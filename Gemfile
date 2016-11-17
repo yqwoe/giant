@@ -35,6 +35,10 @@ gem 'react_on_rails'
 gem 'kaminari'
 gem 'pg', group: :production
 
+gem 'twilio-ruby', '~> 4.1.0'
+gem 'doorkeeper'
+gem 'active_model_serializers', '~> 0.10.0'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,13 +65,12 @@ group :development, :test do
   # Color console output
   gem 'rainbow'
 
-  #rspec
-  gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'database_cleaner'
 
   # Automation test
   gem 'poltergeist'
+  gem 'capybara'
   gem 'guard-minitest'
   gem 'guard-rspec'
   gem 'guard-livereload'
