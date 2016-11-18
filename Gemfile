@@ -71,8 +71,8 @@ group :development, :test do
   # Automation test
   gem 'poltergeist'
   gem 'capybara'
+  gem 'guard'
   gem 'guard-minitest'
-  gem 'guard-rspec'
   gem 'guard-livereload'
 
   gem 'simplecov', :require => false

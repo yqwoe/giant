@@ -12,6 +12,8 @@ class User < ApplicationRecord
     uniqueness: true,
     format: { with: /\A1[378][0-9]{9}\z/, on: :create }
 
+  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create  }
+
   def self.find_for_database_authentication(warden_conditions)
       conditions = warden_conditions.dup
       if login = conditions.delete(:login)
