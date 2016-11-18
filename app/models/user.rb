@@ -15,11 +15,30 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create  }
 
   def self.find_for_database_authentication(warden_conditions)
-      conditions = warden_conditions.dup
-      if login = conditions.delete(:login)
-        where(conditions.to_h).where(["mobile = :value OR lower(email) = :value", { :value => login.downcase }]).first
-      elsif conditions.has_key?(:username) || conditions.has_key?(:email)
-        where(conditions.to_h).first
-      end
+    conditions = warden_conditions.dup
+    if login = conditions.delete(:login)
+      where(conditions.to_h).where(["mobile = :value OR lower(email) = :value",
+                                    { :value => login.downcase }]).first
+    elsif conditions.has_key?(:mobile) || conditions.has_key?(:email)
+      where(conditions.to_h).first
     end
+  end
+
+  def generate_pin
+    self.pin = rand(0000...9999).to_s.rjust(4, "0")
+    save
+  end
+
+  def twilio_client
+    Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
+  end
+
+  def send_pin
+    ChinaSMS.use :yunpian, password: ENV['YUNPIAN_API']
+    ChinaSMS.to :mobile, { code: self.pin, company: '嘻唰唰' }, tpl_id: 1
+  end
+
+  def verify(entered_pin)
+    update(verified: true) if self.pin == entered_pin
+  end
 end

@@ -39,6 +39,8 @@ gem 'twilio-ruby', '~> 4.1.0'
 gem 'doorkeeper'
 gem 'active_model_serializers', '~> 0.10.0'
 
+gem 'china_sms'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
