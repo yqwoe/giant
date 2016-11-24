@@ -1,7 +1,7 @@
-class Api::V1::UsersController <  ActionController::Base
+class Api::V1::UsersController < Api::V1::BaseController
   def show
-    user = User.find(params[:id])
-    render(json: Api::V1::UserSerializer.new(user).to_json)
+    user = User.find_by_authentication_token(params[:user_token])
+    render(json: UserSerializer.new(user).to_json)
   end
 
   def new
@@ -24,4 +24,5 @@ class Api::V1::UsersController <  ActionController::Base
       format.js
      end
   end
+
 end

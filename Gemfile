@@ -35,8 +35,6 @@ gem 'react_on_rails'
 gem 'kaminari'
 gem 'pg', group: :production
 
-gem 'twilio-ruby', '~> 4.1.0'
-gem 'doorkeeper'
 gem 'active_model_serializers', '~> 0.10.0'
 
 gem 'china_sms'
