@@ -5,7 +5,14 @@ namespace :db do
 
     require 'csv'
     CSV.foreach('db/shops.csv') do |row|
-      puts row
+      shop = {}
+      shop[:name] = row[1]
+      shop[:phone] = row[2]
+      shop[:category] = row[5]
+      shop[:province], shop[:city], shop[:county], shop[:address], _ = row[6].split(',')
+
+      puts shop
+      Shop.create! shop
     end
 
     puts 'shops imported! '
