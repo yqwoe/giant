@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_save :ensure_authentication_token
+  has_many :cars
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -12,9 +13,7 @@ class User < ApplicationRecord
   validates :mobile,
     presence: true,
     uniqueness: true,
-    format: { with: /\A1[378][0-9]{9}\z/, on: :create }
-
-  validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create  }
+    format: { with: /\A1[345789][0-9]{9}\z/, on: :create }
 
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -48,6 +47,12 @@ class User < ApplicationRecord
     if authentication_token.blank?
       self.authentication_token = generate_authentication_token
     end
+  end
+
+  protected
+
+  def email_required?
+    false
   end
 
   private

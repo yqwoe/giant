@@ -35,7 +35,9 @@ gem 'kaminari'
 gem 'pg'
 
 gem 'active_model_serializers', '~> 0.10.0'
+gem 'activerecord-import', '~> 0.11.0'
 
+gem 'ruby-pinyin'
 gem 'china_sms'
 
 gem 'alipay'

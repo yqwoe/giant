@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :authenticate
       resource :users
-      resources :cars, only: [:index, :show]
+      resources :car_brands, only: [:index, :show]
     end
   end
 end

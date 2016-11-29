@@ -38,6 +38,8 @@ GEM
       activemodel (= 5.0.0.1)
       activesupport (= 5.0.0.1)
       arel (~> 7.0)
+    activerecord-import (0.11.0)
+      activerecord (>= 3.0)
     activesupport (5.0.0.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (~> 0.7)
@@ -225,6 +227,9 @@ GEM
     redis (3.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
+    rmmseg-cpp-new (0.3.1)
+    ruby-pinyin (0.5.0)
+      rmmseg-cpp-new (~> 0.3.1)
     sass (3.4.22)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -281,6 +286,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
+  activerecord-import (~> 0.11.0)
   alipay
   bootstrap-sass (~> 3.3.6)
   brakeman
@@ -311,6 +317,7 @@ DEPENDENCIES
   rainbow
   react_on_rails
   redis (~> 3.0)
+  ruby-pinyin
   sass-rails (~> 5.0)
   simplecov
   spring

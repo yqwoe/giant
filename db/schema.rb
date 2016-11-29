@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161125013817) do
+ActiveRecord::Schema.define(version: 20161128101042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,8 +22,9 @@ ActiveRecord::Schema.define(version: 20161125013817) do
     t.string   "shor_name"
     t.string   "img_url"
     t.string   "manufacture"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.string   "initial_letter"
   end
 
   create_table "car_models", force: :cascade do |t|
@@ -33,6 +34,20 @@ ActiveRecord::Schema.define(version: 20161125013817) do
     t.string   "initial_letter"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+  end
+
+  create_table "cars", force: :cascade do |t|
+    t.integer  "car_model_id"
+    t.string   "licensed_id"
+    t.integer  "status"
+    t.date     "joined_at"
+    t.date     "visited_at"
+    t.integer  "user_id"
+    t.string   "city"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.date     "valid_at"
+    t.index ["licensed_id"], name: "index_cars_on_licensed_id", unique: true, using: :btree
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|
