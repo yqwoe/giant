@@ -10,8 +10,7 @@
 require 'csv'
 
 CSV.foreach('db/car_types.csv') do |row|
-  brand = CarBrand.find_or_create_by(cn_name: row[1],
-    initial_letter: PinYin.of_string(row[1]).first.first.upcase)
+  brand = CarBrand.find_or_create_by(cn_name: row[1])
   brand.car_models.find_or_create_by cn_name: row[4].gsub(row[1], '')
 end
 

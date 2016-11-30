@@ -2,11 +2,11 @@ class Api::V1::CarBrandsController < ApplicationController
   def index
     data = []
 
-    ('A'..'Z').to_a.each do |initial_letter|
+    ('a'..'z').to_a.each do |initial_letter|
       brands = []
       CarBrand.send(initial_letter).includes(:car_models).find_each do |brand|
         car = {}
-        car[:icon] = view_context.image_url("car_logos/#{brand.img_url}")
+        car[:icon] = view_context.image_url("car_brand_logos/#{brand.img_url}")
         car[:name] = brand[:cn_name]
         car[:id]   = brand[:id]
         car[:car_models] =  brand.car_models.pluck(:cn_name)
