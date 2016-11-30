@@ -4,7 +4,7 @@ class Api::V1::CarBrandsController < ApplicationController
 
     ('a'..'z').to_a.each do |initial_letter|
       brands = []
-      CarBrand.send(initial_letter).includes(:car_models).find_each do |brand|
+      CarBrand.send(initial_letter).find_each do |brand|
         car = {}
         car[:icon] = view_context.image_url("car_brand_logos/#{brand.img_url}")
         car[:name] = brand[:cn_name]
@@ -13,7 +13,7 @@ class Api::V1::CarBrandsController < ApplicationController
         brands << car
       end
 
-      data << { cars: brands, title: initial_letter }
+      data << { cars: brands, title: initial_letter.upcase }
 
     end
 
