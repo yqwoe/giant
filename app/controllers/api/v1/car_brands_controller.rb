@@ -6,7 +6,7 @@ class Api::V1::CarBrandsController < ApplicationController
       brands = []
       CarBrand.send(initial_letter).includes(:car_models).find_each do |brand|
         car = {}
-        car[:icon] = "require('../images/carBrand/#{brand.img_url}')"
+        car[:icon] = view_context.image_url("car_logos/#{brand.img_url}")
         car[:name] = brand[:cn_name]
         car[:id]   = brand[:id]
         car[:car_models] =  brand.car_models.pluck(:cn_name)

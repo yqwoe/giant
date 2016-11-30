@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129095034) do
+ActiveRecord::Schema.define(version: 20161130014029) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,18 +51,15 @@ ActiveRecord::Schema.define(version: 20161129095034) do
   end
 
   create_table "deals", force: :cascade do |t|
+    t.integer  "car_id"
     t.integer  "shop_id"
     t.datetime "visited_at"
     t.datetime "cleaned_at"
     t.integer  "status"
     t.string   "comments"
     t.datetime "commented_at"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.integer  "car_id"
-    t.integer  "dealsable_id"
-    t.integer  "dealsable_type"
-    t.index ["dealsable_id", "dealsable_type"], name: "index_deals_on_dealsable_id_and_dealsable_type", using: :btree
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

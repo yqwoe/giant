@@ -1,3 +1,4 @@
 class Deal < ApplicationRecord
-  belongs_to :dealsable, polymorphic: true
+  belongs_to :car
+  belongs_to :shop
 end

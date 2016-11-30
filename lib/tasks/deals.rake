@@ -6,8 +6,16 @@ namespace :db do
     require 'csv'
     CSV.foreach 'db/deals.csv' do |row|
       begin
-        car = Car.find_by_licensed_id row[3]
-        shop = Shop.find_by_name row[4]
+        passwd = "xss#[3][3..-1]"
+        user = User.find_by(mobile: row[2])
+        user ||= User.find_by(mobile: row[1])
+        user ||= User.new(mobile: row[2], email: "#{row[2]}@139.com", password: "#{passwd}")
+        unless user
+          user = User.find_or_create_by!(mobile: row[1], email: "#{row[1]}@139.com", password: "#{passwd}")
+        end
+        car = user.cars.find_by(licensed_id: row[3])
+        car ||= user.cars.create!(car_model_id: 0, licensed_id: row[3])
+        shop = Shop.find_or_create_by! name: row[4]
 
         deal = {}
         deal[:car_id]       = car.id
@@ -22,8 +30,8 @@ namespace :db do
 
         Deal.create! deal
       rescue Exception => e
-        puts row[0]
         puts e.message
+        puts row[0], row[2]
       end
     end
   end

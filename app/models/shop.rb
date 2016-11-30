@@ -1,3 +1,3 @@
 class Shop < ApplicationRecord
-  has_many :deals, as: :dealsable
+  has_many :deals
 end
