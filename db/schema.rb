@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129080703) do
+ActiveRecord::Schema.define(version: 20161129095034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,8 +57,12 @@ ActiveRecord::Schema.define(version: 20161129080703) do
     t.integer  "status"
     t.string   "comments"
     t.datetime "commented_at"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.integer  "car_id"
+    t.integer  "dealsable_id"
+    t.integer  "dealsable_type"
+    t.index ["dealsable_id", "dealsable_type"], name: "index_deals_on_dealsable_id_and_dealsable_type", using: :btree
   end
 
   create_table "oauth_access_grants", force: :cascade do |t|

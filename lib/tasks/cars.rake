@@ -3,8 +3,8 @@ namespace :db do
   task cars: :environment do
     require 'csv'
 
-      CSV.foreach('db/cars.csv') do |row|
-    begin
+    CSV.foreach('db/cars.csv') do |row|
+      begin
         user = {}
         user[:name]     = row[1]
         user[:mobile]   = row[2]
@@ -24,14 +24,14 @@ namespace :db do
         car[:status]     = car_status(row[6])
         car[:joined_at]  = row[7]
         car[:valid_at]   = row[8]
-   rescue Exception => e
-     puts e.message
-      puts row[0]
-    ensure
-      Car.create! car
-      next
-    end
+      rescue Exception => e
+        puts e.message
+        puts row[0]
+      ensure
+        Car.find_by_licensed_id(row[4]) || Car.create!(car)
+        next
       end
+    end
   end
 
   def car_model str

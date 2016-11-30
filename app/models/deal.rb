@@ -1,3 +1,3 @@
 class Deal < ApplicationRecord
-  belongs_to :dealsable, polymopyic: true
+  belongs_to :dealsable, polymorphic: true
 end
