@@ -19,10 +19,11 @@ class Api::V1::UsersController < Api::V1::BaseController
 
   def verify
     @user = User.find_by(user: params[:hidden_mobile])
-    @user.verify(params[:pin])
-    respond_to do |format|
-      format.js
-     end
+    if @user.verify(params[:pin])
+      render json: {success: true}
+    else
+      render json: {success: false}
+    end
   end
 
 end

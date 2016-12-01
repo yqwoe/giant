@@ -1,5 +1,7 @@
 class User < ApplicationRecord
   before_save :ensure_authentication_token
+  before_save :ensure_email
+
   has_many :cars
 
   # Include default devise modules. Others available are:
@@ -30,10 +32,6 @@ class User < ApplicationRecord
     save
   end
 
-  def twilio_client
-    Twilio::REST::Client.new(ENV['TWILIO_SID'], ENV['TWILIO_TOKEN'])
-  end
-
   def send_pin
     ChinaSMS.use :yunpian, password: ENV['YUNPIAN_API']
     ChinaSMS.to :mobile, { code: self.pin, company: '嘻唰唰' }, tpl_id: 1
@@ -62,5 +60,9 @@ class User < ApplicationRecord
       token = Devise.friendly_token
       break token unless User.where(authentication_token: token).first
     end
+  end
+
+  def ensure_email
+    email || "#{mobile}@139.com"
   end
 end
