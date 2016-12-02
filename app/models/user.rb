@@ -1,6 +1,5 @@
 class User < ApplicationRecord
   before_save :ensure_authentication_token
-  before_save :ensure_email
 
   has_many :cars
 
@@ -54,10 +53,6 @@ class User < ApplicationRecord
 
   protected
 
-  def email_required?
-    false
-  end
-
   private
 
   def generate_authentication_token
@@ -67,7 +62,4 @@ class User < ApplicationRecord
     end
   end
 
-  def ensure_email
-    email || "#{mobile}@139.com"
-  end
 end

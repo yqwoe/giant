@@ -1,5 +1,4 @@
-class Api::V1::UsersController < ApplicationController
-  protect_from_forgery with: :null_session
+class Api::V1::UsersController <  ActionController::API
 
   def show
     user = User.find_by_authentication_token(params[:user_token])
@@ -11,14 +10,17 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def send_pin
-    @user = User.find_or_create_by(mobile: params[:user][:mobile])
+    mobile = params[:user][:mobile]
+    @user = User.find_by(mobile: mobile)
+    @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
     @user.send_pin
     render json: { success: true, pin: @user.pin }
   end
 
   def create
-    @user = User.new(mobile: params[:user][:mobile], password: params[:user][:password])
-    if @user.save
+    @user = User.find_by(mobile: params[:user][:mobile])
+    password = params[:user][:password]
+    if @user.update_attributes(password: password, password_confirmation: password)
       render json: {authentication_token: @user.authentication_token}
     else
       render json: {success: false}
