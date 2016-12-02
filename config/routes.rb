@@ -12,6 +12,7 @@ Rails.application.routes.draw do
       resource :users do
         member do
           post 'verify'
+          get 'send_pin'
         end
       end
       resources :car_brands, only: [:index, :show]
