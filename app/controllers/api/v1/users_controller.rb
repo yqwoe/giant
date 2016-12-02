@@ -15,11 +15,13 @@ class Api::V1::UsersController <  ActionController::API
     @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
     @user.send_pin
     render json: { success: true, pin: @user.pin }
+  rescue
+    render json: { success: false, massenge: "手机号码无效！" }
   end
 
   def create
-    @user = User.find_by(mobile: params[:user][:mobile])
-    password = params[:user][:password]
+    @user = User.find_by(mobile: params[:mobile])
+    password = params[:password]
     if @user.update_attributes(password: password, password_confirmation: password)
       render json: {authentication_token: @user.authentication_token}
     else

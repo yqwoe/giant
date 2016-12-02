@@ -1,9 +1,6 @@
-class Api::V1::BaseController < ApplicationController
+class Api::V1::BaseController < ActionController::API
   before_action :authenticate_user_from_token!
-  before_action :authenticate_user!
   before_action :destroy_session
-
-  protect_from_forgery with: :null_session
 
   respond_to :josn
 

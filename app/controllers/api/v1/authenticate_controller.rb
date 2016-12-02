@@ -1,6 +1,4 @@
 class Api::V1::AuthenticateController < Api::V1::BaseController
-  skip_before_filter :authenticate_user_from_token!, :only => [:create ]
-
   def create
     resource = User.find_for_database_authentication(:login=>params[:user][:login])
 
