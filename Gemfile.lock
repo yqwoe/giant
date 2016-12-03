@@ -46,6 +46,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    airbrussh (1.1.1)
+      sshkit (>= 1.6.1, != 1.7.0)
     alipay (0.12.0)
     arel (7.1.4)
     autoprefixer-rails (6.5.3)
@@ -60,6 +62,24 @@ GEM
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
     byebug (9.0.6)
+    capistrano (3.6.1)
+      airbrussh (>= 1.0.0)
+      capistrano-harrow
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (1.2.0)
+      capistrano (~> 3.1)
+      sshkit (~> 1.2)
+    capistrano-harrow (0.5.3)
+    capistrano-passenger (0.2.0)
+      capistrano (~> 3.0)
+    capistrano-rails (1.1.8)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.2)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     capybara (2.10.1)
       addressable
       mime-types (>= 1.16)
@@ -161,6 +181,9 @@ GEM
     minitest (5.9.1)
     multi_json (1.12.1)
     nenv (0.3.0)
+    net-scp (1.2.1)
+      net-ssh (>= 2.6.5)
+    net-ssh (3.2.0)
     nio4r (1.2.1)
     nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
@@ -227,7 +250,6 @@ GEM
       foreman
       rails (>= 3.2)
       rainbow (~> 2.1)
-    redis (3.3.1)
     responders (2.3.0)
       railties (>= 4.2.0, < 5.1)
     rmmseg-cpp-new (0.3.1)
@@ -260,6 +282,9 @@ GEM
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
     sqlite3 (1.3.12)
+    sshkit (1.11.3)
+      net-scp (>= 1.1.2)
+      net-ssh (>= 2.8.0)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (2.0.5)
@@ -296,6 +321,11 @@ DEPENDENCIES
   brakeman
   bullet
   byebug
+  capistrano
+  capistrano-bundler
+  capistrano-passenger (>= 0.1.1)
+  capistrano-rails
+  capistrano-rvm
   capybara
   china_sms
   coffee-rails (~> 4.2)
@@ -321,7 +351,6 @@ DEPENDENCIES
   rails (~> 5.0.0, >= 5.0.0.1)
   rainbow
   react_on_rails
-  redis (~> 3.0)
   ruby-pinyin
   sass-rails (~> 5.0)
   simplecov
