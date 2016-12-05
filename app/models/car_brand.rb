@@ -1,5 +1,5 @@
 class CarBrand < ApplicationRecord
-  after_save :set_initial_letter, on: :create
+  before_create :set_initial_letter
 
   has_many :car_models
 
@@ -12,6 +12,5 @@ class CarBrand < ApplicationRecord
 
   def set_initial_letter
     self.initial_letter ||= PinYin.of_string(self.cn_name).first.first.upcase
-    save
   end
 end
