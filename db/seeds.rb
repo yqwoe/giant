@@ -15,5 +15,5 @@ end
 
 CSV.foreach('db/car_models.csv') do |row|
   brand = CarBrand.find row[0]
-  brand.car_models.create cn_name: row[1]
+  brand.car_models.find_or_create_by cn_name: row[1]
 end
