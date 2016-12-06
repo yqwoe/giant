@@ -9,12 +9,11 @@
 # imports car brands and models
 require 'csv'
 
-CSV.foreach('db/car_types.csv') do |row|
-  brand = CarBrand.find_or_create_by(cn_name: row[1])
-  brand.car_models.find_or_create_by cn_name: row[4].gsub(row[1], '')
+CSV.foreach('db/car_brands.csv') do |row|
+  CarBrand.find_or_create_by(id: row[0], cn_name: row[1], img_url: row[2])
 end
 
-CSV.foreach('db/car_logos.csv') do |row|
-  brand = CarBrand.find_or_create_by cn_name: row[1]
-  brand.update img_url: row[2]
+CSV.foreach('db/car_models.csv') do |row|
+  brand = CarBrand.find row[0]
+  brand.car_models.create cn_name: row[1]
 end
