@@ -12,5 +12,7 @@ class CarBrand < ApplicationRecord
 
   def set_initial_letter
     self.initial_letter ||= PinYin.of_string(self.cn_name).first.first.upcase
+  rescue
+    self.initial_letter = 'Z'
   end
 end
