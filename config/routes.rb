@@ -15,7 +15,9 @@ Rails.application.routes.draw do
           get 'send_pin'
         end
       end
+      resources :cars, only: [:create]
       resources :car_brands, only: [:index, :show]
+      resources :cards, only: [:create]
     end
   end
 end
