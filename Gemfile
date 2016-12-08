@@ -49,6 +49,10 @@ gem 'ruby-pinyin'
 gem 'china_sms'
 
 gem 'alipay'
+gem 'ransack'
+
+gem 'will_paginate', github: 'jonatack/will_paginate'
+gem 'wx_pay'
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
