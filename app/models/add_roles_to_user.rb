@@ -1,0 +1,2 @@
+class AddRolesToUser < ApplicationRecord
+end

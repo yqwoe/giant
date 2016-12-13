@@ -16,6 +16,14 @@ class User < ApplicationRecord
     uniqueness: true,
     format: { with: /\A1[345789][0-9]{9}\z/, on: :create }
 
+  enum roles: [:unregisted, # 初始注册进来的用户，未付费会员
+                :member,     # 付费会员
+                :agency,     # 代理商
+                :salesman,   # 业务员
+                :admin,      # 普通管理员
+                :sysadmin    # 系统管理员
+               ]
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

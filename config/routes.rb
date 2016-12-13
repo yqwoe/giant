@@ -1,10 +1,16 @@
 Rails.application.routes.draw do
+  root to: 'admin/home#index'
+
+  resources :phones, only: [:new, :create]
+  post 'phones/verify' => "phones#verify"
+
+  namespace :users do
+    resources :invitations
+  end
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
+    sessions: 'users/sessions',
   }
-
-  root to: 'admin/home#index'
 
   namespace :api do
     namespace :v1 do

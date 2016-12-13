@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>app 下载</title>
+  <script src="http://g.tbcdn.cn/mtb/lib-flexible/0.3.4/??flexible_css.js,flexible.js"></script>
+  <style type="text/css">
+    html, body{
+      height: 100%;
+      font-size: 
+    }
+    input, button{
+      border: none;
+    }
+    body{
+      background-color: #ddd;
+      text-align: center;
+    }
+    .mainBox{
+      background-color: #fff;
+      width: 90%;
+      border: 1px solid #aaa;
+      display: inline-block;
+      box-sizing: border-box;
+      margin-top: 1rem;
+    }
+    .topBox{
+      padding: 0.3rem;
+      text-align: left;
+    }
+    .topBox .title{
+      font-size: 16px;
+      color: #aaa;
+      margin-bottom: 0.4rem;
+    }
+    .bottomBox{
+      text-align: left;
+      padding: 0.3rem;
+    }
+    .bottomBox .bottomTitle{
+      margin: 0.3rem 0;
+    }
+    .bottomTitle p{
+      line-height: 0.5rem;
+    }
+    .bottomTitle em{
+      color: #aaa;
+    }
+    .inputBox{
+      border-bottom: 1px solid #ddd;
+      width: 90%;
+      padding-left: 0.7rem;
+      background-repeat: no-repeat;
+      background-size: 0.5rem 0.5rem;
+      height: 0.7rem;
+      background-position: left center;
+      margin-top: 0.5rem;
+    }
+    .inputBoxUser{
+      background-image: image-url('./user@3x.png');
+    }
+    .inputBoxPhone{
+      background-image: image-url('./phone@3x.png')
+      margin-right: -2rem;
+    }
+    .inputBoxLock{
+      background-image: image-url('./lock@3x.png');
+    }
+    .codeButton{
+      width: 2rem;
+      height: 0.7rem;
+      border: 1px solid #ddd;
+      background-color: #fff;
+      padding: 0.1rem;
+      color: #666;
+      position: relative;
+      bottom: 0.1rem;
+    }
+
+    .submitButton{
+      width: 98%;
+      height: 1rem;
+      background-color: #ff8a01;
+      text-align: center;
+      color: #fff;
+      font-size: 16px;
+      margin: 0.8rem 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="mainBox topBox">
+    <p class="title">嘻唰唰</p>
+    <p>全年洗车不限次数、不限地点</p>
+  </div>
+  <div class="mainBox bottomBox">
+    <div class="bottomTitle">
+      <p><%= @salesman.name %><em>邀请您</em></p>
+      <p>加入嘻唰唰体验不一样的洗车</p>
+    </div>
+    <div>
+      <div>
+        <%= form_for @user, url: users_invitations_url do |f| %>
+          <%= f.text_field :name, class: "inputBox inputBoxUser", placeholder: " 请输入您的姓名" %>
+          <%= f.text_field :mobile, class: 'inputBox inputBoxPhone', placeholder: '请输入您的手机号码' %>
+          <%= f.hidden_field :invited_by, value: @salesman.id %>
+          <a class="codeButton" data-remote="true" href="/api/v1/users/send_pin">获取验证码</a>
+          <div>
+            <div>
+              <input class="inputBox inputBoxLock" placeholder=" 请输入验证码" type="text"></input>
+            </div>
+         </div>
+         <%= f.submit '提交', class: "submitButton" %>
+       <% end %>
+     </div>
+  <script>
+    $('.inputBoxPhone').change(function(){
+      $('.codeButton').attr('href', "/api/v1/users/send_pin?user[mobile]=" + this.value )
+      console.log($('.codeButton').attr('href'))
+    })
+  </script>
+</body>
+</html>
