@@ -1,4 +1,4 @@
 class Card < ApplicationRecord
-  enum status: [:inactivited, :activited]
+  enum status: [:inactived, :active]
 
 end

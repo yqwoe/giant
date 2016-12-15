@@ -1,10 +1,12 @@
 class Api::V1::ShopsController < ApplicationController
   def index
-    @q = Shops.ransack(params[:q])
+    @q = Shop.ransack(params[:q])
     @shops = @q.result(distinct: true).as_json
+    render json: @shops
   end
 
   def show
-    Shops.find(params[:id]).as_json
+    @shop = Shop.find(params[:id])
+    render json: @shop
   end
 end
