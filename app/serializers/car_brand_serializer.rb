@@ -1,5 +1,10 @@
 class CarBrandSerializer < ActiveModel::Serializer
-  attributes :cn_name, :img_url
+  include ActionView::Helpers::AssetUrlHelper
+  attributes :cn_name, :logo
 
   has_many :car_models
+
+  def logo
+    image_url("/assets/car_brand_logos/#{object.img_url}")
+  end
 end

@@ -100,7 +100,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'brakeman'
-  gem 'bullet'
+  # gem 'bullet'
   gem "zero_downtime_migrations"
 end
 
