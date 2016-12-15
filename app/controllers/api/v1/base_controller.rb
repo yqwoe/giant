@@ -26,7 +26,7 @@ class Api::V1::BaseController < ActionController::API
       # sign in token, you can simply remove store: false.
       sign_in user, store: false
     else
-      render json: {success: false}, status: :unauthorized
+      render json: {success: false, message: 'Invalid token!'}, status: :unauthorized
     end
   end
 end
