@@ -19,4 +19,13 @@ class Api::V1::CarsController < Api::V1::BaseController
   def index
     render json: current_user.cars
   end
+
+  def wash
+    car = current_user.cars.find_by_licensed_id(params[:licensed_id])
+    render json: { car_brand: car.car_model.car_brand.cn_name,
+                   car_model: car.car_model.cn_name,
+                   licensed_id: car.licensed_id,
+                   date: car.valid_at
+    }
+  end
 end

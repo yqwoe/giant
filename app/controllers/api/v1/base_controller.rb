@@ -19,6 +19,7 @@ class Api::V1::BaseController < ActionController::API
     user_token = params[:user_token].presence
     user       = user_token && User.find_by_authentication_token(user_token.to_s)
 
+    byebug
     if user
       # Notice we are passing store false, so the user is not
       # actually stored in the session and a token is needed
