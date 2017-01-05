@@ -2,6 +2,7 @@ class User < ApplicationRecord
   before_save :ensure_authentication_token
 
   has_many :cars
+  has_many :shops
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -20,6 +21,7 @@ class User < ApplicationRecord
                 :member,     # 付费会员
                 :agency,     # 代理商
                 :salesman,   # 业务员
+                :shop_owner, # 车行老板
                 :admin,      # 普通管理员
                 :sysadmin    # 系统管理员
                ]
