@@ -56,6 +56,7 @@ gem 'china_sms'
 gem 'alipay', github: 'rocLv/alipay'
 gem 'ransack'
 
+gem 'json'
 gem 'will_paginate', github: 'jonatack/will_paginate'
 gem 'wx_pay'
 group :development, :test do
