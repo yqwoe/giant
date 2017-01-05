@@ -26,7 +26,11 @@ Rails.application.routes.draw do
       resources :car_brands, only: [:index, :show]
       resources :cards, only: [:create]
       resources :deals, only: [:index, :show]
-      resources :shops, only: [:index, :show]
+      resources :shops, only: [:index, :show] do
+        collection do
+          get :search
+        end
+      end
     end
   end
 end
