@@ -48,7 +48,12 @@ gem 'activerecord-import', '~> 0.11.0'
 gem 'ruby-pinyin'
 gem 'china_sms'
 
-gem 'alipay'
+##
+# This line for debug
+# gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
+#
+
+gem 'alipay', github: 'rocLv/alipay'
 gem 'ransack'
 
 gem 'will_paginate', github: 'jonatack/will_paginate'

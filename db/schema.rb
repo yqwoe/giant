@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161212114447) do
+ActiveRecord::Schema.define(version: 20161221100642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -332,6 +332,19 @@ ActiveRecord::Schema.define(version: 20161212114447) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "state"
+    t.integer  "payment_gateway"
+    t.integer  "trade_no"
+    t.float    "price"
+    t.integer  "quantity"
+    t.float    "distcount"
+    t.string   "subject"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "phones", force: :cascade do |t|
