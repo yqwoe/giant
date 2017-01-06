@@ -11,7 +11,7 @@ class Api::V1::ShopsController < ApplicationController
   end
 
   def index
-    render json: Shop.all unless params[:sort_by].present?
+    @shops = Shop.all unless params[:sort_by].present?
     case params[:sort_by]
     when 'default'
       @shops = Shop.all
@@ -21,5 +21,7 @@ class Api::V1::ShopsController < ApplicationController
     when 'comment'
       @shops = Shop.all.order(star: :desc)
     end
+
+    render json: @shops
   end
 end
