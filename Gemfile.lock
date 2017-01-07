@@ -6,7 +6,8 @@ GIT
 
 GIT
   remote: git://github.com/rocLv/alipay.git
-  revision: 02577dc5acee66c1ddb0d62a63f49a98ff52ea3a
+  revision: 27b1d269d6451562d4a35074e9598ace7981e02d
+  branch: master
   specs:
     alipay (0.12.0)
       activesupport (~> 5.0)
