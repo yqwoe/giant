@@ -23,7 +23,10 @@ class Api::V1::UsersController <  ActionController::API
     @user = User.find_by(mobile: params[:mobile])
     password = params[:password]
     if @user.update_attributes(password: password, password_confirmation: password)
-      render json: {authentication_token: @user.authentication_token}
+      render json: {
+        authentication_token: @user.authentication_token,
+        member: @user.member?
+      }
     else
       render json: {success: false}
     end

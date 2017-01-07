@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :cars
   has_many :shops
   has_many :deals
+  has_many :comments
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

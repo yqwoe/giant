@@ -14,6 +14,21 @@ class Api::V1::DealsController <  Api::V1::BaseController
     current_user.deals.find params[:id]
   end
 
+  def create
+    deal = current_user.deals.build
+    car = Car.find_by_licensed_id params[:licensed_id]
+    deal.car_id = car.id
+    #TODO: think about multi shops
+    deal.shop_id = current_user.shops.first.id
+    deal.cleaned_at = Time.now
+
+    if current_user.save
+      render json: { success: true }
+    else
+      render json: { success: false, message: current_user.errors.messages }
+    end
+  end
+
   private
 
     def get_member_deals
@@ -23,10 +38,10 @@ class Api::V1::DealsController <  Api::V1::BaseController
       current_user.cars.each do |car|
         car.deals.order(id: :desc).each do |deal|
           records << {
-            title: deal.shop.name,
-            date:  deal.cleaned_at.strftime('%Y-%m-%d'),
-            time:  deal.cleaned_at.strftime('%H:%M'),
-            address: deal.shop.address
+            title: deal&.shop&.name,
+            date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
+            time:  deal&.cleaned_at&.strftime('%H:%M'),
+            address: deal&.shop&.address
           }
         end
       end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170105095119) do
+ActiveRecord::Schema.define(version: 20170106143025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -271,6 +271,17 @@ ActiveRecord::Schema.define(version: 20170105095119) do
     t.index ["licensed_id"], name: "index_cars_on_licensed_id", unique: true, using: :btree
   end
 
+  create_table "comments", force: :cascade do |t|
+    t.integer  "shop_id"
+    t.integer  "user_id"
+    t.string   "content"
+    t.integer  "env_star"
+    t.integer  "service_star"
+    t.integer  "clean_star"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "deals", force: :cascade do |t|
     t.integer  "car_id"
     t.integer  "shop_id"
@@ -281,6 +292,7 @@ ActiveRecord::Schema.define(version: 20170105095119) do
     t.datetime "commented_at"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "user_id"
   end
 
   create_table "evaluates", force: :cascade do |t|
@@ -345,6 +357,12 @@ ActiveRecord::Schema.define(version: 20170105095119) do
     t.string   "subject"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "platform"
+    t.float    "total_amount"
+    t.string   "body"
+    t.datetime "finished_at"
+    t.datetime "canceled_at"
+    t.integer  "status"
   end
 
   create_table "phones", force: :cascade do |t|

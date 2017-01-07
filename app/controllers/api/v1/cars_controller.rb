@@ -21,11 +21,12 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def wash
-    car = current_user.cars.find_by_licensed_id(params[:licensed_id])
-    render json: { car_brand: car.car_model.car_brand.cn_name,
-                   car_model: car.car_model.cn_name,
+    car = Car.find_by_licensed_id(params[:licensed_id])
+    render json: { car_brand: car&.car_model&.car_brand&.cn_name,
+                   car_model: car&.car_model&.cn_name,
                    licensed_id: car.licensed_id,
-                   date: car.valid_at
+                   valid_date: car.valid_at,
+                   member: !!(car.valid_at > Time.now)
     }
   end
 end

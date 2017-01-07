@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   root to: 'admin/home#index'
 
   resources :phones, only: [:new, :create]
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :authenticate
+      resources :payments
+      resources :orders
+      resources :comments
       resource :users do
         member do
           post 'verify'
@@ -25,7 +29,7 @@ Rails.application.routes.draw do
       match :wash, to: 'cars#wash', via: :post
       resources :car_brands, only: [:index, :show]
       resources :cards, only: [:create]
-      resources :deals, only: [:index, :show]
+      resources :deals, only: [:index, :show, :create]
       resources :shops, only: [:index, :show] do
         collection do
           get :search
