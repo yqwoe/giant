@@ -38,6 +38,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
       current_user.cars.each do |car|
         car.deals.order(id: :desc).each do |deal|
           records << {
+            shop_id: deal&.shop&.id,
             title: deal&.shop&.name,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
             time:  deal&.cleaned_at&.strftime('%H:%M'),
