@@ -33,6 +33,7 @@ Rails.application.routes.draw do
       resources :shops, only: [:index, :show] do
         collection do
           get :search
+          get :counties
         end
       end
     end

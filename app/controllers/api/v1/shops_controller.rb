@@ -1,6 +1,6 @@
 class Api::V1::ShopsController < ApplicationController
   def search
-    @q = Shop.ransack(name_cont:  params[:q])
+    @q = Shop.ransack(name_cont:  params[:q], county_cont: params[:county])
     @shops = @q.result(distinct: true).as_json
     render json: @shops
   end
@@ -8,6 +8,11 @@ class Api::V1::ShopsController < ApplicationController
   def show
     @shop = Shop.find(params[:id])
     render json: @shop
+  end
+
+  def counties
+    @q = Shop.ransack(city_cont: params[:city])
+    render json: @q.result(distinct: true).pluck(:county).reject {|c| c.nil? }
   end
 
   def index

@@ -17,7 +17,11 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def index
-    render json: current_user.cars
+    if current_user.cars
+      render json: current_user.cars
+    else
+      render json: { success: false, message: '该用户没有绑定任何车辆！' }
+    end
   end
 
   def wash

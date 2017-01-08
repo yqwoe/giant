@@ -1,5 +1,5 @@
-class Api::V1::PaymentsController < ApplicationController
-  before_action :set_order
+class Api::V1::PaymentsController < Api::V1::BaseController
+  before_action :set_order, only: [:show]
 
   def create
     # verify
@@ -9,12 +9,12 @@ class Api::V1::PaymentsController < ApplicationController
   end
 
   def show
-    
+    render json: { success: !!@order&.finished? }
   end
 
   private
 
     def set_order
-      @order = Order.find_by_trade_no params[:out_trade_no]
+      @order = Order.find_by_trade_no params[:id]
     end
 end
