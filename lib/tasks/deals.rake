@@ -34,9 +34,7 @@ namespace :db do
         Deal.create! deal
       rescue Exception => e
         puts e.message
-        byebug
         puts row
-        sleep 10
       end
     end
   end
