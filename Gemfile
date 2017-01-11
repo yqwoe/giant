@@ -54,11 +54,11 @@ gem 'china_sms'
 # gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
 
-gem 'alipay', 'https:://git.coding.net/railstutorial/alipay.git'
+gem 'alipay', git: 'https://git.coding.net/railstutorial/alipay.git'
 gem 'ransack'
 
 gem 'json'
-gem 'will_paginate', github: 'jonatack/will_paginate'
+gem 'will_paginate', git: 'https://git.coding.net/railstutorial/will_paginate.git'
 gem 'wx_pay'
 group :development, :test do
   gem 'sqlite3'

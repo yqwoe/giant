@@ -1,15 +1,15 @@
 GIT
-  remote: git://github.com/jonatack/will_paginate.git
-  revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
-  specs:
-    will_paginate (3.0.4)
-
-GIT
-  remote: git://github.com/rocLv/alipay.git
+  remote: https://git.coding.net/railstutorial/alipay.git
   revision: bd4962f12fcf698ffca4dcc696637709b1fa7d16
   specs:
     alipay (0.12.0)
       activesupport (~> 5.0)
+
+GIT
+  remote: https://git.coding.net/railstutorial/will_paginate.git
+  revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
+  specs:
+    will_paginate (3.0.4)
 
 GEM
   remote: https://gems.ruby-china.org/
