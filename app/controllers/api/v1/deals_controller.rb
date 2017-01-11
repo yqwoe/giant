@@ -42,7 +42,8 @@ class Api::V1::DealsController <  Api::V1::BaseController
             title: deal&.shop&.name,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
             time:  deal&.cleaned_at&.strftime('%H:%M'),
-            address: deal&.shop&.address
+            address: deal&.shop&.address,
+            comment: !!deal.status
           }
         end
       end
