@@ -54,7 +54,7 @@ gem 'china_sms'
 # gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
 
-gem 'alipay', github: 'rocLv/alipay'
+gem 'alipay', 'https:://git.coding.net/railstutorial/alipay.git'
 gem 'ransack'
 
 gem 'json'
