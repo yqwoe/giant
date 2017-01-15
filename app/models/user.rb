@@ -19,7 +19,7 @@ class User < ApplicationRecord
     uniqueness: true,
     format: { with: /\A1[345789][0-9]{9}\z/, on: :create }
 
-  enum roles: [:unregisted, # 初始注册进来的用户，未付费会员
+  enum roles: [ :registed, # 初始注册进来的用户，未付费会员
                 :member,     # 付费会员
                 :agency,     # 代理商
                 :salesman,   # 业务员
@@ -46,7 +46,7 @@ class User < ApplicationRecord
   def send_pin
     generate_pin
     if Rails.env.production?
-      ChinaSMS.use :yunpian, password: '5b76fb3dd816300f06fc9ea523e58a0e' #ENV['YUNPIAN_API']
+      ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
       ChinaSMS.to mobile, { code: self.pin, company: '嘻唰唰' }, tpl_id: 1
     end
   end
