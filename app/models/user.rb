@@ -45,7 +45,7 @@ class User < ApplicationRecord
 
   def send_pin
     generate_pin
-    unless Rails.env.production?
+    if Rails.env.production?
       ChinaSMS.use :yunpian, password: '5b76fb3dd816300f06fc9ea523e58a0e' #ENV['YUNPIAN_API']
       ChinaSMS.to mobile, { code: self.pin, company: '嘻唰唰' }, tpl_id: 1
     end

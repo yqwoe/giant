@@ -13,7 +13,7 @@ namespace :db do
         pin = gen_pin(111111111111...999999999999, 11)
         csv << [id, pin]
         Card.create! cid: id, pin: pin
-        puts id
+        puts id, pin
       end
     end
   end
