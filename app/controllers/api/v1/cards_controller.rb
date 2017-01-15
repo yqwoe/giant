@@ -8,7 +8,6 @@ class Api::V1::CardsController < Api::V1::BaseController
       render json: { success: false, message: 'Your card has been activited!'} and return
     end
 
-    byebug
     if current_user.cars.exists?
       car = current_user.cars.find_by_licensed_id params[:licensed_id]
 
