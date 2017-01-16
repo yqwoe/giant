@@ -3,5 +3,5 @@ class Shop < ApplicationRecord
 
   belongs_to :user
 
-  enum :status, [:inactived, :actived]
+  enum status: [:inactived, :actived]
 end
