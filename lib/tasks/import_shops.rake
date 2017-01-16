@@ -14,7 +14,7 @@ namespace :db do
       shop[:county]    = row[5]
       shop[:address]   = row[6]
       shop[:position]  = [row[7], row[8]]
-
+      shop[:status]    = 1
       puts shop
       Shop.create! shop
     end
