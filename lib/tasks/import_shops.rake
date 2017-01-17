@@ -9,12 +9,12 @@ namespace :db do
       shop[:name]  = row[0]
       shop[:phone] = row[1]
       shop[:city]  = row[2]
-      shop[:star]  = row[3]
-      shop[:category] = row[4]
-      shop[:province] = row[5]
-      shop[:county]    = row[6]
-      shop[:address]   = row[8]
-      shop[:position]  = [row[9], row[10]]
+      shop[:star]  = row[4]
+      shop[:category] = row[5]
+      shop[:province] = row[6]
+      shop[:county] = row[8]
+      shop[:address]   = row[9]
+      shop[:position]  = [row[10], row[11]]
       shop[:status]    = 1
       puts shop
       Shop.create! shop
