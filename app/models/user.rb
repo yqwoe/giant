@@ -17,7 +17,7 @@ class User < ApplicationRecord
   validates :mobile,
     presence: true,
     uniqueness: true,
-    format: { with: /\A1[345789][0-9]{9}\z/, on: :create }
+    format: { with: /\A[0-9\-]+\z/, on: :create }
 
   enum roles: [ :registed, # 初始注册进来的用户，未付费会员
                 :member,     # 付费会员
