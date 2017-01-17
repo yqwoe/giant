@@ -1,4 +1,6 @@
 class Api::V1::DealsController <  Api::V1::BaseController
+  HOSTNAME = 'https://autoxss.com/'
+
   def index
     records = []
     if current_user.member?
@@ -37,14 +39,16 @@ class Api::V1::DealsController <  Api::V1::BaseController
       records = []
       current_user.cars.each do |car|
         car.deals.order(id: :desc).each do |deal|
+          shop_image = deal&.shop&.image
           records << {
             deal_id: deal.id,
-            shop_id: deal&.shop&.id,
+            shop_id: deal&.shop_id,
             title: deal&.shop&.name,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
             time:  deal&.cleaned_at&.strftime('%H:%M'),
             address: deal&.shop&.address,
-            comment: !!deal.status
+            comment: !!deal.status,
+            image: "#{HOSTNAME}assets/#{shop_image}"
           }
         end
       end
