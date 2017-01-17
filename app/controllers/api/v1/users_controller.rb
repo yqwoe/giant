@@ -2,7 +2,11 @@ class Api::V1::UsersController <  ActionController::API
 
   def show
     user = User.find_by_authentication_token(params[:user_token])
-    render(json: UserSerializer.new(user).to_json)
+    if user
+      render(json: UserSerializer.new(user).to_json) and return
+    else
+      render json: { success: false, message: '该用户不存在' }
+    end
   end
 
   def new
