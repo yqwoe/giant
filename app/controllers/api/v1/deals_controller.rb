@@ -48,7 +48,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
             time:  deal&.cleaned_at&.strftime('%H:%M'),
             address: deal&.shop&.address,
             comment: !!deal.status,
-            image: "#{HOSTNAME}assets/#{shop_image}"
+            image: "#{HOSTNAME}assets/shops/#{shop_image}"
           }
         end
       end
