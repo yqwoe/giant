@@ -7,6 +7,6 @@ class ShopSerializer < ActiveModel::Serializer
 
 
   def img_url
-    image_path("https://autoxss.com/assets/#{object.image}")
+    image_path("https://autoxss.com/assets/shops/#{object.image}")
   end
 end
