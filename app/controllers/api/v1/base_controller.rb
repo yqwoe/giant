@@ -10,13 +10,16 @@ class Api::V1::BaseController < ActionController::API
   end
 
   rescue_from(ActionController::ParameterMissing) do |err|
-    render json: { error: 'ParameterInvalid', message: err }, status: 400
+    render json: { success: false, error: 'ParameterInvalid', message: err }, status: 400
   end
   rescue_from(ActiveRecord::RecordInvalid) do |err|
-    render json: { error: 'RecordInvalid', message: err }, status: 400
+    render json: { success:false, error: 'RecordInvalid', message: err }, status: 400
   end
   rescue_from(ActiveRecord::RecordNotFound) do
-    render json: { error: 'ResourceNotFound' }, status: 404
+    render json: { success: false, error: 'ResourceNotFound' }, status: 404
+  end
+  rescue_from(NoMethodError) do
+    render json: { success: false, error: 'NoMethodError' }, status: 400
   end
 
   private
