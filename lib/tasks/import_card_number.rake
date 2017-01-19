@@ -3,7 +3,7 @@ namespace :db do
     require 'csv'
 
     CSV.foreach 'db/unactived_cards.csv' do |r|
-      Card.create! cid: r[0], pin: r[2]
+      Card.create! cid: r[0], pin: r[1]
     end
   end
 end
