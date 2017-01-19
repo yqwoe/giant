@@ -63,10 +63,10 @@ class Api::V1::DealsController <  Api::V1::BaseController
       current_user.shops.each do |shop|
         shop.deals.order(id: :desc).each do |deal|
           records << {
-            licensed_id: deal.car.licensed_id,
-            date:  deal.cleaned_at.strftime('%Y-%m-%d'),
-            time:  deal.cleaned_at.strftime('%H:%M'),
-            car_brand: deal.car&.car_model&.car_brand&.cn_name
+            licensed_id: deal&.car&.licensed_id,
+            date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
+            time:  deal&.cleaned_at&.strftime('%H:%M'),
+            car_brand: deal&.car&.car_model&.car_brand&.cn_name
           }
         end
       end
