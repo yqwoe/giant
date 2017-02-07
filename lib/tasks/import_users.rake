@@ -2,13 +2,14 @@ namespace :db do
   desc 'import users'
   task users: :environment do
     require 'csv'
-
+    fo = File.open('db/import_user.log', 'a+')
+    puts'start to import users ...'
     CSV.foreach 'db/users.csv', headers: true do |r|
       begin
         name = r[0]
         mobile = r[1]
         email = "#{mobile}@139.com"
-        password = mobile[-6..-1]
+        password = '123456' #mobile[-6..-1]
         user = User.find_by mobile: mobile
         unless user
           user = User.new name: name,
@@ -23,7 +24,7 @@ namespace :db do
         user.save!
 
         car = user.cars.find_or_create_by licensed_id: r[5]
-        brand = r[3]
+        brand = r[4]
         model = r[4]
         car_brand = CarBrand.find_or_create_by(cn_name: brand)
 
@@ -34,10 +35,14 @@ namespace :db do
         car.save!
 
         user.save!
-
-      rescue
-        puts r
+        print '.'
+      rescue Exception => e
+        fo.puts r
+        fo.puts e.message
+        print '-'
       end
     end
+    fo.close
+    puts 'users has been imported'
   end
 end

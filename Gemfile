@@ -38,7 +38,6 @@ group :development do
   gem 'capistrano-rails'
 end
 
-
 gem 'devise'
 gem 'react_on_rails'
 gem 'kaminari'
