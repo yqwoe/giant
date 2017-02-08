@@ -3,7 +3,8 @@ namespace :db do
   task users: :environment do
     require 'csv'
     fo = File.open('db/import_user.log', 'a+')
-    puts'start to import users ...'
+    puts'Start to import users ...'
+    success, failed = 0, 0
     CSV.foreach 'db/users.csv', headers: true do |r|
       begin
         name = r[0]
@@ -36,13 +37,16 @@ namespace :db do
 
         user.save!
         print '.'
+        success = success + 1
       rescue Exception => e
         fo.puts r
         fo.puts e.message
         print '-'
+        failed = failed + 1
       end
     end
     fo.close
-    puts 'users has been imported'
+    puts
+    puts "#{success} users have been imported, #{failed} failed!"
   end
 end
