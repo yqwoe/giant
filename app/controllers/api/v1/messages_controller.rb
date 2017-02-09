@@ -4,12 +4,12 @@ class Api::V1::MessagesController < ActionController::API
 
   def index
     @messages = Message.all
-    render json: @messages
+    render json: {success: true, content: @messages.to_json}
   end
 
   def show
     if @message
-      render json: @message
+      render json: {success: true, content: @message.to_json}
     else
       render json: {success: false, message: '没有此消息!'}
     end
@@ -21,7 +21,7 @@ class Api::V1::MessagesController < ActionController::API
   private
 
     def set_message
-      @message = Message.find params[:id]
+      @message = Message.find_by msg_id: params[:id]
     rescue
       @message = nil
     end
