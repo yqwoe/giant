@@ -14,7 +14,7 @@ class Api::V1::CardsController < Api::V1::BaseController
       render json: { success: false, message: 'Car ID is not exist!' } and return unless car
 
       car.joined_at ||= Time.zone.now
-      car.valid_at = car.valid_at ? car.valid_at + 1.year : Time.zone.now + 1.year
+      car.valid_at = car.valid_at ? car.valid_at + card.range.month : Time.zone.now + card.range.month
       card.transaction do
         car.save!
         card.actived!
