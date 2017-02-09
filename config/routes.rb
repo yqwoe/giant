@@ -19,6 +19,7 @@ Rails.application.routes.draw do
       resources :payments
       resources :orders
       resources :comments
+      resources :messages
       resource :users do
         member do
           post 'verify'
