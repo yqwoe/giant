@@ -4,12 +4,12 @@ class Api::V1::MessagesController < ActionController::API
 
   def index
     @messages = Message.all
-    render json: {success: true, content: @messages.to_json}
+    render json: {success: true, content: @messages}
   end
 
   def show
     if @message
-      render json: {success: true, content: @message.to_json}
+      render json: {success: true, content: @message}
     else
       render json: {success: false, message: '没有此消息!'}
     end
