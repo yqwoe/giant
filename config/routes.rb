@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :orders
       resources :comments
       resources :messages
+      resources :violations
       resource :users do
         member do
           post 'verify'
