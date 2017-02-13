@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'dashboard', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link rel="icon" href="../../favicon.ico">
 
@@ -31,16 +31,8 @@
 
     <%= render "layouts/navbar" %>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <%= render "layouts/sidebar" %>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <%= yield %>
-        </div>
-      </div>
+    <div class="container-fluid" id="dashboard">
+       <%= yield %>
     </div>
   </body>
 </html>

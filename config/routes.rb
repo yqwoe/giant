@@ -13,6 +13,11 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
+  scope :admin do
+    get '/', to: 'admin/home#index'
+    resources :users
+  end
+
   namespace :api do
     namespace :v1 do
       resources :authenticate
