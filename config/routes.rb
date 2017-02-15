@@ -13,9 +13,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
-  scope :admin do
-    get '/', to: 'admin/home#index'
+  namespace :admin do
+    get '/', to: 'home#index'
     resources :users
+    post 'users/search', to: 'users#search'
   end
 
   namespace :api do
