@@ -1,0 +1,14 @@
+<tr id='<%= "car-#{car.id}" %>'>
+  <td>
+    <input class='form-control' value='<%= car.licensed_id %>' />
+  </td>
+  <td><%= car.created_at.strftime("%Y-%m-%d") %></td>
+  <td>
+    <input class='form-control' value='<%= car.valid_at %>' />
+  </td>
+  <td>
+    <button class="car btn btn-sm btn-danger" id='<%= "car-modify-#{car.id}" %>'>修改</button>
+    <button class="car btn btn-sm btn-info"   id='<%= "car-delete-#{car.id}" %>'>删除</button>
+  </td>
+</tr>
+

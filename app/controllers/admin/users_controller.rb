@@ -18,7 +18,17 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def update
+    @user.name = user_params[:name]
+    @user.mobile = user_params[:mobile]
+    case user_params[:roles]
+    when 'member'
+      @user.member!
+    when 'registed'
+      @user.registed!
+    end
 
+    @user.save
+    render :edit
   end
 
   private

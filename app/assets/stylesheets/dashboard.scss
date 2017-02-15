@@ -3,6 +3,8 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+@import 'bootstrap';
+
 body {
   padding-top: 50px;
   background: #315E7D;
@@ -124,15 +126,11 @@ body {
   a {
     color: white;
   }
-}
-
-.bs-example {
-  position: relative;
-  padding: 45px 15px 15px;
-  margin: 0 -15px 15px;
-  border-color: #e5e5e5 #eee #eee;
-  border-style: solid;
-  border-width: 1px 0;
-  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
-          box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  .form-input {
+    @extend .form-group;
+    height: 40px;
+  }
+  .table th,.table td {
+    text-align: center;
+  }
 }

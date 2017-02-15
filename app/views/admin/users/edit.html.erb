@@ -1,7 +1,21 @@
-<div id="users" class="row">
+<div id="users">
   <div class="col-lg-10 col-lg-offset-1">
-    <div class="bs-example">
-      <%= render 'form', admin_user: @admin_user %>
+    <%= render 'form', admin_user: @user %>
+    <div class="table-info" style="margin-top: 100px;">
+      <table class="table">
+        <thead>
+          <tr>
+            <th> 车牌号</th>
+            <th>开通日期</th>
+            <th>有效日期</th>
+            <th>编辑</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render partial: 'admin/users/car', collection: @cars if @cars %>
+        </tbody>
+      </table>
+      <%= '该用户目前还没有添加车辆！' unless @cars %>
     </div>
   </div>
 </div>
