@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :comments
       resources :messages
       resources :violations
+      resources :ads
       resource :users do
         member do
           post 'verify'
