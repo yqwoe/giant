@@ -4,7 +4,12 @@ class Api::V1::AdsController < ActionController::API
   def show
     @ad = Ad.find params[:id]
     if @ad
-      render json: { success: true, message:{ img_url: asset_url("assets/#{@ad.img_url}") } }
+      render json: { success: true,
+                     message: {
+                        title: @ad.title,
+                        img_url: asset_url("assets/#{@ad.img_url}")
+                       }
+                     }
     end
   rescue Exception => e
     render json: { success: false, message: { error: e.message }}
