@@ -21,6 +21,7 @@ class Api::V1::CardsController < Api::V1::BaseController
         card.actived_at = Time.zone.now
         card.car_id = car.id
         card.save!
+        current_user.member!
       end
       render json: { success: true, valid: car.valid_at }
     else
