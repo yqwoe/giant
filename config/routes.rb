@@ -15,9 +15,12 @@ Rails.application.routes.draw do
 
   namespace :admin do
     get '/', to: 'home#index'
-    resources :users
+    resources :users do
+      collection do
+        post 'search'
+      end
+    end
     resources :cars
-    post 'users/search', to: 'users#search'
   end
 
   namespace :api do

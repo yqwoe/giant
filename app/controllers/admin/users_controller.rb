@@ -4,6 +4,7 @@ class Admin::UsersController < Admin::BaseController
 
   def index
     @users = User.member.paginate(:page => params[:page])
+    @users_count = @users.count
   end
 
   def show
@@ -34,6 +35,7 @@ class Admin::UsersController < Admin::BaseController
   private
 
     def set_user
+      return if params[:id] == 'search'
       @user = User.find params[:id]
       @cars = @user.cars if @user.member?
     end
