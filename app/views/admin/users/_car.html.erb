@@ -1,14 +1,31 @@
 <tr id='<%= "car-#{car.id}" %>'>
   <td>
-    <input class='form-control' value='<%= car.licensed_id %>' />
+    <input
+      class='form-control' value='<%= car.licensed_id %>'
+      id='<%= "licensed-#{car.id}" %>' />
   </td>
   <td><%= car.created_at.strftime("%Y-%m-%d") %></td>
   <td>
-    <input class='form-control' value='<%= car.valid_at %>' />
+    <input
+      class='form-control'
+      value='<%= car.valid_at %>'
+      id='<%= "valid-#{car.id}" %>'
+    />
   </td>
   <td>
-    <button class="car btn btn-sm btn-danger" id='<%= "car-modify-#{car.id}" %>'>修改</button>
-    <button class="car btn btn-sm btn-info"   id='<%= "car-delete-#{car.id}" %>'>删除</button>
+    <button
+      class="car-modify btn btn-sm btn-danger"
+      data-id='<%= "#{car.id}" %>'
+    >
+      修改
+    </button>
+    <button
+      class="car-delete btn btn-sm btn-info"
+      data-id='<%= "#{car.id}" %>'
+      data-remote='true'
+    >
+      删除
+    </button>
   </td>
 </tr>
 
