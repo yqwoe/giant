@@ -26,3 +26,5 @@ config/key
 public/assets
 db/new_cards.csv
 db/cards.csv
+
+tags
