@@ -1,35 +1,24 @@
+<h2 class='text-center' style='color: white;'>会员管理</h2>
 <div id="users">
   <div class="row">
-   <div class="col-lg-10 col-lg-offset-1">
-     <div class="row">
-       <div class='col-lg-10'>
-        <%= form_tag search_admin_users_path, class: 'form-inline pull-left' do %>
-           <div class="form-group">
-             <p class="form-control-static">手机号</p>
-           </div>
-           <div class="form-group">
-             <input type="text" class="form-control" name="mobile" placeholder="mobile number">
-           </div>
-           <button type="submit" class="btn btn-default">查询</button>
-         <% end %>
-       </div>
-       <div class='col-lg-2'>
-         <h4><span><%= @users_count %></span></h4>
-       </div>
-     </div>
-     <br>
-     <div class="row">
-       <table class='table'>
-           <tr>
-             <th>姓名</th>
-             <th>手机号</th>
-             <th>类别</th>
-             <th>操作</th>
-           </tr>
-         <tbody>
-            <%= render @users if @users%>
-         </tbody>
-       </table>
-     </div>
+    <div class="col-lg-10 col-lg-offset-1">
+      <h4 class='text-right'>总计：<span><%= @users_count if @users_count %></span></h4>
+      <br>
+      <div class="row">
+        <table class='table'>
+            <tr>
+              <th>姓名</th>
+              <th>手机号</th>
+              <th>类别</th>
+              <th>上次登录日期</th>
+              <th>操作</th>
+            </tr>
+          <tbody>
+             <%= render @users if @users%>
+          </tbody>
+        </table>
+      </div>
+    </div>
   </div>
 </div>
+<%= render partial: "paginate", locals: {collection: @users}  %>

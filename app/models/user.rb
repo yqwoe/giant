@@ -28,6 +28,16 @@ class User < ApplicationRecord
                 :sysadmin    # 系统管理员
                ]
 
+  def role
+    %w(未付费会员
+      付费会员
+      代理商
+      业务员
+      车行老板
+      普通管理员
+      系统管理员)[roles_before_type_cast]
+  end
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if login = conditions.delete(:login)

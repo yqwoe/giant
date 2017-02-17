@@ -27,7 +27,10 @@
     <div class="form-input">
       <%= f.label :会员类别, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-        <%= f.text_field :roles, class: 'form-control' %>
+        <%= f.text_field :role,
+          class: 'form-control',
+          placeholder: 'registed为非会员，member为会员'
+        %>
       </div>
     </div>
 

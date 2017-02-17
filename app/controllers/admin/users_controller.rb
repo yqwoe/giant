@@ -11,8 +11,9 @@ class Admin::UsersController < Admin::BaseController
   end
 
   def search
-    @users = User.find_by(mobile: params[:mobile])
-    render :index
+    @users = User.where('mobile like ?', "%#{params[:mobile]}%")
+      .paginate(page: params[:page])
+    render template: 'admin/users/index'
   end
 
   def edit

@@ -29,6 +29,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jpush'
 gem 'byebug'
+gem 'will_paginate-bootstrap'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
