@@ -1,5 +1,8 @@
 <tr id='<%= "car-#{car.id}" %>'>
   <td>
+    <%= car.car_model ? car.car_model.cn_name : '未知' %>
+  </td>
+  <td>
     <input
       class='form-control' value='<%= car.licensed_id %>'
       id='<%= "licensed-#{car.id}" %>' />
@@ -11,6 +14,9 @@
       value='<%= car.valid_at %>'
       id='<%= "valid-#{car.id}" %>'
     />
+  </td>
+  <td>
+    <%= car.deals.count %>
   </td>
   <td>
     <button
