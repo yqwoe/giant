@@ -49,6 +49,7 @@ Rails.application.routes.draw do
           get :counties
         end
       end
+      resource :version, only: [:show]
     end
   end
 end
