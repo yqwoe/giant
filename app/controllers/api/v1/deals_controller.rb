@@ -39,10 +39,12 @@ class Api::V1::DealsController <  Api::V1::BaseController
     def get_member_deals
       return nil unless current_user.member?
 
+      page = params[:page] || 1
+      per_page = params[:per_page] || current_user.deals.count
       records = []
       current_user.deals.order(id: :desc)
-        .page(params[:page])
-        .per_page(params[:per_page]).each do |deal|
+        .page(page)
+        .per_page(per_page).each do |deal|
           shop_image = deal&.shop&.image
           records << {
             deal_id: deal.id,
@@ -62,10 +64,12 @@ class Api::V1::DealsController <  Api::V1::BaseController
     def get_shop_deals
       return nil unless current_user.shop_owner?
 
+      page = params[:page] || 1
+      per_page = params[:per_page] || current_user.deals.count
       records = []
       current_user.deals.order(id: :desc)
-        .page(params[:page])
-        .per_page(params[:per_page]).each do |deal|
+        .page(page)
+        .per_page(per_page).each do |deal|
           records << {
             licensed_id: deal&.car&.licensed_id,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
