@@ -40,8 +40,9 @@ class Api::V1::DealsController <  Api::V1::BaseController
       return nil unless current_user.member?
 
       records = []
-      current_user.cars.each do |car|
-        car.deals.order(id: :desc).each do |deal|
+      current_user.deals.order(id: :desc)
+        .page(params[:page])
+        .per_page(params[:per_page]).each do |deal|
           shop_image = deal&.shop&.image
           records << {
             deal_id: deal.id,
@@ -53,7 +54,6 @@ class Api::V1::DealsController <  Api::V1::BaseController
             comment: !!deal.status,
             image: "#{HOSTNAME}assets/shops/#{shop_image}"
           }
-        end
       end
 
       records
@@ -63,8 +63,9 @@ class Api::V1::DealsController <  Api::V1::BaseController
       return nil unless current_user.shop_owner?
 
       records = []
-      current_user.shops.each do |shop|
-        shop.deals.order(id: :desc).each do |deal|
+      current_user.deals.order(id: :desc)
+        .page(params[:page])
+        .per_page(params[:per_page]).each do |deal|
           records << {
             licensed_id: deal&.car&.licensed_id,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
@@ -72,9 +73,25 @@ class Api::V1::DealsController <  Api::V1::BaseController
             car_brand: deal&.car&.car_model&.car_brand&.cn_name
           }
         end
+      records
+    end
+
+    def get_car_deals car
+      records = []
+      car.deals.order(id: :desc).each do |deal|
+        shop_image = deal&.shop&.image
+        records << {
+          deal_id: deal.id,
+          shop_id: deal&.shop_id,
+          title: deal&.shop&.name,
+          date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
+          time:  deal&.cleaned_at&.strftime('%H:%M'),
+          address: deal&.shop&.address,
+          comment: !!deal.status,
+          image: "#{HOSTNAME}assets/shops/#{shop_image}"
+        }
       end
 
       records
     end
-
 end
