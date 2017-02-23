@@ -1,16 +1,26 @@
 <div id="desktop" class="row">
+  <div class='col-lg-10 col-lg-offset-1'>
    <div class="col-lg-3">
-     <a href="users">
-       <%= image_tag 'users.png', class: 'app-icon img-rounded' %>
-     </a>
+     <%= link_to image_tag('users.jpg', class: 'app-icon img-rounded'),
+       admin_users_path
+     %>
      <h4 style="color: white">用户管理</h4> 
    </div><!-- /.col-lg-3 -->
    <div class="col-lg-3">
-     <a href="admin/shops">
-       <%= image_tag 'carwash.jpg', class: 'app-icon img-rounded' %>
-     </a>
-     <h4 style="color: white">洗车行管理</h4> 
+     <%= link_to image_tag('carwash.jpg', class: 'app-icon img-rounded'), '#' %>
+     <h4 style="color: white">洗车行</h4> 
    </div><!-- /.col-lg-3 -->
    <div class="col-lg-3">
+     <%= link_to image_tag('cards.jpg', class: 'app-icon img-rounded'),
+       admin_cards_path
+     %>
+     <h4 style="color: white">激活卡</h4> 
    </div><!-- /.col-lg-3 -->
+   <div class="col-lg-3">
+     <%= link_to image_tag('deals.png', class: 'app-icon img-rounded'),
+       '#'
+     %>
+     <h4 style="color: white">交易记录</h4> 
+   </div><!-- /.col-lg-3 -->
+  </div>
 </div>

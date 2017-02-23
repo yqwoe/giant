@@ -22,7 +22,7 @@ class Admin::UsersController < Admin::BaseController
   def update
     @user.name = user_params[:name]
     @user.mobile = user_params[:mobile]
-    case user_params[:roles]
+    case user_params[:role]
     when 'member'
       @user.member!
     when 'registed'

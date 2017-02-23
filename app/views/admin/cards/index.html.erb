@@ -1,0 +1,34 @@
+<h2 class='text-center' style='color: white;'>会员卡管理</h2>
+<div id="cards" style="color: white;">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <h4 class='text-right'>总计：<span><%= @cards_count if @cards_count %></span></h4>
+      <br>
+      <div class='row'>
+        <a href='/admin/cards?actived=false'>
+          <button class="btn btn-warning">未激活</button>
+        </a>
+        <a href='/admin/cards?actived=true'>
+          <button class="btn btn-success">已激活</button>
+        </a>
+      </div>
+      <br>
+      <div class="row" id="table-info">
+        <table class='table'>
+            <tr>
+              <th>卡号</th>
+              <th>是否激活</th>
+              <th>激活日期</th>
+              <th>绑定车牌</th>
+              <th>操作</th>
+            </tr>
+          <tbody>
+             <%= render @cards if @cards%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "shared/paginate", locals: {collection: @cards}  %>
+
