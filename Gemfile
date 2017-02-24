@@ -28,7 +28,6 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 gem 'jpush'
-gem 'byebug'
 gem 'will_paginate-bootstrap'
 
 group :development do
@@ -64,6 +63,8 @@ gem 'ransack'
 gem 'json'
 gem 'will_paginate', git: 'https://git.coding.net/railstutorial/will_paginate.git'
 gem 'wx_pay'
+
+gem 'sweetalert2'
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

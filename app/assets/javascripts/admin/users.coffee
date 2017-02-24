@@ -29,3 +29,10 @@ $(document).on 'turbolinks:load', ->
         record.remove()
      fail: (data) ->
        alert data.message
+
+  swal
+    title: 'Error'
+    text: 'Do you want to continuoe'
+    type: 'error'
+    confirmButtonText: 'Cool'
+  

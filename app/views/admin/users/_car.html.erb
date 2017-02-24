@@ -25,10 +25,20 @@
     >
       修改
     </button>
+    <%= button_to '删除', { action: 'destroy', controller: 'admin/cars', id: car.id },
+      method: :delete, data: { confirm: 'Are you sure?',
+                               :"confirm-button-text" => 'Im ready',
+                               :"concel-button-text" => 'No way',
+                               :"sweet-alert-type" => 'info',
+                               text: 'This is a subtitle',
+                               :'image-url' => '/pic.png'
+    }, remote: true
+    %>
     <button
       class="car-delete btn btn-sm btn-info"
       data-id='<%= "#{car.id}" %>'
       data-remote='true'
+      data-confirm='确定删除该车辆吗？一旦删除，无法恢复！'
     >
       删除
     </button>

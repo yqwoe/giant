@@ -1,4 +1,4 @@
-class Admin::CarsController < ApplicationController
+class Admin::CarsController < Admin::BaseController
   before_action :set_car, only: [:show, :update, :destroy]
   def update
     @car.licensed_id = car_params[:licensed_id]
@@ -14,7 +14,9 @@ class Admin::CarsController < ApplicationController
 
   def destroy
     if @car.delete
-      render json: {success: true, licensed_id: @car.licensed_id}
+      respond_to do |format|
+        format.js
+      end
     else
       render json: {success: false, message: @car.errors.message}
     end
