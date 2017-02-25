@@ -37,21 +37,32 @@
         <span class="txt">用距车门较远的那只手开门，以便扭身查看车门后方是否有突发情况。</span>
         <button class="btn">点击生成海报</button> </div>
 </footer>
-
+<div class="form_box">
+    <h3>请填写信息</h3>
+    <%= form_for '/ads' do %>
+        <div class="name_box box">
+            <label for="name">您的姓名：</label><input type="text" name="name" id="name" placeholder="填写姓名">
+        </div>
+        <div class="pic_box box">
+            <label for="pic"><span>您的照片：</span>   <%= image_tag 'cards' %></label><input type="file" name="pic" id="pic" value="" >
+            <span>请上传竖版图片</span>
+        </div>
+        <input class="submit" type="submit" name="" value="提交">
+    <% end %>
+</div>
 <script type="text/javascript" charset="utf-8">
   $('.btn').on('click', function() {
-    var token = $('meta[name="csrf-token"]')[0].content;
-    swal({
-      title: '请上传图片',
-      html:
-        '<form action="/ads", method="post">' +
-          '<input type="hidden" name="authenticity_token" value="' + token + '">' +
-          '<input type="text" class="form-control" name="user_name"></input><br> ' +
-        '<input type="file" name="image"></input> ' +
-          '<button type="submit">Submit</button>' +
-        '</form>',
-      showCloseButton: false
-    })
+    // var token = $('meta[name="csrf-token"]')[0].content;
+    // swal({
+    //   title: '请上传图片',
+    //   html:
+    //     '<form action="/ads", method="post">' +
+    //       '<input type="hidden" name="authenticity_token" value="' + token + '">' +
+    //       '<input type="text" class="form-control" name="user_name"></input><br> ' +
+    //     '<input type="file" name="image"></input> ' +
+    //       '<button type="submit">Submit</button>' +
+    //     '</form>',
+    //   showCloseButton: false
+    // })
   });
 </script>
-

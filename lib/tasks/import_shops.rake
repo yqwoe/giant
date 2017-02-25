@@ -4,9 +4,10 @@ namespace :db do
     puts 'importing shops...'
 
     require 'csv'
-    CSV.foreach('db/carstoredata.csv', headers: true) do |row|
+    CSV.foreach('db/carstoredata0223.csv', headers: true) do |row|
       shop = {}
       shop[:name]  = row[0]
+
       shop[:phone] = row[1]
       shop[:city]  = row[2]
       shop[:star]  = row[4]

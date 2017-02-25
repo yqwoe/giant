@@ -107,3 +107,61 @@ footer .btn{
 footer .btn:active{
     background-color: #efefef;
 }
+
+.form_box{
+    width: 90%;
+    // height: 6rem;
+    border-radius: 20px;
+    background-color: #fff;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -59%);
+    font-size: 40px;
+    padding: 10px;
+}
+.form_box .box{
+    padding-left: 0.8rem;
+    margin-bottom: 0.2rem;
+}
+.form_box .pic_box{
+    margin-bottom: 0.5rem;
+}
+.pic_box span{
+    vertical-align: middle;
+}
+.pic_box label{
+    height: 100%;
+    vertical-align: middle;
+    display: inline-block;
+}
+.pic_box label span{
+    float: left;
+}
+.pic_box input{
+    display: none;
+}
+.name_box input{
+    width: 6rem;
+    height: 60px;
+    border: 1px solid #999;
+    border-radius: 10px;
+    vertical-align: middle;
+    font-size: 26px;
+    padding-left: 0.5rem;
+}
+.form_box h3{
+    text-align: center;
+    border-bottom: 2px solid #666;
+    padding-bottom: 0.3rem;
+    color: #333;
+}
+.form_box .submit{
+    width: 100%;
+    height: 1.3rem;
+    background-color: orange;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 40px;
+}
