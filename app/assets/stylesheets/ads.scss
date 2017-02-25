@@ -1,0 +1,109 @@
+// Place all the styles related to the ads controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "sweetalert2";
+html, body{
+    width: 100%;
+    height: 100%;
+    font-size: 75px;
+    padding: 0;
+    margin: 0;
+}
+.bg_orange{
+    background-color: #ff8a01
+}
+.txt_white{
+    color: #fff;
+}
+.txt_orange{
+    color: #ff8a01;
+}
+
+header{
+    width: 100%;
+    height: 1.173rem;
+    line-height: 1.173rem;
+    position: absolute;
+    top: 0;
+}
+header span{
+    font-size: 25.73px;
+    vertical-align: middle;
+    margin-left: 1rem;
+}
+header img{
+    width: 1.44rem;
+    vertical-align: middle;
+}
+
+.content{
+    width: 100%;
+    background-image: url('person.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 1.173rem;
+    bottom: 3.27rem;
+}
+.content .name_box{
+    width: 6.76rem;
+    height: 2.29rem;
+    line-height: 12px;
+    position: absolute;
+    right: 0;
+    bottom: 1.52rem;
+    padding: 0.32rem 0 0 0.62rem;
+}
+.name_box .title{
+    font-size: 46px;
+    line-height: 1.1rem;
+    font-weight: bold;
+}
+.name_box .name{
+    font-size: 28px;
+    line-height: auto;
+}
+
+footer{
+    height: 3.27rem;
+    bottom: 0;
+    width: 100%;
+    position: absolute;
+    line-height: 3.27rem;
+    text-align: center;
+}
+footer .footer_content{
+    display: inline-block;
+    text-align: left;
+    line-height: 43.47px;
+    vertical-align: middle;
+}
+footer .title{
+    font-size: 60px;
+    line-height: 80px;
+    margin: 0;
+    font-weight: bolder;
+}
+footer .txt{
+    font-size: 28px;
+    display: block;
+    line-height: auto;
+}
+footer .btn{
+    width: 3.82rem;
+    height: 0.9rem;
+    border-radius: 0.45rem;
+    border: none;
+    line-height: 0.68rem;
+    text-align: center;
+    background-color: #fff;
+    color: #ff8a01;
+    display: block;
+    font-size: 28px;
+    float: right;
+    margin-top: 10px;
+}
+footer .btn:active{
+    background-color: #efefef;
+}

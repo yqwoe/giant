@@ -64,6 +64,8 @@ gem 'json'
 gem 'will_paginate', git: 'https://git.coding.net/railstutorial/will_paginate.git'
 gem 'wx_pay'
 
+gem 'carrierwave', '~> 1.0'
+
 gem 'sweetalert2'
 group :development, :test do
   gem 'sqlite3'

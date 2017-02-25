@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'admin/home#index'
 
+   resource :ads
   resources :phones, only: [:new, :create]
   post 'phones/verify' => "phones#verify"
 
