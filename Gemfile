@@ -67,10 +67,10 @@ gem 'wx_pay'
 gem 'carrierwave', '~> 1.0'
 
 gem 'sweetalert2'
+gem 'byebug', platform: :mri
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platform: :mri
   gem 'mini_racer', platforms: :ruby
   gem 'pry'
 
