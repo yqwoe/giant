@@ -10,12 +10,12 @@
             您的名字
           </span>
         </div>
-        <span class="name txt_white">我为荷氏开门代言</span>
+        <span class="name txt_white">我为荷式开门代言</span>
     </div>
 </div>
 <footer class="bg_orange txt_white">
     <div class="footer_content">
-        <h3 class="title">荷氏开门法</h3>
+        <h3 class="title">荷式开门法</h3>
         <span class="txt">用距车门较远的那只手开门，以便扭身查看车门后方是否有突发情况。</span>
         <button class="btn">点击生成海报</button> </div>
 </footer>
@@ -29,7 +29,7 @@
         <div class="pic_box box">
           <label for="pic">
             <span>您的照片：</span>
-            <%= image_tag 'upload' %>
+            <%= image_tag 'upload.jpg' %>
           </label>
           <%= f.file_field :avatar, multiple: true, id: 'pic' %>
           <span>请上传竖版图片</span>
@@ -47,9 +47,12 @@
   });
   $(document).ready(function(){
     var name = $.urlParam('name');
+    name = decodeURI(name);
     var img = $.urlParam('img');
 
-    $('#user-name').text(decodeURI(name));
+    document.title = '我是' + name + ', 荷式开门我接力...';
+
+    $('#user-name').text(name);
     $('.content').css('background-image', 'url(uploads/ads/' + img + ')');
   });
 </script>
