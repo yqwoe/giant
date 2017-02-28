@@ -25,7 +25,8 @@ class User < ApplicationRecord
                 :salesman,   # 业务员
                 :shop_owner, # 车行老板
                 :admin,      # 普通管理员
-                :sysadmin    # 系统管理员
+                :sysadmin,    # 系统管理员
+                :dadi
                ]
 
   def role

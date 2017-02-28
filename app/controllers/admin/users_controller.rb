@@ -1,5 +1,7 @@
 class Admin::UsersController < Admin::BaseController
   before_action :set_user, only: [:show, :edit, :update]
+  before_action :authenticate_admin?
+
   layout 'dashboard'
 
   def index
@@ -43,5 +45,9 @@ class Admin::UsersController < Admin::BaseController
 
     def user_params
       params.fetch(:user, {})
+    end
+
+    def authenticate_admin?
+      render text: '请和管理员联系！' unless current_user.admin?
     end
 end

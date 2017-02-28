@@ -6,10 +6,20 @@
       <br>
       <div class='row'>
         <a href='/admin/cards?actived=false'>
-          <button class="btn btn-warning"><%= @inactived_cards_count %>未激活</button>
+          <button class="btn btn-warning">
+            <span class="badge">
+              <%= @inactived_cards_count %>
+            </span>
+            未激活
+          </button>
         </a>
         <a href='/admin/cards?actived=true'>
-          <button class="btn btn-success"><%= @active_cards_count %>已激活</button>
+          <button class="btn btn-success">
+            <span class="badge">
+              <%= @actived_cards_count %>
+            </span>
+              已激活
+          </button>
         </a>
       </div>
       <br>
