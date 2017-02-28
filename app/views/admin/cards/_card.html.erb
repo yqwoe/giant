@@ -1,7 +1,6 @@
 <tr>
   <td><%= card.cid %></td>
-  <td><%= card.actived? %></td>
+  <td><%= card.is_actived? %></td>
   <td><%= card.actived_at&.strftime('%Y-%m-%d %H:%M') %></td>
   <td><%= card.car_id %></td>
-  <td><%= link_to '编辑', edit_admin_card_path(card) %></td>
 </tr>

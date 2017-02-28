@@ -13,5 +13,7 @@ module Giant
     # -- all .rb files in that directory are automatically loaded.
     config.time_zone = 'Beijing'
     config.active_record.default_timezone = :local
+
+    WillPaginate.per_page = 10
   end
 end

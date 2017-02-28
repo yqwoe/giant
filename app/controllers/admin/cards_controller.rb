@@ -9,6 +9,8 @@ class Admin::CardsController < Admin::BaseController
     else
       @cards = Card.page(params[:page])
     end
+    @inactived_cards = Card.inactived.count
+    @actived_cards = Card.actived.count
   end
 
   def update

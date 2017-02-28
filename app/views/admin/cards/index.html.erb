@@ -6,10 +6,10 @@
       <br>
       <div class='row'>
         <a href='/admin/cards?actived=false'>
-          <button class="btn btn-warning">未激活</button>
+          <button class="btn btn-warning"><%= @inactived_cards_count %>未激活</button>
         </a>
         <a href='/admin/cards?actived=true'>
-          <button class="btn btn-success">已激活</button>
+          <button class="btn btn-success"><%= @active_cards_count %>已激活</button>
         </a>
       </div>
       <br>
@@ -20,7 +20,6 @@
               <th>是否激活</th>
               <th>激活日期</th>
               <th>绑定车牌</th>
-              <th>操作</th>
             </tr>
           <tbody>
              <%= render @cards if @cards%>
