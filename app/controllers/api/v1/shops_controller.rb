@@ -1,6 +1,6 @@
 class Api::V1::ShopsController < ApplicationController
   def search
-    @q = Shop.ransack(name_cont:  params[:q], county_cont: params[:county])
+    @q = Shop.ransack(name_cont:  params[:q], county_cont: params[:county], city_cont: params[:city])
     @shops = @q.result(distinct: true)
     render json: @shops
   end
