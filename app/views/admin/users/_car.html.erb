@@ -32,7 +32,8 @@
       method: :delete, data: { :'sweet-alert-confirm' => "确定删除车牌为#{car.licensed_id}的车辆吗？",
                                :"confirm-button-text" => '我确定',
                                :"cancel-button-text" => '算了',
-                               :'image-url' => image_path("carwash.png")
+                               :'sweet-alert-type' => 'null',
+                               :'image-url' => image_path("delete.gif")
     }, remote: true
     %>
   </td>
