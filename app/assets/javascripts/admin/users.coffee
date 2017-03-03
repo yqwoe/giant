@@ -25,14 +25,7 @@ $(document).on 'turbolinks:load', ->
       url: '/admin/cars/' + id
       type: 'DELETE'
       success: (data) ->
-        alert data.licensed_id + '已经从数据库中删除'
+        swal data.licensed_id + '已经从数据库中删除'
         record.remove()
      fail: (data) ->
-       alert data.message
-
-  swal
-    title: 'Error'
-    text: 'Do you want to continuoe'
-    type: 'error'
-    confirmButtonText: 'Cool'
-  
+       swal data.message
