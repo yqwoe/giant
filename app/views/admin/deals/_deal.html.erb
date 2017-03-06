@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to deal.shop.name, admin_shop_path(deal.shop) if deal.shop %></td>
+  <td><%= deal&.car&.user&.name %></td>
+  <td><%= link_to deal.car&.licensed_id, admin_car_path(deal.car) if deal.car  %></td>
+  <td><%= deal.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+</tr>

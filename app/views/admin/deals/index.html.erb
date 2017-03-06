@@ -1,0 +1,24 @@
+<h2 class='text-center' style='color: white;'>洗车记录管理</h2>
+<div id="deals" style="color: white; a: {color: yellow;}">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <h4 class='text-right'>总计：<span><%= @sers_count if @deals_count %></span></h4>
+      <br>
+      <div class="row">
+        <table class='table'>
+            <tr>
+              <th>车行名称</th>
+              <th>用户名</th>
+              <th>手机</th>
+              <th>车牌号</th>
+              <th>洗车时间</th>
+            </tr>
+          <tbody>
+             <%= render @deals if @deals%>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render partial: "shared/paginate", locals: {collection: @deals}  %>
