@@ -29,7 +29,7 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'jpush'
 gem 'will_paginate-bootstrap'
-
+gem 'cancancan'
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
