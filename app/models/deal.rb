@@ -5,4 +5,6 @@ class Deal < ApplicationRecord
   has_one :comment
 
   enum status: [:uncommented, :commented]
+
+  include Queriable
 end
