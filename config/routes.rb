@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :shops
     resources :deals
     resources :cards
     get '/', to: 'home#index'
