@@ -3,41 +3,39 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
       <h4 class='text-right'>总计：<span><%= @cards_count if @cards_count %></span></h4>
-      <br>
-      <div class='row'>
-        <a href='/admin/cards?actived=false'>
-          <button class="btn btn-warning">
-            <span class="badge">
-              <%= @inactived_cards_count %>
-            </span>
-            未激活
-          </button>
-        </a>
-        <a href='/admin/cards?actived=true'>
-          <button class="btn btn-success">
-            <span class="badge">
-              <%= @actived_cards_count %>
-            </span>
-              已激活
-          </button>
-        </a>
-      </div>
-      <br>
+    <br>
       <%= search_form_for [:admin, @q], class: 'form-inline' do |f| %>
         <%= f.label "选择初始日期" %>
         <%= f.search_field :actived_at_gteq, class: 'form-control', 'data-provide': 'datepicker' %>
         <%= f.label "选择结束日期" %>
-        <%= f.search_field :actived_at_lteq, class: 'form-control' %>
+        <%= f.search_field :actived_at_lteq, class: 'form-control', 'data-provide': 'datepicker' %>
+        <%= f.search_field :status_eq, class: 'form-control', style: 'display: none;' %>
       <% end %>
       <br>
+        <button id="inactived" class="btn btn-warning">
+          <span class="badge">
+            <%= @inactived_cards_count %>
+          </span>
+          未激活
+        </button>
+        <button id="actived" class="btn btn-success">
+          <span class="badge">
+            <%= @actived_cards_count %>
+          </span>
+            已激活
+        </button>
+        <br><br>
       <div class="row" id="table-info">
         <table class='table'>
-            <tr>
-              <th>卡号</th>
-              <th>是否激活</th>
-              <th>激活日期</th>
-              <th>绑定车牌</th>
+          <thead>
+            <tr class="text-center">
+              <th class="text-center">卡号</th>
+              <th class="text-center">是否激活</th>
+              <th class="text-center">购买用户</th>
+              <th class="text-center">绑定车牌</th>
+              <th class="text-center">激活日期</th>
             </tr>
+          </thead>
           <tbody>
              <%= render @cards if @cards%>
           </tbody>
@@ -47,4 +45,13 @@
   </div>
 </div>
 <%= render partial: "shared/paginate", locals: {collection: @cards}  %>
-
+<script type="text/javascript" charset="utf-8">
+$('#actived').click(function(){
+  $('input[name="q[status_eq]"]').val(1);
+  $('#card_search').submit();
+});
+$('#inactived').click(function(){
+  $('input[name="q[status_eq]"]').val(null);
+  $('#card_search').submit();
+});
+</script>

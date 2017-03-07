@@ -1,6 +1,7 @@
 <tr>
   <td><%= card.cid %></td>
   <td><%= card.is_actived? %></td>
+  <td><%= card&.car&.user&.name || card&.car&.user&.mobile %></td>
+  <td><%= card&.car&.licensed_id %></td>
   <td><%= card.actived_at&.strftime('%Y-%m-%d %H:%M') %></td>
-  <td><%= card.car_id %></td>
 </tr>

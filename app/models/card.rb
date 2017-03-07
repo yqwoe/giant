@@ -1,5 +1,6 @@
 class Card < ApplicationRecord
   include Queriable
+  belongs_to :car
 
   enum status: [:inactived, :actived]
   enum channel: [:dadi, :zhongyuan, :zhumadian]
