@@ -1,5 +1,6 @@
 class Admin::CardsController < Admin::BaseController
   def index
+    @q = Card.ransack(params[:q])
     if current_user.dadi?
       set_dadi_cards
       @actived_cards_count = dadi_actived_cards_count

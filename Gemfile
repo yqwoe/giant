@@ -31,6 +31,7 @@ gem 'jpush'
 gem 'will_paginate-bootstrap'
 gem 'cancancan'
 
+gem 'bootstrap-datepicker-rails'
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'

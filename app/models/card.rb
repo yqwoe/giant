@@ -1,6 +1,8 @@
 class Card < ApplicationRecord
+  include Queriable
+
   enum status: [:inactived, :actived]
-  enum channel: [:dadi]
+  enum channel: [:dadi, :zhongyuan, :zhumadian]
 
   self.per_page = 10
 

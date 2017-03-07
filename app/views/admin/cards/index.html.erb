@@ -23,6 +23,13 @@
         </a>
       </div>
       <br>
+      <%= search_form_for [:admin, @q], class: 'form-inline' do |f| %>
+        <%= f.label "选择初始日期" %>
+        <%= f.search_field :actived_at_gteq, class: 'form-control', 'data-provide': 'datepicker' %>
+        <%= f.label "选择结束日期" %>
+        <%= f.search_field :actived_at_lteq, class: 'form-control' %>
+      <% end %>
+      <br>
       <div class="row" id="table-info">
         <table class='table'>
             <tr>

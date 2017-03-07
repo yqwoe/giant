@@ -17,4 +17,5 @@
 //= require turbolinks
 //= require sweet-alert
 //= require sweet-alert-confirm
+//= require bootstrap-datepicker
 //= require_tree .
