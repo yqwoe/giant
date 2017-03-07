@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jpush'
 gem 'will_paginate-bootstrap'
 gem 'cancancan'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
@@ -117,6 +118,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'brakeman'
   # gem 'bullet'
-  gem "zero_downtime_migrations"
+  # gem "zero_downtime_migrations"
 end
 

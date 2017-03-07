@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170228032902) do
+ActiveRecord::Schema.define(version: 20170303085911) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -319,6 +319,71 @@ ActiveRecord::Schema.define(version: 20170228032902) do
     t.datetime "updated_at",                              null: false
     t.index ["shop_id"], name: "index_evaluates_on_shop_id", using: :btree
     t.index ["user_id"], name: "index_evaluates_on_user_id", using: :btree
+  end
+
+  create_table "homeland_nodes", force: :cascade do |t|
+    t.string   "name",                     null: false
+    t.string   "description"
+    t.string   "color"
+    t.integer  "sort",         default: 0, null: false
+    t.integer  "topics_count", default: 0, null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.index ["sort"], name: "index_homeland_nodes_on_sort", using: :btree
+  end
+
+  create_table "homeland_replies", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "topic_id"
+    t.text     "body"
+    t.text     "body_html"
+    t.datetime "deleted_at"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "reply_to_id"
+    t.index ["reply_to_id"], name: "index_homeland_replies_on_reply_to_id", using: :btree
+    t.index ["topic_id"], name: "index_homeland_replies_on_topic_id", using: :btree
+    t.index ["user_id"], name: "index_homeland_replies_on_user_id", using: :btree
+  end
+
+  create_table "homeland_topics", force: :cascade do |t|
+    t.integer  "node_id",                        null: false
+    t.integer  "user_id",                        null: false
+    t.string   "title",                          null: false
+    t.text     "body"
+    t.text     "body_html"
+    t.integer  "last_reply_id"
+    t.integer  "last_reply_user_id"
+    t.integer  "last_active_mark",   default: 0, null: false
+    t.datetime "replied_at"
+    t.integer  "replies_count",      default: 0, null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.index ["deleted_at"], name: "index_homeland_topics_on_deleted_at", using: :btree
+    t.index ["last_active_mark", "deleted_at"], name: "index_homeland_topics_on_last_active_mark_and_deleted_at", using: :btree
+    t.index ["node_id", "deleted_at"], name: "index_homeland_topics_on_node_id_and_deleted_at", using: :btree
+    t.index ["node_id", "last_active_mark"], name: "index_homeland_topics_on_node_id_and_last_active_mark", using: :btree
+    t.index ["user_id"], name: "index_homeland_topics_on_user_id", using: :btree
+  end
+
+  create_table "inner_users", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.integer  "roles"
+    t.index ["email"], name: "index_inner_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_inner_users_on_reset_password_token", unique: true, using: :btree
   end
 
   create_table "messages", force: :cascade do |t|

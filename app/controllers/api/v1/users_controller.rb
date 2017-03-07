@@ -25,6 +25,8 @@ class Api::V1::UsersController <  ActionController::API
 
   def create
     @user = User.find_by(mobile: params[:mobile])
+    render json: {success: false} and return unless @user
+
     password = params[:password]
     if @user.update_attributes(password: password, password_confirmation: password)
       render json: {
