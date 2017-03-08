@@ -52,5 +52,6 @@ class Admin::CardsController < Admin::BaseController
 
   def dadi_inactived_cards_count
     Card.dadi.count - Card.dadi.actived.count
+ 'data-provide': 'datepicker'
   end
 end
