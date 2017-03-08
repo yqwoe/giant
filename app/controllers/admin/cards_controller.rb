@@ -9,6 +9,14 @@ class Admin::CardsController < Admin::BaseController
       @actived_cards_count = Card.actived.count
       @inactived_cards_count = Card.count - @actived_cards_count
     end
+
+    respond_to do |format|
+      format.html
+      format.xls {
+        @cards = Card.dadi
+        render layout: "application"
+      }
+    end
   end
 
   def update

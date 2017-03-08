@@ -5,7 +5,10 @@
 <div id="cards" style="color: white;">
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-      <h4 class='text-right'>总计：<span><%= @cards_count if @cards_count %></span></h4>
+      <h4 class='text-right'>
+        <span>导出：<%=  link_to 'Excel', admin_cards_path(format: :xls), style: 'color: yellow' %></span>
+        总计：<span><%= @cards_count if @cards_count %></span>
+      </h4>
     <br>
       <%= search_form_for [:admin, @q], class: 'form-inline' do |f| %>
         <%= f.label "选择初始日期" %>
