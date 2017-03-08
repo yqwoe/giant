@@ -29,6 +29,7 @@ class Admin::CardsController < Admin::BaseController
     else
       @cards = Card.page(params[:page])
     end
+    @cards_count = Card.count
   end
 
   def set_dadi_cards
@@ -44,6 +45,7 @@ class Admin::CardsController < Admin::BaseController
       @q = Card.dadi.ransack(params[:q])
       @cards = @q.result.includes(:car).page(params[:page])
     end
+    @cards_count = Card.dadi.count
   end
 
   def dadi_actived_cards_count
@@ -52,6 +54,5 @@ class Admin::CardsController < Admin::BaseController
 
   def dadi_inactived_cards_count
     Card.dadi.count - Card.dadi.actived.count
- 'data-provide': 'datepicker'
   end
 end
