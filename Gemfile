@@ -44,7 +44,6 @@ group :development do
 end
 
 gem 'devise'
-gem 'react_on_rails'
 gem 'kaminari'
 gem 'pg'
 
