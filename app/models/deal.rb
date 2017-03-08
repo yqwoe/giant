@@ -8,12 +8,4 @@ class Deal < ApplicationRecord
 
   include Queriable
 
-  def self.to_csv(options={})
-    CSV.generate(options) do |csv|
-      csv << column_names
-      limit(100).each do |deal|
-        csv << deal.attributes.values_at(*column_names)
-      end
-    end
-  end
 end

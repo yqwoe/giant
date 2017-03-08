@@ -6,7 +6,7 @@ class Admin::DealsController < Admin::BaseController
     respond_to do |format|
       format.html
       format.csv { render text: @deals.to_csv }
-      format.xls # { send_data @deals.to_csv(col_sep: "\t")}
+      format.xls { @deals = Deal.all }
     end
 
   end
