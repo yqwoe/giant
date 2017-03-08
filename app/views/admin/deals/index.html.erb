@@ -2,7 +2,10 @@
 <div id="users" style="color: white; a: {color: yellow;}">
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-      <h4 class='text-right'>总计：<span><%= @sers_count if @deals_count %></span></h4>
+      <h4 class='text-right'>
+        <span>下载：<%= link_to "Excel", admin_deals_path(format: "xls") %></span>
+        <span>总计:<%= @deals_count if @deals_count %></span>
+      </h4>
       <br>
       <div class="row">
         <table class='table'>

@@ -3,6 +3,12 @@ class Admin::DealsController < Admin::BaseController
 
   def index
     @deals = Deal.order(:shop_id).page(params[:page])
+    respond_to do |format|
+      format.html
+      format.csv { render text: @deals.to_csv }
+      format.xls # { send_data @deals.to_csv(col_sep: "\t")}
+    end
+
   end
 
   private

@@ -1,0 +1,7 @@
+<Row>
+  <Cell><Data ss:Type="String"><%= deal&.shop&.name %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= deal&.car&.user&.name %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= deal&.car&.user&.mobile %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= deal&.car&.licensed_id  %></Data></Cell>
+  <Cell><Data ss:Type="String"><%= deal.created_at.strftime('%Y-%m-%d %H:%M') %></Data></Cell>
+</Row>
