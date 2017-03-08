@@ -51,10 +51,12 @@ $('#actived').click(function(){
   $('#card_search').submit();
 });
 $('#inactived').click(function(){
+  $('.datepicker').val(null);
   $('input[name="q[status_eq]"]').val(null);
   $('#card_search').submit();
 });
 $('.datepicker').datepicker({
-  format: 'yyyy-mm-dd'
+  format: 'yyyy-mm-dd',
+  language: 'zh-CN'
 })
 </script>
