@@ -13,7 +13,7 @@ class Admin::CardsController < Admin::BaseController
     respond_to do |format|
       format.html
       format.xls {
-        @cards = Card.dadi
+        @cards = current_user.dadi? ?  Card.dadi : Card.all
         render layout: "application"
       }
     end
@@ -29,13 +29,14 @@ class Admin::CardsController < Admin::BaseController
     if params[:actived].present?
       if params[:actived] == 'true'
         @q = Card.actived.ransack(params[:q])
-        @cards = @q.result.includes(:cars).page(params[:page])
-        @cards = Card.actived.page(params[:page])
+        @cards = @q.result.includes(:car).page(params[:page])
       elsif params[:actived] == 'false'
-        @cards = Card.where(status: nil).page(params[:page])
+        @q = Card.where(status: nil).ransack(params[:q])
+        @cards = @q.result.includes(:car).page(params[:page])
       end
     else
-      @cards = Card.page(params[:page])
+      @q = Card.ransack(params[:q])
+      @cards = @q.result.includes(:car).page(params[:page])
     end
     @cards_count = Card.count
   end
