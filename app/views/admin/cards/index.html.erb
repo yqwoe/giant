@@ -6,21 +6,22 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
       <h4 class='text-right'>
-        <span>导出：<%=  link_to 'Excel', admin_cards_path(format: :xls), style: 'color: yellow' %></span>
-        总计：<span><%= @cards_count if @cards_count %></span>
       </h4>
     <br>
+    <div class="row">
+      <div class="col-sm-6">
       <%= search_form_for [:admin, @q], class: 'form-inline' do |f| %>
         <%= f.label "选择初始日期" %>
         <%= f.search_field :actived_at_gteq, class: 'form-control datepicker',
                    'data-provide': 'datepicker', 'data-date-end-date': "0d" %>
-                 <span style="margin: 0 30px;">===>></span>
+       <span style="margin: 0 30px;">-</span>
         <%= f.label "结束日期" %>
         <%= f.search_field :actived_at_lteq, class: 'form-control datepicker',
           'data-provide': 'datepicker', 'data-date-end-date': "0d" %>
         <%= f.search_field :status_eq, class: 'form-control', style: 'display: none;' %>
       <% end %>
-      <br>
+      </div>
+      <div class="col-sm-3">
         <button id="inactived" class="btn btn-warning">
           <span class="badge">
             <%= @inactived_cards_count %>
@@ -33,6 +34,15 @@
           </span>
             已激活
         </button>
+      </div> 
+      <div class="col-sm-3">
+        <span><%=  link_to '导出Excel', admin_cards_path(format: :xls),
+          class: 'btn btn-info',
+          id: 'excel' %>
+        </span>
+        <span class="btn btn-default"><%= "合计：#{@cards_count}" if @cards_count %></span>
+      </div>
+    </div>
         <br><br>
       <div class="row" id="table-info">
         <table class='table'>
@@ -55,6 +65,8 @@
 </div>
 <%= render partial: "shared/paginate", locals: {collection: @cards}  %>
 <script type="text/javascript" charset="utf-8">
+var url = "/admin/cards.xls?actived=";
+$('.btn-info').attr('href', url + Cookies.get('actived'));
 $('#actived').click(function(){
   $('input[name="q[status_eq]"]').val(1);
   $('#card_search').submit();

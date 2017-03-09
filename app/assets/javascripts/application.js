@@ -18,4 +18,5 @@
 //= require sweet-alert
 //= require sweet-alert-confirm
 //= require bootstrap-datepicker
+//= require cookie
 //= require_tree .

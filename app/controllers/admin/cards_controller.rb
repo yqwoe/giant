@@ -1,5 +1,6 @@
 class Admin::CardsController < Admin::BaseController
   def index
+    set_cookies
     if current_user.dadi?
       set_dadi_cards
       @actived_cards_count = dadi_actived_cards_count
@@ -13,7 +14,7 @@ class Admin::CardsController < Admin::BaseController
     respond_to do |format|
       format.html
       format.xls {
-        @cards = current_user.dadi? ?  Card.dadi : Card.all
+        @cards = set_cards_for_excel
         render layout: "application"
       }
     end
@@ -24,6 +25,20 @@ class Admin::CardsController < Admin::BaseController
   end
 
   private
+
+  def set_cookies
+    cookies[:actived]  = !!params[:actived]
+  end
+
+  def set_cards_for_excel
+    if current_user.dadi?
+      Card.dadi
+    elsif params[:actived].present?
+      params[:actived] ? Card.actived : Card.where(status: nil)
+    else
+      Card.all
+    end
+  end
 
   def set_cards
     if params[:actived].present?
