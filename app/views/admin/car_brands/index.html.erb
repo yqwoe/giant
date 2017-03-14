@@ -1,23 +1,15 @@
 <h2 class='text-center' style='color: white;'>汽车品牌管理</h2>
-<div id="users">
+<div id="users" style="background-color: white; color: black; a{color: blue;}">
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-      <h4 class='text-right'>总计：<span><%= @car_brands_count if @car_brands_count %></span></h4>
       <br>
       <div class="row">
-        <table class='table'>
-            <tr>
-              <th>品牌</th>
-              <th>图片</th>
-              <th>首字母</th>
-              <th>操作</th>
-            </tr>
-          <tbody>
+        <div class='div'>
+        <tbody>
              <%= render @car_brands if @car_brands%>
           </tbody>
-        </table>
+        </div>
       </div>
     </div>
   </div>
 </div>
-<%= render partial: "shared/paginate", locals: {collection: @car_brands}  %>
