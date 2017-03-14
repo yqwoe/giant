@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  namespace :admin do
+  end
+
   root to: 'admin/home#index'
 
    resource :ads
@@ -15,6 +18,7 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    resources :car_brands
     resources :shops
     resources :deals
     resources :cards

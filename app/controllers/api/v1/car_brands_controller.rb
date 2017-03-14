@@ -11,6 +11,7 @@ class Api::V1::CarBrandsController < ApplicationController
         car[:name] = brand[:cn_name]
         car[:id]   = brand[:id]
         car[:car_models] =  brand.car_models.pluck(:cn_name)
+        car[:car_models] << "其他"
         brands << car
       end
 
