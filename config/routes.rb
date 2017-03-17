@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root to: 'admin/home#index'
 
-   resource :ads
+  resource :ads
   resources :phones, only: [:new, :create]
   post 'phones/verify' => "phones#verify"
 
@@ -56,4 +56,6 @@ Rails.application.routes.draw do
       resource :version, only: [:show]
     end
   end
+
+  mount StatusPage::Engine, at: '/'
 end

@@ -52,6 +52,7 @@ gem 'activerecord-import', '~> 0.11.0'
 
 gem 'ruby-pinyin'
 gem 'china_sms'
+gem 'status-page'
 
 ##
 # This line for debug
