@@ -3,8 +3,6 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-# server 'example.com', user: 'deploy', roles: %w{app db web}, my_property: :my_value
-# server 'example.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.example.com', user: 'deploy', roles: %w{db}
 
 
@@ -40,10 +38,13 @@
 #
 # Global options
 # --------------
-server '120.27.29.69', roles: %w{web app db}
+# server '120.27.29.69', roles: %w{web app db}
+server 'autoxss.com', user: 'deploy', roles: %w{app db web}
+server 'www.autoxss.com', user: 'deploy', roles: %w{app web}
+
 set :ssh_options, {
   keys: %w(/home/wangqsh/.ssh/id_rsa),
-  forward_agent: false,
+  forward_agent: true,
   user: 'deploy'
 }
 #
