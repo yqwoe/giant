@@ -3,6 +3,7 @@ class CarSerializer < ActiveModel::Serializer
     :city, :car_brand_url
 
   def car_brand_url
+    return nil unless object.car_model
     if object.car_model.car_brand
       object.car_model ? CarBrandSerializer.new(object.car_model.car_brand) : nil
     end
