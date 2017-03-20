@@ -3,7 +3,7 @@
 set :application, 'giant'
 set :repo_url, 'git@git.coding.net:xiss/Giant.git'
 set :user, 'deploy'
-set :rvm_ruby_version, '2.4.0'
+set :rvm_ruby_version, '2.3.1'
 
 # use touch tmp/restart.txt to restart passenger
 set :passenger_restart_with_touch, true
