@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to car_brand.cn_name, edit_admin_car_brand_path(car_brand) if car_brand.cn_name %></td>
+  <td><%= image_tag("car_brand_logos/#{car_brand.img_url}" || 'default.png')%></td>
+  <td><%= car_brand.initial_letter %></td>
+  <td><%= link_to '编辑', edit_admin_car_brand_path(car_brand), style: "color: blue;"%></td>
+</tr>
