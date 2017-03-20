@@ -10,17 +10,42 @@
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
       <div class="list-group">
-      <% @car_brand.car_models.each do |cb| %>
-         <button class="list-group-item" type="button">
-           <%= cb.cn_name %>
-           <span class="glyphicon glyphicon-remove pull-right" style="margin: 0 10px;"></span>
-           <span class="glyphicon glyphicon-pencil pull-right"></span>
-         </button>
+      <% @car_brand.car_models.each do |cm| %>
+         <div class="list-group-item"  style="height: 40px" id="<%= cm.id%>">
+           <span style= "color: black; float:left;"><%= cm.cn_name %></span>
+           <%=link_to '<span class="glyphicon glyphicon-remove pull-right" style="margin: 0 10px;"></span>'.html_safe,
+            admin_car_brand_car_model_path(@car_brand, cm), method: :delete, remote: true, data: { confirm: "确定删除吗?"} , style: "color: grey;" %>
+
+           <!-- <%=link_to '<span class="glyphicon glyphicon-pencil pull-right "></span>'.html_safe,
+            edit_admin_car_brand_car_model_path(@car_brand,cm),style: "color: blue;" %> -->
+            <span class="glyphicon glyphicon-pencil pull-right"  style="color:blue"></span>
+        </div>
+
+        <div class="edit_form <%= cm.id%>"  style="display: none">
+            <%= form_for [:admin,cm], :url => admin_car_brand_car_model_path(@car_brand,cm) do |f| %>
+                  <%= f.text_field :cn_name, class: 'form-control' %>
+                  <%= f.submit "修改", class: "btn btn-primary" %>
+            <% end %>
+        </div>
       <% end %>
       </div>
-      <button class="btn btn-success">新建</button>
+
+      <div class="new_form">
+        <%= form_for [:admin,@car_brand.car_models.new], :url => admin_car_brand_car_models_path(@car_brand) do |f| %>
+          <%= f. text_field :cn_name, class: 'form-control' %>
+          <%= f.submit "新建", class: "btn btn-primary" %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>
 
+<script>
+$('.glyphicon-pencil').on('click',function(){
+    var id=$('.list-group-item').attr('id');
+    var divClass = '.' + id;
+    $(divClass).show();
+});
 
+
+</script>

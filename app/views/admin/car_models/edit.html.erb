@@ -1,0 +1,5 @@
+<h2>修改车型</h2>
+<%= form_for @car_model,:url => { :action => "update" } do |f| %>
+      <%= f. text_field :cn_name, class: 'form-control' %>
+      <%= f.submit "确认修改", class: "btn btn-primary" %>
+    <% end %>

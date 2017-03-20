@@ -1,12 +1,13 @@
 class Admin::CarBrandsController < Admin::BaseController
-  before_action :set_car_brand, only: [:edit, :update]
+  before_action :set_car_brand, only: [:edit, :update, :destroy]
   def index
     @car_brands = CarBrand.all
   end
 
   def edit
-
+    
   end
+
 
   private
 

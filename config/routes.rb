@@ -1,11 +1,19 @@
 Rails.application.routes.draw do
 
   namespace :admin do
+    get 'car_models/edit'
+  end
+
+  namespace :admin do
+    get 'car_models/update'
+  end
+
+  namespace :admin do
   end
 
   root to: 'admin/home#index'
 
-   resource :ads
+  resource :ads
   resources :phones, only: [:new, :create]
   post 'phones/verify' => "phones#verify"
 
@@ -18,7 +26,11 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    resources :car_brands
+    resources :car_models
+    resources :car_brands do
+      resources :car_models
+    end
+
     resources :shops
     resources :deals
     resources :cards
