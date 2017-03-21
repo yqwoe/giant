@@ -15,9 +15,9 @@ class Admin::CarModelsController < ApplicationController
   end
 
   def update
-      @car_model.cn_name = params[:car_model][:cn_name]
-      @car_model.save!
-      redirect_to edit_admin_car_brand_path(@car_model.car_brand_id)
+    @car_model.cn_name = params[:car_model][:cn_name]
+    @car_model.save!
+    redirect_to edit_admin_car_brand_path(@car_model.car_brand_id)
   end
 
   def destroy
