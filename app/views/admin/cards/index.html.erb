@@ -42,8 +42,18 @@
         </span>
         <span class="btn btn-default"><%= "合计：#{@cards_count}" if @cards_count %></span>
       </div>
-    </div>
-        <br><br>
+      </div>
+        <br>
+      <div class="row">
+        <div class="col-lg-5 text-left">
+           <%= search_form_for [:admin, @q], class: 'form-inline' do |f| %>
+             <%= f.label "卡号查询" %>
+             <%= f.search_field :cid_eq, class: 'form-control' %>
+             <%= f.submit '查询', class: 'btn btn-default' %>
+           <% end %>
+        </div>
+      </div>
+      <br>
       <div class="row" id="table-info">
         <table class='table'>
           <thead>

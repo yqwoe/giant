@@ -18,13 +18,13 @@ class Api::V1::VersionsController < ApplicationController
         currentVersion: '2.0.4',
         packageSize: '25M',
         updateContent: ["1. Bug修复。", "2. 完善用户活动版块。"],
-        download_url: 'https://autoxss.com/apk/xishuashua.apk'
+        download_url: 'https://www.autoxss.com/apk/xishuashua.apk'
       }
     end
 
     def ios_shop_version
       render json: {
-        currentVersion: '2.0.6',
+        currentVersion: '2.0.7',
         packageSize: '25M',
         updateContent: ["1. Bug修复。", "2. 完善用户活动版块。"]
       }
@@ -32,10 +32,10 @@ class Api::V1::VersionsController < ApplicationController
 
     def android_shop_version
       render json: {
-        currentVersion: '2.0.6',
+        currentVersion: '2.0.7',
         packageSize: '25M',
         updateContent: ["1. Bug修复。", "2. 完善用户活动版块。"],
-        download_url: 'https://autoxss.com/apk/xishuashua.apk'
+        download_url: 'https://www.autoxss.com/apk/xishuashua_shop.apk'
       }
     end
 end
