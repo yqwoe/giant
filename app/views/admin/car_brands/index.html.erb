@@ -1,15 +1,12 @@
 <h2 class='text-center' style='color: white;'>汽车品牌管理</h2>
 <div id="users" style="background-color: white; color: black; a{color: blue;}">
-  <div class="row">
-    <div class="col-lg-10 col-lg-offset-1">
-      <br>
-      <div class="row">
-        <div class='div'>
-          <tbody>
-            <%= render @car_brands if @car_brands%>
-          </tbody>
+    <body>
+      <% 0.upto(@car_brands.count-1) do |i|%>
+        <div class="car_brand" style="display:inline-block; padding:10px; margin:15px">
+          <img src='/assets/car_brand_logos/<%= @car_brands[i].img_url %>'>
+          <%= link_to @car_brands[i].cn_name, edit_admin_car_brand_path(@car_brands[i]), style: "color: blue"%>
         </div>
-      </div>
-    </div>
-  </div>
+      <%end%>
+    </body>
+
 </div>
