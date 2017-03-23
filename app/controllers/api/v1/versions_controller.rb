@@ -36,6 +36,6 @@ class Api::V1::VersionsController < ApplicationController
         packageSize: '12.6M',
         updateContent: ["1. 增加版本更新提示功能。", "2. 添加扫描二维码动画效果。", "3. 其他部分功能优化。"],
         download_url: 'https://www.autoxss.com/apk/xishuashua_shop.apk'
-      }gst
+      }
     end
 end
