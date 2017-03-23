@@ -1,24 +1,10 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 部署
+* git push
+* bundle exec cap production deploy
+然后测试网站是否运转正常
+如网站报错，则执行以下命令回滚：
 
-Things you may want to cover:
+* bundle exec cap production deploy:rollback
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
