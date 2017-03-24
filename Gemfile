@@ -1,5 +1,5 @@
 source 'https://gems.ruby-china.org'
-ruby '2.3.1'
+ruby '2.4.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
@@ -30,6 +30,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'jpush'
 gem 'will_paginate-bootstrap'
 gem 'cancancan'
+gem 'pghero'
+gem 'pg_query'
 
 gem 'bootstrap-datepicker-rails'
 group :development do
@@ -118,7 +120,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'brakeman'
-  # gem 'bullet'
-  # gem "zero_downtime_migrations"
+  gem 'bullet'
+  gem "zero_downtime_migrations"
 end
 

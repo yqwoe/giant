@@ -39,8 +39,8 @@
 # Global options
 # --------------
 # server '120.27.29.69', roles: %w{web app db}
-server 'autoxss.com', user: 'deploy', roles: %w{app db web}
-# server 'www.autoxss.com', user: 'deploy', roles: %w{app web}
+# server 'autoxss.com', user: 'deploy', roles: %w{app db web}
+server 'www.autoxss.com', user: 'deploy', roles: %w{app db web}
 
 set :ssh_options, {
   keys: %w(/home/wangqsh/.ssh/id_rsa),

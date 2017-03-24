@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
+  authenticate :user, -> (user) { user.admin? } do
+    mount PgHero::Engine, at: "pghero"
+  end
+
   namespace :admin do
     resources :shops
     resources :deals

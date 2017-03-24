@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303085911) do
+ActiveRecord::Schema.define(version: 20170323024429) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -386,6 +386,15 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.index ["reset_password_token"], name: "index_inner_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  create_table "inviter_situations", force: :cascade do |t|
+    t.integer  "inviter_id"
+    t.integer  "invited_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["invited_id"], name: "index_inviter_situations_on_invited_id", using: :btree
+    t.index ["inviter_id", "invited_id"], name: "index_inviter_situations_on_inviter_id_and_invited_id", unique: true, using: :btree
+  end
+
   create_table "messages", force: :cascade do |t|
     t.string   "title"
     t.string   "body"
@@ -459,6 +468,21 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "promotion_statuses", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "promotion_id"
+    t.integer  "status"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string   "link"
+    t.string   "img"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shop_categories", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
@@ -510,7 +534,10 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.string   "invitation_token"
     t.integer  "invited_by"
     t.string   "avatar"
+    t.string   "identity_token"
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["identity_token"], name: "index_users_on_identity_token", unique: true, using: :btree
     t.index ["mobile"], name: "index_users_on_mobile", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
