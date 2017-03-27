@@ -46,7 +46,7 @@ group :development do
 end
 
 gem 'devise'
-gem 'kaminari'
+#gem 'kaminari'
 gem 'pg'
 
 gem 'active_model_serializers', '~> 0.10.0'

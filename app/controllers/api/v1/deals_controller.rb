@@ -3,6 +3,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
 
   def index
     records = []
+
     if current_user.member?
       records = get_member_deals
     elsif current_user.shop_owner?
@@ -40,11 +41,10 @@ class Api::V1::DealsController <  Api::V1::BaseController
       return nil unless current_user.member?
 
       page = params[:page] || 1
-      per_page = params[:per_page] || current_user.deals.count
       records = []
-      current_user.deals.order(id: :desc)
-        .page(page)
-        .per_page(per_page).each do |deal|
+      Deal.where('car_id IN (?)', current_user.cars.pluck(:id).join(','))
+        .order(id: :desc)
+        .paginate(page: page, per_page: params[:per_page]).each do |deal|
           shop_image = deal&.shop&.image
           records << {
             deal_id: deal.id,
