@@ -35,7 +35,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :authenticate
       resources :payments
-      resources :orders
+      resources :orders do
+        collection do
+          post :notify
+        end
+      end
       resources :comments
       resources :messages
       resources :violations

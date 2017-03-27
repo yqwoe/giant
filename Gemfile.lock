@@ -1,11 +1,4 @@
 GIT
-  remote: https://git.coding.net/railstutorial/alipay.git
-  revision: bd4962f12fcf698ffca4dcc696637709b1fa7d16
-  specs:
-    alipay (0.12.0)
-      activesupport (~> 5.0)
-
-GIT
   remote: https://git.coding.net/railstutorial/will_paginate.git
   revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
   specs:
@@ -68,6 +61,7 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
+    alipay (0.14.0)
     arel (7.1.4)
     autoprefixer-rails (6.7.7.1)
       execjs
@@ -195,6 +189,7 @@ GEM
     lumberjack (1.0.11)
     mail (2.6.4)
       mime-types (>= 1.16, < 4)
+    metaclass (0.0.4)
     method_source (0.8.2)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -203,6 +198,8 @@ GEM
     mini_racer (0.1.9)
       libv8 (~> 5.3)
     minitest (5.10.1)
+    mocha (1.2.1)
+      metaclass (~> 0.0.1)
     multi_json (1.12.1)
     nenv (0.3.0)
     net-scp (1.2.1)
@@ -364,7 +361,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activerecord-import (~> 0.11.0)
-  alipay!
+  alipay (~> 0.14.0)
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   brakeman
@@ -393,6 +390,7 @@ DEPENDENCIES
   json
   listen (~> 3.0.5)
   mini_racer
+  mocha
   pg
   pg_query
   pghero

@@ -46,7 +46,6 @@ group :development do
 end
 
 gem 'devise'
-#gem 'kaminari'
 gem 'pg'
 
 gem 'active_model_serializers', '~> 0.10.0'
@@ -61,7 +60,7 @@ gem 'status-page'
 # gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
 
-gem 'alipay', git: 'https://git.coding.net/railstutorial/alipay.git'
+gem 'alipay', '~> 0.14.0' #, git: 'https://git.coding.net/railstutorial/alipay.git'
 gem 'ransack'
 
 gem 'json'
@@ -110,6 +109,8 @@ group :development, :test do
   gem 'guard-livereload'
 
   gem 'simplecov', :require => false
+
+  gem 'mocha'
 end
 
 group :development do
