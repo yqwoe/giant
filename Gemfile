@@ -111,6 +111,7 @@ group :development, :test do
   gem 'simplecov', :require => false
 
   gem 'mocha'
+  gem 'minitest-reporters'
 end
 
 group :development do
