@@ -1,4 +1,11 @@
 GIT
+  remote: https://git.coding.net/railstutorial/alipay.git
+  revision: bd4962f12fcf698ffca4dcc696637709b1fa7d16
+  specs:
+    alipay (0.12.0)
+      activesupport (~> 5.0)
+
+GIT
   remote: https://git.coding.net/railstutorial/will_paginate.git
   revision: 3c861498bdbc643638c1f25bdbe67f93d03be79b
   specs:
@@ -61,7 +68,6 @@ GEM
       public_suffix (~> 2.0, >= 2.0.2)
     airbrussh (1.1.2)
       sshkit (>= 1.6.1, != 1.7.0)
-    alipay (0.14.0)
     arel (7.1.4)
     autoprefixer-rails (6.7.7.1)
       execjs
@@ -361,7 +367,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activerecord-import (~> 0.11.0)
-  alipay (~> 0.14.0)
+  alipay!
   bootstrap-datepicker-rails
   bootstrap-sass (~> 3.3.6)
   brakeman

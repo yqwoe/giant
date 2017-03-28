@@ -60,7 +60,7 @@ gem 'status-page'
 # gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
 
-gem 'alipay', '~> 0.14.0' #, git: 'https://git.coding.net/railstutorial/alipay.git'
+gem 'alipay', git: 'https://git.coding.net/railstutorial/alipay.git'
 gem 'ransack'
 
 gem 'json'
