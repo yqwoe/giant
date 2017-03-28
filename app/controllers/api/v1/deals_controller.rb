@@ -42,7 +42,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
 
       page = params[:page] || 1
       records = []
-      Deal.where('car_id IN (?)', current_user.cars.pluck(:id).join(','))
+      Deal.where('car_id IN (?)', current_user.cars.pluck(:id))
         .order(id: :desc)
         .paginate(page: page, per_page: params[:per_page]).each do |deal|
           shop_image = deal&.shop&.image
