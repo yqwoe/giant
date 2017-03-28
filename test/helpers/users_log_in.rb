@@ -3,7 +3,7 @@ require 'capybara/rails'
 
 module ActionDispatch
   class IntegrationTest
-    include Capybara
+    include Capybara::DSL
 
     def sign_in_as(user)
       user = create(:user)

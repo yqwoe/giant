@@ -4,7 +4,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     total_amount = params[:total_amount]
     subject = params[:subject]
     body = params[:body]
-    car = current_user.cars.find_by licensed_id: params[:licensed_id].upcase
+    car = current_user.cars.find_by licensed_id: params[:licensed_id]&.upcase
     render json: {success: false, message: '请先添加车辆！'} and return unless car
 
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
