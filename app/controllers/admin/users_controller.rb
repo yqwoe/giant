@@ -14,7 +14,14 @@ class Admin::UsersController < Admin::BaseController
 
   def search
     @users = User.where('mobile like ?', "%#{params[:mobile]}%")
-      .paginate(page: params[:page])
+                 .paginate(page: params[:page])
+
+    if @users.empty?
+      cars = Car.where('licensed_id LIKE ?', "%#{params[:mobile]}%")
+      @users = User.where('id IN (?)', cars.pluck(:user_id).join(','))
+        .paginate(page: params[:page]) if cars.exists?
+    end
+
     render template: 'admin/users/index'
   end
 
@@ -40,7 +47,7 @@ class Admin::UsersController < Admin::BaseController
     def set_user
       return if params[:id] == 'search'
       @user = User.find params[:id]
-      @cars = @user.cars if @user.member?
+      @cars = @user.cars
     end
 
     def user_params

@@ -3,7 +3,7 @@
 set :application, 'giant'
 set :repo_url, 'git@git.coding.net:xiss/Giant.git'
 set :user, 'deploy'
-set :rvm_ruby_version, '2.3.1'
+set :rvm_ruby_version, '2.4.0'
 
 # use touch tmp/restart.txt to restart passenger
 set :passenger_restart_with_touch, true
@@ -28,6 +28,7 @@ set :deploy_to, '/var/www/giant'
 
 # Default value for :linked_files is []
 append :linked_files, 'config/database.yml', 'config/secrets.yml'
+append :linked_files, 'config/env.yml'
 
 # Default value for linked_dirs is []
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system', 'config/key'

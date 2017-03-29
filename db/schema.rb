@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303085911) do
+ActiveRecord::Schema.define(version: 20170327105211) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,7 +20,6 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.string   "img_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string   "avatar"
     t.string   "name"
   end
 
@@ -33,219 +32,6 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.string   "initial_letter"
-  end
-
-  create_table "car_config", id: :bigint, force: :cascade do |t|
-    t.string "首字母",                  limit: 50
-    t.string "品牌",                   limit: 50
-    t.string "车系",                   limit: 50
-    t.string "销售状态",                 limit: 50
-    t.string "车型名称",                 limit: 100
-    t.string "年款",                   limit: 50
-    t.string "厂商指导价(元)",             limit: 50
-    t.string "排量",                   limit: 50
-    t.string "厂商",                   limit: 50
-    t.string "级别",                   limit: 50
-    t.string "发动机",                  limit: 50
-    t.string "变速箱",                  limit: 50
-    t.string "长*宽*高(mm)",            limit: 50
-    t.string "车身结构",                 limit: 50
-    t.string "最高车速(km/h)",           limit: 50
-    t.string "官方0-100km/h加速(s)",     limit: 50
-    t.string "实测0-100km/h加速(s)",     limit: 50
-    t.string "实测100-0km/h制动(m)",     limit: 50
-    t.string "实测油耗(L/100km)",        limit: 50
-    t.string "工信部综合油耗(L/100km)",     limit: 50
-    t.string "实测离地间隙(mm)",           limit: 50
-    t.string "整车质保",                 limit: 50
-    t.string "长度(mm)",               limit: 50
-    t.string "宽度(mm)",               limit: 50
-    t.string "高度(mm)",               limit: 50
-    t.string "轴距(mm)",               limit: 50
-    t.string "前轮距(mm)",              limit: 50
-    t.string "后轮距(mm)",              limit: 50
-    t.string "最小离地间隙(mm)",           limit: 50
-    t.string "整备质量(kg)",             limit: 50
-    t.string "车门数(个)",               limit: 50
-    t.string "座位数(个)",               limit: 50
-    t.string "油箱容积(L)",              limit: 50
-    t.string "行李厢容积(L)",             limit: 50
-    t.string "发动机型号",                limit: 50
-    t.string "排量(mL)",               limit: 50
-    t.string "排量(L)",                limit: 50
-    t.string "进气形式",                 limit: 50
-    t.string "气缸排列形式",               limit: 50
-    t.string "气缸数(个)",               limit: 50
-    t.string "每缸气门数(个)",             limit: 50
-    t.string "压缩比",                  limit: 50
-    t.string "配气机构",                 limit: 50
-    t.string "缸径(mm)",               limit: 50
-    t.string "行程(mm)",               limit: 50
-    t.string "最大马力(Ps)",             limit: 50
-    t.string "最大功率(kW)",             limit: 50
-    t.string "最大功率转速(rpm)",          limit: 50
-    t.string "最大扭矩(N·m)",            limit: 50
-    t.string "最大扭矩转速(rpm)",          limit: 50
-    t.string "发动机特有技术",              limit: 50
-    t.string "燃料形式",                 limit: 50
-    t.string "燃油标号",                 limit: 50
-    t.string "供油方式",                 limit: 50
-    t.string "缸盖材料",                 limit: 50
-    t.string "缸体材料",                 limit: 50
-    t.string "环保标准",                 limit: 50
-    t.string "简称",                   limit: 50
-    t.string "挡位个数",                 limit: 50
-    t.string "变速箱类型",                limit: 50
-    t.string "驱动方式",                 limit: 50
-    t.string "四驱形式",                 limit: 50
-    t.string "中央差速器结构",              limit: 50
-    t.string "前悬架类型",                limit: 50
-    t.string "后悬架类型",                limit: 50
-    t.string "助力类型",                 limit: 50
-    t.string "车体结构",                 limit: 50
-    t.string "前制动器类型",               limit: 50
-    t.string "后制动器类型",               limit: 50
-    t.string "驻车制动类型",               limit: 50
-    t.string "前轮胎规格",                limit: 50
-    t.string "后轮胎规格",                limit: 50
-    t.string "备胎规格",                 limit: 50
-    t.string "主/副驾驶座安全气囊",           limit: 50
-    t.string "前/后排侧气囊",              limit: 50
-    t.string "前/后排头部气囊(气帘)",         limit: 50
-    t.string "膝部气囊",                 limit: 50
-    t.string "胎压监测装置",               limit: 50
-    t.string "零胎压继续行驶",              limit: 50
-    t.string "安全带未系提示",              limit: 50
-    t.string "ISOFIX儿童座椅接口",         limit: 50
-    t.string "发动机电子防盗",              limit: 50
-    t.string "车内中控锁",                limit: 50
-    t.string "遥控钥匙",                 limit: 50
-    t.string "无钥匙启动系统",              limit: 50
-    t.string "无钥匙进入系统",              limit: 50
-    t.string "ABS防抱死",               limit: 50
-    t.string "制动力分配(EBD/CBC等)",      limit: 50
-    t.string "刹车辅助(EBA/BAS/BA等)",    limit: 50
-    t.string "牵引力控制(ASR/TCS/TRC等)",  limit: 50
-    t.string "车身稳定控制(ESC/ESP/DSC等)", limit: 50
-    t.string "上坡辅助",                 limit: 50
-    t.string "自动驻车",                 limit: 50
-    t.string "陡坡缓降",                 limit: 50
-    t.string "可变悬架",                 limit: 50
-    t.string "空气悬架",                 limit: 50
-    t.string "可变转向比",                limit: 50
-    t.string "前桥限滑差速器/差速锁",          limit: 50
-    t.string "中央差速器锁止功能",            limit: 50
-    t.string "后桥限滑差速器/差速锁",          limit: 50
-    t.string "电动天窗",                 limit: 50
-    t.string "全景天窗",                 limit: 50
-    t.string "运动外观套件",               limit: 50
-    t.string "铝合金轮圈",                limit: 50
-    t.string "电动吸合门",                limit: 50
-    t.string "侧滑门",                  limit: 50
-    t.string "电动后备厢",                limit: 50
-    t.string "感应后备厢",                limit: 50
-    t.string "车顶行李架",                limit: 50
-    t.string "真皮方向盘",                limit: 50
-    t.string "方向盘调节",                limit: 50
-    t.string "方向盘电动调节",              limit: 50
-    t.string "多功能方向盘",               limit: 50
-    t.string "方向盘换挡",                limit: 50
-    t.string "方向盘加热",                limit: 50
-    t.string "方向盘记忆",                limit: 50
-    t.string "定速巡航",                 limit: 50
-    t.string "前/后驻车雷达",              limit: 50
-    t.string "倒车视频影像",               limit: 50
-    t.string "行车电脑显示屏",              limit: 50
-    t.string "全液晶仪表盘",               limit: 50
-    t.string "HUD抬头数字显示",            limit: 50
-    t.string "座椅材质",                 limit: 50
-    t.string "运动风格座椅",               limit: 50
-    t.string "座椅高低调节",               limit: 50
-    t.string "腰部支撑调节",               limit: 50
-    t.string "肩部支撑调节",               limit: 50
-    t.string "主/副驾驶座电动调节",           limit: 50
-    t.string "第二排靠背角度调节",            limit: 50
-    t.string "第二排座椅移动",              limit: 50
-    t.string "后排座椅电动调节",             limit: 50
-    t.string "电动座椅记忆",               limit: 50
-    t.string "前/后排座椅加热",             limit: 50
-    t.string "前/后排座椅通风",             limit: 50
-    t.string "前/后排座椅按摩",             limit: 50
-    t.string "第三排座椅",                limit: 50
-    t.string "后排座椅放倒方式",             limit: 50
-    t.string "前/后中央扶手",              limit: 50
-    t.string "后排杯架",                 limit: 50
-    t.string "GPS导航系统",              limit: 50
-    t.string "定位互动服务",               limit: 50
-    t.string "中控台彩色大屏",              limit: 50
-    t.string "蓝牙/车载电话",              limit: 50
-    t.string "车载电视",                 limit: 50
-    t.string "后排液晶屏",                limit: 50
-    t.string "220V/230V电源",          limit: 50
-    t.string "外接音源接口",               limit: 50
-    t.string "CD支持MP3/WMA",          limit: 50
-    t.string "多媒体系统",                limit: 50
-    t.string "扬声器品牌",                limit: 50
-    t.string "扬声器数量",                limit: 50
-    t.string "近光灯",                  limit: 50
-    t.string "远光灯",                  limit: 50
-    t.string "日间行车灯",                limit: 50
-    t.string "自适应远近光",               limit: 50
-    t.string "自动头灯",                 limit: 50
-    t.string "转向辅助灯",                limit: 50
-    t.string "转向头灯",                 limit: 50
-    t.string "前雾灯",                  limit: 50
-    t.string "大灯高度可调",               limit: 50
-    t.string "大灯清洗装置",               limit: 50
-    t.string "车内氛围灯",                limit: 50
-    t.string "前/后电动车窗",              limit: 50
-    t.string "车窗防夹手功能",              limit: 50
-    t.string "防紫外线/隔热玻璃",            limit: 50
-    t.string "后视镜电动调节",              limit: 50
-    t.string "后视镜加热",                limit: 50
-    t.string "内/外后视镜自动防眩目",          limit: 50
-    t.string "后视镜电动折叠",              limit: 50
-    t.string "后视镜记忆",                limit: 50
-    t.string "后风挡遮阳帘",               limit: 50
-    t.string "后排侧遮阳帘",               limit: 50
-    t.string "后排侧隐私玻璃",              limit: 50
-    t.string "遮阳板化妆镜",               limit: 50
-    t.string "后雨刷",                  limit: 50
-    t.string "感应雨刷",                 limit: 50
-    t.string "空调控制方式",               limit: 50
-    t.string "后排独立空调",               limit: 50
-    t.string "后座出风口",                limit: 50
-    t.string "温度分区控制",               limit: 50
-    t.string "车内空气调节/花粉过滤",          limit: 50
-    t.string "车载冰箱",                 limit: 50
-    t.string "自动泊车入位",               limit: 50
-    t.string "发动机启停技术",              limit: 50
-    t.string "并线辅助",                 limit: 50
-    t.string "车道偏离预警系统",             limit: 50
-    t.string "主动刹车/主动安全系统",          limit: 50
-    t.string "整体主动转向系统",             limit: 50
-    t.string "夜视系统",                 limit: 50
-    t.string "中控液晶屏分屏显示",            limit: 50
-    t.string "自适应巡航",                limit: 50
-    t.string "全景摄像头",                limit: 50
-    t.text   "外观颜色"
-    t.text   "外观颜色码"
-    t.text   "内饰颜色"
-    t.text   "内饰颜色码"
-    t.string "后排车门开启方式",             limit: 50
-    t.string "货箱尺寸(mm)",             limit: 50
-    t.string "最大载重质量(kg)",           limit: 50
-    t.string "电动机总功率(kW)",           limit: 50
-    t.string "电动机总扭矩(N·m)",          limit: 50
-    t.string "前电动机最大功率(kW)",         limit: 50
-    t.string "前电动机最大扭矩(N·m)",        limit: 50
-    t.string "后电动机最大功率(kW)",         limit: 50
-    t.string "后电动机最大扭矩(N·m)",        limit: 50
-    t.string "工信部续航里程(km)",          limit: 50
-    t.string "电池容量(kWh)",            limit: 50
-    t.string "电池组质保",                limit: 50
-    t.string "电池充电时间",               limit: 50
-    t.string "充电桩价格",                limit: 50
   end
 
   create_table "car_models", force: :cascade do |t|
@@ -308,84 +94,6 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.integer  "comment_id"
   end
 
-  create_table "evaluates", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "shop_id"
-    t.integer  "service_score",     limit: 2, default: 0
-    t.integer  "quality_score",     limit: 2, default: 0
-    t.integer  "environment_score", limit: 2, default: 0
-    t.text     "comment"
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-    t.index ["shop_id"], name: "index_evaluates_on_shop_id", using: :btree
-    t.index ["user_id"], name: "index_evaluates_on_user_id", using: :btree
-  end
-
-  create_table "homeland_nodes", force: :cascade do |t|
-    t.string   "name",                     null: false
-    t.string   "description"
-    t.string   "color"
-    t.integer  "sort",         default: 0, null: false
-    t.integer  "topics_count", default: 0, null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.index ["sort"], name: "index_homeland_nodes_on_sort", using: :btree
-  end
-
-  create_table "homeland_replies", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "topic_id"
-    t.text     "body"
-    t.text     "body_html"
-    t.datetime "deleted_at"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "reply_to_id"
-    t.index ["reply_to_id"], name: "index_homeland_replies_on_reply_to_id", using: :btree
-    t.index ["topic_id"], name: "index_homeland_replies_on_topic_id", using: :btree
-    t.index ["user_id"], name: "index_homeland_replies_on_user_id", using: :btree
-  end
-
-  create_table "homeland_topics", force: :cascade do |t|
-    t.integer  "node_id",                        null: false
-    t.integer  "user_id",                        null: false
-    t.string   "title",                          null: false
-    t.text     "body"
-    t.text     "body_html"
-    t.integer  "last_reply_id"
-    t.integer  "last_reply_user_id"
-    t.integer  "last_active_mark",   default: 0, null: false
-    t.datetime "replied_at"
-    t.integer  "replies_count",      default: 0, null: false
-    t.datetime "deleted_at"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["deleted_at"], name: "index_homeland_topics_on_deleted_at", using: :btree
-    t.index ["last_active_mark", "deleted_at"], name: "index_homeland_topics_on_last_active_mark_and_deleted_at", using: :btree
-    t.index ["node_id", "deleted_at"], name: "index_homeland_topics_on_node_id_and_deleted_at", using: :btree
-    t.index ["node_id", "last_active_mark"], name: "index_homeland_topics_on_node_id_and_last_active_mark", using: :btree
-    t.index ["user_id"], name: "index_homeland_topics_on_user_id", using: :btree
-  end
-
-  create_table "inner_users", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "email",                  default: "", null: false
-    t.string   "encrypted_password",     default: "", null: false
-    t.string   "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
-    t.datetime "current_sign_in_at"
-    t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.integer  "roles"
-    t.index ["email"], name: "index_inner_users_on_email", unique: true, using: :btree
-    t.index ["reset_password_token"], name: "index_inner_users_on_reset_password_token", unique: true, using: :btree
-  end
-
   create_table "messages", force: :cascade do |t|
     t.string   "title"
     t.string   "body"
@@ -433,7 +141,6 @@ ActiveRecord::Schema.define(version: 20170303085911) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer  "user_id"
     t.integer  "state"
     t.integer  "payment_gateway"
     t.integer  "trade_no"
@@ -449,6 +156,7 @@ ActiveRecord::Schema.define(version: 20170303085911) do
     t.datetime "finished_at"
     t.datetime "canceled_at"
     t.integer  "status"
+    t.integer  "car_id"
   end
 
   create_table "phones", force: :cascade do |t|

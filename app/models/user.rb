@@ -72,6 +72,12 @@ class User < ApplicationRecord
     end
   end
 
+  def ensure_identity_token
+    if identity_token.blank?
+      self.identity_token = generate_identity_token
+    end
+  end
+
   protected
 
   private
@@ -83,4 +89,10 @@ class User < ApplicationRecord
     end
   end
 
+  def generate_identity_token
+    loop do
+      token = Devise.friendly_token
+      break token unless User.where(identity_token: token).first
+    end
+  end
 end

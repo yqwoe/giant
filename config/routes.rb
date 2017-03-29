@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     sessions: 'users/sessions',
   }
 
+  authenticate :user, -> (user) { user.admin? } do
+    mount PgHero::Engine, at: "pghero"
+  end
+
   namespace :admin do
     #resources :car_models
     resources :car_brands do
@@ -47,7 +51,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :authenticate
       resources :payments
-      resources :orders
+      resources :orders do
+        collection do
+          post :notify
+        end
+      end
       resources :comments
       resources :messages
       resources :violations
@@ -72,4 +80,7 @@ Rails.application.routes.draw do
       resource :version, only: [:show]
     end
   end
+
+  mount StatusPage::Engine, at: '/'
+  get '/api' => redirect('/swagger/dist/index.html?url=/apidocs/api-docs.yml')
 end

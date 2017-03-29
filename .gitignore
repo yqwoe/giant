@@ -22,11 +22,15 @@
 
 data
 config/key
+config/env.yml
 
 public/assets
 public/uploads
+public/apidocs/
 db/new_cards.csv
 db/cards.csv
 
 tags
 card.csv
+logfile
+*.log

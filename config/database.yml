@@ -81,5 +81,4 @@ test:
 production:
   <<: *default
   database: giant_production
-  username: giant
-  password: 123456
+  username: postgres
