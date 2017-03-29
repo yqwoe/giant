@@ -34,6 +34,8 @@ gem 'pghero'
 gem 'pg_query'
 
 gem 'bootstrap-datepicker-rails'
+gem 'swagger-docs'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'
@@ -43,7 +45,6 @@ group :development do
   gem 'capistrano-rvm'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
-  gem 'swagger-docs'
 end
 
 gem 'devise'
