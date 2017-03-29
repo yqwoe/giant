@@ -47,7 +47,7 @@ class Admin::UsersController < Admin::BaseController
     def set_user
       return if params[:id] == 'search'
       @user = User.find params[:id]
-      @cars = @user.cars if @user.member?
+      @cars = @user.cars
     end
 
     def user_params
