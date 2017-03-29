@@ -66,5 +66,5 @@ Rails.application.routes.draw do
   end
 
   mount StatusPage::Engine, at: '/'
-  get '/api' => redirect('/swagger/dist/index.html?url=/apidocs/api-docs.json')
+  get '/api' => redirect('/swagger/dist/index.html?url=/apidocs/api-docs.yml')
 end
