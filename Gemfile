@@ -43,6 +43,7 @@ group :development do
   gem 'capistrano-rvm'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+  gem 'swagger-docs'
 end
 
 gem 'devise'
@@ -111,6 +112,7 @@ group :development, :test do
   gem 'simplecov', :require => false
 
   gem 'mocha'
+  gem 'minitest-reporters'
 end
 
 group :development do
