@@ -17,12 +17,28 @@ class Api::V1::DealsController <  Api::V1::BaseController
     current_user.deals.find params[:id]
   end
 
-  def create
-    deal = current_user.deals.build
-    car = Car.find_by_licensed_id params[:licensed_id]
-    unless car
-      render json: {success: false, message: '该辆车不存在！'} and return
+  def qrcode
+    # generate hash licensed_id + timestamp
+    # save to redis
+    # set expired by 5 minute
+    # send to member app
+    render json: {success: false, message: "请提供设备ID"} and return unless params[:device_id].present?
+
+    rand_pin = SecureRandom.hex(12)
+    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true )
+      render json: {success: true, rand_pin: rand_pin, expired: 30}
+    else
+      render json: {success: false, message: "请稍后再试"}
     end
+  end
+
+  def create
+    verify_qrcode
+
+    car = check_car_licensed_id
+
+    deal = current_user.deals.build
+
     deal.car_id = car.id
     #TODO: think about multi shops
     deal.shop_id = current_user.shops.first.id
@@ -97,5 +113,32 @@ class Api::V1::DealsController <  Api::V1::BaseController
       end
 
       records
+    end
+
+    def verify_qrcode
+      valid = false
+      # car wash frequency
+      deal_count = Deal.last3d
+         .where('car_id = ?', Car.find_by_licensed_id(params[:licensed_id]).id)
+         .count
+      valid = false if deal_count >= 2
+
+      # verify rand_pin
+      rand_pin = params[:rand_pin]
+      device_id = params[:device_id]
+      if rand_pin == $redis.get(device_id)
+        valid = true
+      end
+
+      render json: {success: false, message: '数据异常'} and return unless valid
+    end
+
+    def check_car_licensed_id
+      car = Car.find_by_licensed_id params[:licensed_id]
+      unless car
+        render json: {success: false, message: '该辆车不存在！'} and return
+      end
+
+      car
     end
 end

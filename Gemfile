@@ -32,6 +32,8 @@ gem 'will_paginate-bootstrap'
 gem 'cancancan'
 gem 'pghero'
 gem 'pg_query'
+gem 'redis'
+gem 'redis-namespace'
 
 gem 'bootstrap-datepicker-rails'
 group :development do
@@ -44,6 +46,7 @@ group :development do
   # Use Capistrano for deployment
   gem 'capistrano-rails'
   gem 'swagger-docs'
+  gem 'foreman'
 end
 
 gem 'devise'

@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :shops
   has_many :deals
   has_many :comments
+  has_many :devices
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -25,8 +26,10 @@ class User < ApplicationRecord
                 :salesman,   # 业务员
                 :shop_owner, # 车行老板
                 :admin,      # 普通管理员
-                :sysadmin,    # 系统管理员
-                :dadi
+                :sysadmin,   # 系统管理员
+                :dadi,
+                :risk,       #高危用户
+                :blacklist   #黑名单
                ]
 
   def role
