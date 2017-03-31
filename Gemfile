@@ -34,7 +34,7 @@ gem 'pghero'
 gem 'pg_query'
 gem 'redis'
 gem 'redis-namespace'
-
+gem 'swagger-docs'
 gem 'bootstrap-datepicker-rails'
 group :development do
   gem 'guard-ctags-bundler'
@@ -46,7 +46,6 @@ group :development do
   gem 'capistrano-rvm'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
-  gem 'swagger-docs'
   gem 'foreman'
 end
 
