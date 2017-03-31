@@ -41,7 +41,7 @@ server 'www.autoxss.com', user: 'deploy', roles: %w{app db web}
 #
 # Global options
 # --------------
-ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :ssh_options, {
   keys: %w(~/.ssh/id_rsa),
   forward_agent: false,
