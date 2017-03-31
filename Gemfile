@@ -36,6 +36,8 @@ gem 'redis'
 gem 'redis-namespace'
 gem 'swagger-docs'
 gem 'bootstrap-datepicker-rails'
+gem 'swagger-docs'
+
 group :development do
   gem 'guard-ctags-bundler'
   gem 'capistrano'
