@@ -1,6 +1,4 @@
 class Api::V1::DealsController <  Api::V1::BaseController
-  before_action :set_car, only: [:create]
-
   HOSTNAME = 'https://autoxss.com/'
 
   def index
