@@ -1,5 +1,8 @@
 class Api::V1::ShopsController < ApplicationController
   def search
+    if params[:timestamp].present?
+      render json: [] and return if server_version <= app_version
+    end
     @q = Shop.ransack(name_cont:  params[:q], county_cont: params[:county], city_cont: params[:city])
     @shops = @q.result(distinct: true)
     render json: @shops
@@ -28,5 +31,17 @@ class Api::V1::ShopsController < ApplicationController
     end
 
     render json: @shops
+  end
+
+  private
+
+  def server_version
+    DateTime.parse '201703300646' # User UTC time
+  end
+
+  def app_version
+    DateTime.parse params[:timestamp]
+  rescue
+    1.year.ago
   end
 end
