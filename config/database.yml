@@ -82,3 +82,7 @@ production:
   <<: *default
   database: giant_production
   username: postgres
+staging:
+  <<: *default
+  database: giant_staging
+  username: postgres

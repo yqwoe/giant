@@ -37,6 +37,7 @@ gem 'redis-namespace'
 
 gem 'bootstrap-datepicker-rails'
 group :development do
+  gem 'guard-ctags-bundler'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger', '>= 0.1.1'

@@ -34,3 +34,4 @@ tags
 card.csv
 logfile
 *.log
+dump.rdb
