@@ -39,8 +39,9 @@ class Api::V1::DealsController <  Api::V1::BaseController
 
   def create
     deal = current_user.deals.build
-
-    deal.car_id = @car.id
+    car = Car.find_by licensed_id: params[:licensed_id]
+    render json: { success: false, message: '此车不存在' } and return unless car
+    deal.car_id = car.id
     #TODO: think about multi shops
     deal.shop_id = current_user.shops.first.id
     deal.cleaned_at = Time.zone.now
