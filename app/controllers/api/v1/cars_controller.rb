@@ -29,21 +29,32 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist    and return unless @car
-
-    render_not_member and return unless car_in_service?
-    puts car_in_service?
-
+    render_not_member       and return unless car_in_service?
     render_qrcode_not_valid and return unless verify_qrcode?
-
-    render json: { car_brand:   @car&.car_model&.car_brand&.cn_name,
-                   car_model:   @car&.car_model&.cn_name,
-                   licensed_id: @car.licensed_id,
-                   valid_date:  @car.valid_at,
-                   member:      car_in_service?
-    }
+    create_wash_record
   end
 
   private
+    def create_wash_record
+      deal = current_user.deals.build
+      deal.car_id = @car.id
+      #TODO: think about multi shops
+      deal.shop_id = current_user.shops.first.id
+      deal.cleaned_at = Time.zone.now
+
+      if current_user.save
+        render json: {
+          member:      car_in_service?,
+          car_brand:   @car&.car_model&.car_brand&.cn_name,
+          car_model:   @car&.car_model&.cn_name,
+          valid_date:  @car.valid_at,
+          licensed_id: @car.licensed_id
+        }
+      else
+        render json: { success: false, message: current_user.errors.messages }
+      end
+    end
+
     def car_in_service?
       !!@car.valid_at && @car.valid_at >= Time.zone.now
     end
