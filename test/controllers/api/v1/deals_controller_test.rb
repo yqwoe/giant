@@ -5,4 +5,5 @@ class Api::V1::DealsControllerTest < ActionDispatch::IntegrationTest
     get api_v1_deals_url
     assert_response :unauthorized
   end
+
 end

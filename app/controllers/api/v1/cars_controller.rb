@@ -1,7 +1,7 @@
 class Api::V1::CarsController < Api::V1::BaseController
   def create
     if current_user.cars.find_by(licensed_id: params[:licensed_id].upcase)
-      render json: { success: false, message: '该车牌已经被绑定' }
+      render json: { success: false, message: '该车牌已经被绑定' } and return
     end
     car_model = CarBrand.find(params[:car_brand_id]).car_models.find_by_cn_name(params[:car_model])
     render json: {success: false, message: '无效车型'} and return unless car_model
@@ -18,7 +18,7 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def index
     response.set_header("Access-Control-Allow-Origin", "*")
-    if current_user.cars
+    if current_user.cars.count>0
       render json: current_user.cars
     else
       render json: { success: false, message: '该用户没有绑定任何车辆！' }

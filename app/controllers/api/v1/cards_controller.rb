@@ -28,4 +28,5 @@ class Api::V1::CardsController < Api::V1::BaseController
       render json: {success: false, message: '请先绑定车辆!'}
     end
   end
+
 end
