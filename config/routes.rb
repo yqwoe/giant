@@ -71,6 +71,7 @@ Rails.application.routes.draw do
         end
       end
       resource :version, only: [:show]
+      get :use_new_qrcode, to: 'versions#use_new_qrcode'
     end
   end
 

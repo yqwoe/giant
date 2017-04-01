@@ -30,7 +30,8 @@ class Api::V1::CarsController < Api::V1::BaseController
   def wash
     render_car_not_exist    and return unless @car
     render_not_member       and return unless car_in_service?
-    render_qrcode_not_valid and return unless verify_qrcode?
+    # Fixme: will use this by market
+    # render_qrcode_not_valid and return unless verify_qrcode?
     create_wash_record
   end
 
