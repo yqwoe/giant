@@ -4,6 +4,7 @@ require 'rails/test_help'
 require 'capybara/rails'
 require 'mocha/mini_test'
 require "minitest/reporters"
+require 'test/helpers'
 Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new
 
 class ActiveSupport::TestCase
