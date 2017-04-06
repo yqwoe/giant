@@ -1,3 +1,4 @@
 class Device < ApplicationRecord
-  belongs_to :user
+  has_many :devices_and_users_relationships
+  has_many :users, through: :devices_and_users_relationships
 end

@@ -5,7 +5,9 @@ class User < ApplicationRecord
   has_many :shops
   has_many :deals
   has_many :comments
-  has_many :devices
+  has_many :devices_and_users_relationships
+  has_many :devices, through: :devices_and_users_relationships
+
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

@@ -2,8 +2,22 @@ class Api::V1::AuthenticateController <  ActionController::API
   def create
     resource = User.find_for_database_authentication(:login=>params[:login])
     render_unauthorized and return if resource.nil?
-
     render_not_match_app and return unless  match_app? resource, params[:client_kind]
+
+    # check if device exist?
+    device = Device.find_by_uuid(params[:device_id])
+    unless device
+      device = Device.create uuid: params[:device_id]
+      DevicesAndUsersRelationship.create device_id: device.id, user_id: resource.id
+    end
+
+    if device.users.count > 3
+      render_too_many_accounts_sign_in_same_device and return
+    end
+    # check resource loged in with this device
+    # if not, check loged in acounts count,
+    # if larger than 3, reject
+    # else log in
 
     if resource.valid_password?(params[:password])
       render_valid resource and return
@@ -13,6 +27,13 @@ class Api::V1::AuthenticateController <  ActionController::API
   end
 
   private
+
+  def render_too_many_accounts_sign_in_same_device
+    render json: {
+      success: false,
+      message: "一台设备最多可以登陆三个账户, 请更换手机再次登录！",
+    }, status: :unauthorized
+  end
 
   def render_unauthorized
     render json:
@@ -37,10 +58,10 @@ class Api::V1::AuthenticateController <  ActionController::API
     case client_kind
     when 'shop'
       resource.shop_owner?
-    when client_kind == 'car'
+    when 'car'
       !resource.shop_owner?
     else
-      false
+      true
     end
   rescue
     false
