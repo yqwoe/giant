@@ -45,6 +45,7 @@ group :development do
   gem 'capistrano-rvm'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+  gem 'rails-erd'
 end
 
 gem 'devise'

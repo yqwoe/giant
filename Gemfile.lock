@@ -115,6 +115,7 @@ GEM
     case_transform (0.2)
       activesupport
     china_sms (0.0.7)
+    choice (0.2.0)
     cliver (0.3.2)
     coderay (1.1.1)
     coffee-rails (4.2.1)
@@ -271,6 +272,11 @@ GEM
     rails-dom-testing (2.0.2)
       activesupport (>= 4.2.0, < 6.0)
       nokogiri (~> 1.6)
+    rails-erd (1.5.0)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
     railties (5.0.2)
@@ -297,6 +303,7 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rmmseg-cpp-new (0.3.1)
+    ruby-graphviz (1.2.3)
     ruby-pinyin (0.5.0)
       rmmseg-cpp-new (~> 0.3.1)
     ruby-progressbar (1.8.1)
@@ -419,6 +426,7 @@ DEPENDENCIES
   pry-rescue
   puma (~> 3.0)
   rails (~> 5.0.2)
+  rails-erd
   rainbow
   ransack
   ruby-pinyin

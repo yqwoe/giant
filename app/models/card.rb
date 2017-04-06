@@ -2,6 +2,8 @@ class Card < ApplicationRecord
   include Queriable
   belongs_to :car
 
+  validates_uniqueness_of :cid, :pin
+
   enum status: [:inactived, :actived]
   enum channel: [:dadi, :zhongyuan, :zhumadian]
 
