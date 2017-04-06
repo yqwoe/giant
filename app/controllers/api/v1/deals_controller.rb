@@ -17,22 +17,40 @@ class Api::V1::DealsController <  Api::V1::BaseController
     current_user.deals.find params[:id]
   end
 
-  def create
-    deal = current_user.deals.build
-    car = Car.find_by_licensed_id params[:licensed_id]
-    unless car
-      render json: {success: false, message: '该辆车不存在！'} and return
-    end
-    deal.car_id = car.id
-    #TODO: think about multi shops
-    deal.shop_id = current_user.shops.first.id
-    deal.cleaned_at = Time.now
+  def qrcode
+    # generate hash licensed_id + timestamp
+    # save to redis
+    # set expired by 5 minute
+    # send to member app
+    render json: {success: false, message: "请提供设备ID"} and return unless params[:device_id].present?
 
-    if current_user.save
-      render json: { success: true }
+    rand_pin = SecureRandom.hex(12)
+    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true )
+      render json: {success: true, rand_pin: rand_pin, expired: 30}
     else
-      render json: { success: false, message: current_user.errors.messages }
+      will_expired = $redis.ttl(params[:device_id])
+      render json: {
+        success: false,
+        message: "请#{$redis.ttl(will_expired)}秒后再试",
+        will_expired: will_expired
+      }
     end
+  end
+
+  def create
+    # deal = current_user.deals.build
+    # car = Car.find_by licensed_id: params[:licensed_id]
+    # render json: { success: false, message: '此车不存在' } and return unless car
+    # deal.car_id = car.id
+    # #TODO: think about multi shops
+    # deal.shop_id = current_user.shops.first.id
+    # deal.cleaned_at = Time.zone.now
+
+    # if current_user.save
+    #   render json: { success: true, message: '洗车记录已经创建！' }
+    # else
+    #   render json: { success: false, message: current_user.errors.messages }
+    # end
   end
 
   private

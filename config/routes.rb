@@ -59,7 +59,11 @@ Rails.application.routes.draw do
       match :wash, to: 'cars#wash', via: :post
       resources :car_brands, only: [:index, :show]
       resources :cards, only: [:create]
-      resources :deals, only: [:index, :show, :create]
+      resources :deals, only: [:index, :show, :create] do
+        collection do
+          get :qrcode
+        end
+      end
       resources :shops, only: [:index, :show] do
         collection do
           get :search
@@ -67,6 +71,7 @@ Rails.application.routes.draw do
         end
       end
       resource :version, only: [:show]
+      get :use_new_qrcode, to: 'versions#use_new_qrcode'
     end
   end
 

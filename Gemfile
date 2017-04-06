@@ -32,11 +32,14 @@ gem 'will_paginate-bootstrap'
 gem 'cancancan'
 gem 'pghero'
 gem 'pg_query'
-
+gem 'redis'
+gem 'redis-namespace'
+gem 'swagger-docs'
 gem 'bootstrap-datepicker-rails'
 gem 'swagger-docs'
 
 group :development do
+  gem 'guard-ctags-bundler'
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger', '>= 0.1.1'
@@ -45,7 +48,10 @@ group :development do
   gem 'capistrano-rvm'
   # Use Capistrano for deployment
   gem 'capistrano-rails'
+
   gem 'rails-erd'
+  gem 'foreman'
+
 end
 
 gem 'devise'

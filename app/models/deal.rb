@@ -6,6 +6,7 @@ class Deal < ApplicationRecord
 
   enum status: [:uncommented, :commented]
 
+  scope :last3d, -> { where(created_at: (1.day.ago)..(4.day.ago)) }
   include Queriable
 
 end

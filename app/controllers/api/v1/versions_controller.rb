@@ -12,6 +12,10 @@ class Api::V1::VersionsController < ApplicationController
     send "#{params[:os]}_#{params[:kind]}_version"
   end
 
+  def use_new_qrcode
+    render json: { success: false }
+  end
+
   private
 
     def ios_car_owner_version

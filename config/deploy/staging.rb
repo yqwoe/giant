@@ -3,7 +3,7 @@
 # Defines a single server with a list of roles and multiple properties.
 # You can define all roles on a single server, or split them:
 
-server 'www.autoxss.com', user: 'deploy', roles: %w{app web}
+server 'www.autoxss.com', user: 'deploy', roles: %w{app db web}
 # server 'autoxss.com', user: 'deploy', roles: %w{app web}, other_property: :other_value
 # server 'db.autoxss.com', user: 'deploy', roles: %w{db}
 
@@ -41,6 +41,7 @@ server 'www.autoxss.com', user: 'deploy', roles: %w{app web}
 #
 # Global options
 # --------------
+set :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 set :ssh_options, {
   keys: %w(~/.ssh/id_rsa),
   forward_agent: false,
