@@ -66,7 +66,7 @@ gem 'status-page'
 
 ##
 # This line for debug
-# gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
+#gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
 
 gem 'alipay', git: 'https://git.coding.net/railstutorial/alipay.git'
