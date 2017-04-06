@@ -33,7 +33,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   def notify
    fp = File.open 'alipay_notifies.log', 'a'
-   fp.puts params
+   fp.puts params.inspect
    fp.close
    # order = Order.find_by trade_no
 
