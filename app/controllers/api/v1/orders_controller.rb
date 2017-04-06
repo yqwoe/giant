@@ -18,7 +18,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
         out_trade_no: out_trade_no,
       },
       timestamp: timestamp,
-      notify_url: api_v1_payments_path
+      notify_url: notify_api_v1_orders_url
     )
 
     # create order
@@ -32,14 +32,17 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def notify
-    order = Order.find_by trade_no
+   fp = File.open 'alipay_notifies.log', 'a'
+   fp.puts params
+   fp.close
+   # order = Order.find_by trade_no
 
-    if Alipay::App::Service.verify? params
-      car = order.car
-      car.valid_at = Time.zone.now + 1.year
-      order.success!
-    else
-      order.failed!
-    end
+   # if Alipay::App::Service.verify? params
+   #   car = order.car
+   #   car.valid_at = Time.zone.now + 1.year
+   #   order.success!
+   # else
+   #   order.failed!
+   # end
   end
 end
