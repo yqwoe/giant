@@ -18,6 +18,10 @@ class Api::V1::OrdersControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     #TODO: check alipay string
-    # assert JSON.parse(response.body)['order_string'], ALIPAY_STRING
+     #assert_equal JSON.parse(response.body)['order_string'], 'as'
+  end
+
+  test "should bind cars" do
+
   end
 end

@@ -5,7 +5,6 @@ FactoryGirl.define do
     visited_at "2016-11-30 09:40:29"
     cleaned_at "2016-11-30 09:40:29"
     status 1
-
     commented_at "2016-11-30 09:40:29"
   end
 end
