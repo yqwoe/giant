@@ -1,0 +1,5 @@
+<h2>增加车型</h2>
+<%= form_for @car_model,:url => { :action => "create" } do |f| %>
+      <%= f. text_field :cn_name, class: 'form-control' %>
+      <%= f.submit "保存", class: "btn btn-primary" %>
+    <% end %>

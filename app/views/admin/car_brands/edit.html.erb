@@ -1,0 +1,62 @@
+<h2 style= "color: #fff">
+  <%= @car_brand.cn_name %>
+  <span>
+    <%= image_tag "car_brand_logos/#{@car_brand.img_url}" %>
+  </span>
+</h2>
+<span style="float: right;margin-right: 10%">
+  <%= link_to "车品牌", admin_car_brands_path, style: "color: #ddd;" %>
+</span>
+<div id="users">
+  <div class="row">
+    <div class="col-lg-10 col-lg-offset-1">
+      <div class="list-group">
+        <% @car_brand.car_models.each do |cm| %>
+           <div class="list-group-item <%= cm.id%>"  style="height: 40px" id="<%= cm.id%>">
+             <span style= "color: black; float:left;"><%= cm.cn_name %></span>
+             <%=link_to '<span class="glyphicon glyphicon-remove pull-right" style="margin: 0 10px;"></span>'.html_safe,
+              admin_car_brand_car_model_path(@car_brand, cm), method: :delete, remote: true, data: { confirm: "确定删除吗?"} , style: "color: grey;" %>
+
+              <span class="glyphicon glyphicon-pencil pull-right"  style="color:blue" id="<%= cm.id%>"></span>
+           </div>
+
+           <div class="edit_form <%= cm.id%>"  style="display: none; position: relative;">
+              <%= form_for [:admin,cm], :url => admin_car_brand_car_model_path(@car_brand,cm) do |f| %>
+                  <%= f.text_field :cn_name, class: 'form-control', style: "height: 50px"%>
+                  <div style="position: absolute; right: 6px; top: 0;">
+                      <%= f.submit "修改", class: "btn btn-primary", style: "margin: 10px" %>
+                      <button class="btn cancel" type="button" id="<%= cm.id%>">取消</button>
+                  </div>
+              <% end %>
+           </div>
+        <% end %>
+      </div>
+
+      <div class="new_form" style="margin-top: 5%">
+        <%= form_for  [:admin,@car_brand.car_models.new], :url => admin_car_brand_car_models_path(@car_brand) do |f| %>
+          <%= f. text_field :cn_name, class: 'form-control', style: "display: inline-block; width: 50%" %>
+          <%= f.submit "新建", class: "btn btn-primary"%>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$('.glyphicon-pencil').on('click',function(){
+    var id=$(this).attr('id');
+    var update = '.' + id;
+    var record='#' + id;
+    $(update).show();
+    $(record).hide();
+});
+
+$('.cancel').on('click',function(){
+    var id=$(this).attr('id');
+    var update = '.' + id;
+    var record='#' + id;
+    $(update).hide();
+    $(record).show();
+});
+
+</script>
