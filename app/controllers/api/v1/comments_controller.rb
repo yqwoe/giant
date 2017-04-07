@@ -11,7 +11,6 @@ class Api::V1::CommentsController < Api::V1::BaseController
     unless params[:content].present?
       render json: { success: false, message: 'comment can not be nil' } and return
     end
-
     if @deal = Deal.find(params[:deal_id])
       @deal.commented!
     else
