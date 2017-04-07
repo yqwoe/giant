@@ -1,10 +1,13 @@
-class Api::V1::PaymentsController < Api::V1::BaseController
+class Api::V1::PaymentsController <  ActionController::API
   before_action :set_order, only: [:show]
 
   def create
     # verify
     # modify order state
     # modify car valid_at
+   fp = File.open 'alipay_notifies.log', 'a'
+   fp.puts params.inspect
+   fp.close
     render json: { success: true }
   end
 
