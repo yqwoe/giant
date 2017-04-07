@@ -2,13 +2,13 @@
   <td>
     <%= car.car_model ? car.car_model.cn_name : '未知' %>
   </td>
-  <td>
+  <td width="15%">
     <input
       class='form-control' value='<%= car.licensed_id %>'
       id='<%= "licensed-#{car.id}" %>' />
   </td>
   <td><%= car.created_at.strftime("%Y-%m-%d") %></td>
-  <td>
+  <td width="18%">
     <input
       class='form-control'
       value='<%= car.valid_at %>'

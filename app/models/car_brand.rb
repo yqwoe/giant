@@ -1,7 +1,7 @@
 class CarBrand < ApplicationRecord
   before_create :set_initial_letter
 
-  has_many :car_models
+  has_many :car_models, dependent: :destroy
 
   ('a'..'z').to_a.each do |cars|
     scope cars, -> { where(initial_letter: cars.upcase) }

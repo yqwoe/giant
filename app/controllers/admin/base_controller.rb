@@ -6,7 +6,7 @@ class Admin::BaseController < ApplicationController
 
   def authenticate_admin!
     authenticate_user!
-    redirect_to admin_url unless current_user.admin? || current_user.dadi?
+    render plain: 'illegal users' unless current_user.admin? || current_user.dadi?
   end
 
 end

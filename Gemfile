@@ -34,6 +34,8 @@ gem 'pghero'
 gem 'pg_query'
 
 gem 'bootstrap-datepicker-rails'
+gem 'swagger-docs'
+
 group :development do
   gem 'capistrano'
   gem 'capistrano-bundler'

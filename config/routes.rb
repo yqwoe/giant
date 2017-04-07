@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
+    resources :car_models
+    resources :car_brands do
+      resources :car_models
+    end
+
     resources :shops
     resources :deals
     resources :cards
@@ -66,4 +71,5 @@ Rails.application.routes.draw do
   end
 
   mount StatusPage::Engine, at: '/'
+  get '/api' => redirect('/swagger/dist/index.html?url=/apidocs/api-docs.yml')
 end
