@@ -23,6 +23,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
     # create order
     car.orders.create(platform: platform,
+                 total_amount: total_amount,
                  subject: subject,
                  body: body,
                  trade_no: out_trade_no,

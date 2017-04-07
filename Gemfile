@@ -36,7 +36,6 @@ gem 'redis'
 gem 'redis-namespace'
 gem 'swagger-docs'
 gem 'bootstrap-datepicker-rails'
-gem 'swagger-docs'
 
 group :development do
   gem 'guard-ctags-bundler'
@@ -133,5 +132,6 @@ group :development do
   gem 'brakeman'
   gem 'bullet'
   gem "zero_downtime_migrations"
+  gem "better_errors"
 end
 
