@@ -76,12 +76,12 @@ ActiveRecord::Schema.define(version: 20170412074046) do
   create_table "clients", force: :cascade do |t|
     t.integer  "seller_id"
     t.integer  "second_seller_id"
-    t.integer  "client_id"
+    t.integer  "custom_id"
     t.float    "commission_portion",        default: 0.0
     t.float    "second_commission_portion", default: 0.0
     t.datetime "created_at",                              null: false
     t.datetime "updated_at",                              null: false
-    t.index ["client_id"], name: "index_clients_on_client_id", using: :btree
+    t.index ["custom_id"], name: "index_clients_on_custom_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
