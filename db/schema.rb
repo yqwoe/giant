@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170412043556) do
+ActiveRecord::Schema.define(version: 20170412074046) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20170412043556) do
     t.string   "vin"
     t.string   "engine_no"
     t.index ["licensed_id"], name: "index_cars_on_licensed_id", unique: true, using: :btree
+  end
+
+  create_table "clients", force: :cascade do |t|
+    t.integer  "seller_id"
+    t.integer  "second_seller_id"
+    t.integer  "client_id"
+    t.float    "commission_portion",        default: 0.0
+    t.float    "second_commission_portion", default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["client_id"], name: "index_clients_on_client_id", using: :btree
   end
 
   create_table "comments", force: :cascade do |t|
