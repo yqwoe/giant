@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170329101824) do
+ActiveRecord::Schema.define(version: 20170412043556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20170329101824) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "deal_id"
+    t.integer  "shop_id"
   end
 
   create_table "deals", force: :cascade do |t|
@@ -97,11 +98,17 @@ ActiveRecord::Schema.define(version: 20170329101824) do
   end
 
   create_table "devices", force: :cascade do |t|
-    t.integer  "user_id"
     t.string   "uuid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_devices_on_user_id", using: :btree
+  end
+
+  create_table "devices_and_users_relationships", force: :cascade do |t|
+    t.integer  "device_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["device_id", "user_id"], name: "index_devices_and_users_relationships_on_device_id_and_user_id", unique: true, using: :btree
   end
 
   create_table "messages", force: :cascade do |t|
@@ -242,6 +249,17 @@ ActiveRecord::Schema.define(version: 20170329101824) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "fine"
+  end
+
+  create_table "wares", force: :cascade do |t|
+    t.string   "name"
+    t.float    "origin_price"
+    t.float    "sale_price"
+    t.string   "avatar"
+    t.string   "tags"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "shop_id"
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"

@@ -67,6 +67,7 @@ Rails.application.routes.draw do
         end
       end
       resource :version, only: [:show]
+      resources :shop_detail, only: [:show]
     end
   end
 
