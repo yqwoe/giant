@@ -1,3 +1,3 @@
 class Ware < ApplicationRecord
-  belongs_to :shop
+  belongs_to :suite
 end
