@@ -1,9 +1,6 @@
 require 'test_helper'
 
 class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
   setup do
     @user = create(:user)
     @car_brand = create(:car_brand)
