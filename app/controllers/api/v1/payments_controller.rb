@@ -12,7 +12,8 @@ class Api::V1::PaymentsController <  ActionController::API
 
     logger_payment.info "#{@car.licensed_id} " \
       "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
-    render json: { success: true }
+    render json: { success: true,
+             message: "您的会员已经办理成功，有效期至#{@car.valid_at}" }
   end
 
   def show
