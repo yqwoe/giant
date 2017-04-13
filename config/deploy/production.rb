@@ -47,6 +47,14 @@ set :ssh_options, {
   forward_agent: true,
   user: 'deploy'
 }
+
+task :add_shops do
+  on roles(:app) do
+    execute :rake, 'db:shops shops170413.csv'
+  end
+end
+
+after "deploy:published", "add_shops"
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
