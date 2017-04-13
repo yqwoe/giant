@@ -50,7 +50,7 @@ set :ssh_options, {
 
 task :add_shops do
   on roles(:app) do
-    execute :rake, 'db:shops shops170413.csv'
+    execute :rails, 'db:shops["shops170413.csv"]'
   end
 end
 

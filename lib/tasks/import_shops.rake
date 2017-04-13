@@ -1,10 +1,10 @@
 namespace :db do
   desc 'import shops data'
-  task shops: :environment do
+  task :shops, [:file_path] => [:environment] do |t, args|
     puts 'importing shops...'
 
     require 'csv'
-    csv_file = ARGV[1]
+    csv_file = args[:file_path]
     begin
       CSV.foreach(csv_file, headers: true) do |row|
         user = User.find_by_mobile row[2].strip
@@ -14,6 +14,7 @@ namespace :db do
         end
 
         next if Shop.find_by_name row[0]
+
         shop = {}
         shop[:name]          = row[0]
         shop[:phone]         = row[1]
@@ -27,6 +28,7 @@ namespace :db do
       end
 
       puts 'shops imported! '
+      `rm "#{ARGV[1]}"` if Rails.env.production?
     rescue Exception => e
       puts e.message
     end
