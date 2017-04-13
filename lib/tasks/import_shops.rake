@@ -4,23 +4,32 @@ namespace :db do
     puts 'importing shops...'
 
     require 'csv'
-    CSV.foreach('db/carstoredata0223.csv', headers: true) do |row|
-      shop = {}
-      shop[:name]  = row[0]
+    csv_file = ARGV[1]
+    begin
+      CSV.foreach(csv_file, headers: true) do |row|
+        user = User.find_by_mobile row[2].strip
+        unless user
+          user = User.create mobile: row[2].strip, email: "#{row[2]}@1.com",
+            password: '123456', password_confirmation: '123456'
+        end
 
-      shop[:phone] = row[1]
-      shop[:city]  = row[2]
-      shop[:star]  = row[4]
-      shop[:category] = row[5]
-      shop[:province] = row[6]
-      shop[:county] = row[8]
-      shop[:address]   = row[9]
-      shop[:position]  = [row[10], row[11]]
-      shop[:status]    = 1
-      puts shop
-      Shop.create! shop
+        next if Shop.find_by_name row[0]
+        shop = {}
+        shop[:name]          = row[0]
+        shop[:phone]         = row[1]
+        shop[:category]      = row[3]
+        shop[:position]      = [row[7], row[6]]
+        shop[:image]     = row[9]
+        shop[:province], shop[:city], shop[:county], shop[:address] =
+          row[6].split(',')
+        puts shop
+        user.shops.create! shop
+      end
+
+      puts 'shops imported! '
+    rescue Exception => e
+      puts e.message
     end
-
-    puts 'shops imported! '
   end
+
 end
