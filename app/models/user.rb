@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :deals
   has_many :comments
 
+  has_many :customs, class_name: 'Client', foreign_key: 'seller_id'
+  has_one  :seller,  class_name: 'Client', foreign_key: 'custom_id'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
