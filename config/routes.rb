@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       end
       resource :version, only: [:show]
       resources :shop_detail, only: [:show]
+      resources :coupons, only: [:index]
     end
   end
 
