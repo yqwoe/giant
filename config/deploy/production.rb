@@ -48,13 +48,6 @@ set :ssh_options, {
   user: 'deploy'
 }
 
-task :add_shops do
-  on roles(:app) do
-    execute :rails, 'db:shops["shops170413.csv"]'
-  end
-end
-
-after "deploy:published", "add_shops"
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------
