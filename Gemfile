@@ -128,4 +128,5 @@ group :development do
   gem 'brakeman', require: false
   gem 'bullet'
   gem "zero_downtime_migrations"
+  gem 'guard-brakeman'
 end
