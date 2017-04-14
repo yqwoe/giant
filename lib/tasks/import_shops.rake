@@ -11,6 +11,7 @@ namespace :db do
         unless user
           user = User.create mobile: row[2].strip, email: "#{row[2]}@1.com",
             password: '123456', password_confirmation: '123456'
+          user.shop_owner!
         end
 
         next if Shop.find_by_name row[0]
