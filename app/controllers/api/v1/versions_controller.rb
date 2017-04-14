@@ -1,15 +1,10 @@
 class Api::V1::VersionsController < ApplicationController
   respond_to :json
 
-  swagger_controller :versions, 'Versions'
-
-  swagger_api :show do
-    summary 'return version'
-    notes 'return version by platform and app kind'
-  end
-
   def show
-    send "#{params[:os]}_#{params[:kind]}_version"
+    os   = params[:os].to_sym   == :ios ? :ios : :android
+    kind = params[:kind].to_sym == :shop ? :shop : :car_owner
+    send "#{os}_#{kind}_version"
   end
 
   private
