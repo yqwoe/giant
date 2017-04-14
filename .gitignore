@@ -36,3 +36,4 @@ card.csv
 logfile
 *.log
 dump.rdb
+gems.tags

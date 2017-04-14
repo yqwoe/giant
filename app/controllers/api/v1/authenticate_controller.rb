@@ -5,14 +5,15 @@ class Api::V1::AuthenticateController <  ActionController::API
     render_not_match_app and return unless  match_app? resource, params[:client_kind]
 
     # check if device exist?
-    device = Device.find_by_uuid(params[:device_id])
-    unless device
-      device = Device.create uuid: params[:device_id]
-      DevicesAndUsersRelationship.create device_id: device.id, user_id: resource.id
-    end
+    if params[:device_id].present?
+      device = Device.find_or_create_by uuid: params[:device_id].strip
+      unless device.users.include? resource
+        DevicesAndUsersRelationship.create device_id: device.id, user_id: resource.id
+      end
 
-    if device.users.count > 3
-      render_too_many_accounts_sign_in_same_device and return
+      if device.users.count > 3
+        render_too_many_accounts_sign_in_same_device and return
+      end
     end
     # check resource loged in with this device
     # if not, check loged in acounts count,
