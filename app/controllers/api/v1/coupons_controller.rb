@@ -3,7 +3,7 @@ class Api::V1::CouponsController < Api::V1::BaseController
     if params[:tag] == 'all' or  Coupon.statuses.include? params[:tag]
       render json: coupon_result
     else
-      render json: Coupon.count
+      render json: {count: Coupon.count}
     end
   end
 
