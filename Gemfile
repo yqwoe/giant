@@ -115,6 +115,7 @@ group :development, :test do
 
   gem 'mocha'
   gem 'minitest-reporters'
+  gem 'railroady'
 end
 
 group :development do
@@ -128,4 +129,3 @@ group :development do
   gem 'bullet'
   gem "zero_downtime_migrations"
 end
-
