@@ -10,9 +10,9 @@
 </Row>
 <% @cars.each do |car| %>
   <Row>
-    <Cell><Data ss:Type="String"><%= car.user.name %></Data></Cell>
-    <Cell><Data ss:Type="String"><%= car.user.mobile %></Data></Cell>
-    <Cell><Data ss:Type="String"><%= car.user.role %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.user&.name %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.user&.mobile %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.user&.role %></Data></Cell>
     <Cell><Data ss:Type="String"><%= car.car_model&.cn_name  %></Data></Cell>
     <Cell><Data ss:Type="String"><%= car.licensed_id %></Data></Cell>
     <Cell><Data ss:Type="String"><%= car.created_at&.strftime('%Y-%m-%d %H:%M') %></Data></Cell>
