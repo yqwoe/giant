@@ -31,7 +31,7 @@ class Api::V1::CarsController < Api::V1::BaseController
                    car_model: car&.car_model&.cn_name,
                    licensed_id: car.licensed_id,
                    valid_date: car.valid_at,
-                   member: !!(car.valid_at > Time.zone.now)
+                   member: !!(car.valid_at > Time.zone.now) && Deal.today_deals_count(car) < 1
     }
   end
 end
