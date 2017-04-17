@@ -1,6 +1,8 @@
-class Api::V1::CommentsController < Api::V1::BaseController
+class Api::V1::CommentsController < ActionController::API
+  before_action :set_shop, only: [:index]
+
   def index
-    render json: current_user.comments
+    render json: @shop.comments
   end
 
   def show
@@ -32,4 +34,10 @@ class Api::V1::CommentsController < Api::V1::BaseController
       render json: { success: false, message: @comment.errors.messages  }
     end
   end
+
+  private
+
+    def set_shop
+      @shop = Shop.find params[:shop_id]
+    end
 end
