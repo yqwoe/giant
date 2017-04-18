@@ -26,7 +26,12 @@ class Api::V1::DealsController <  Api::V1::BaseController
     deal.car_id = car.id
     #TODO: think about multi shops
     deal.shop_id = current_user.shops.first.id
-    deal.cleaned_at = Time.now
+    deal.cleaned_at = Time.zone.now
+    today_deal_count = Deal.today_deal_count car
+
+    if today_deal_count > 0
+      render json: { success: false, message: "验证不通过！" } and return
+    end
 
     if current_user.save
       render json: { success: true }
