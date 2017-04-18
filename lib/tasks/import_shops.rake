@@ -1,5 +1,8 @@
 namespace :db do
   desc 'import shops data'
+  ##
+  # Usage: RAILS_ENV=production rails db:shops['shops.csv']
+  #
   task :shops, [:file_path] => [:environment] do |t, args|
     puts 'importing shops...'
 
@@ -20,7 +23,7 @@ namespace :db do
         shop[:name]          = row[0]
         shop[:phone]         = row[1]
         shop[:category]      = row[3]
-        shop[:position]      = [row[7], row[6]]
+        shop[:position]      = [row[8], row[7]]
         shop[:image]     = row[9]
         shop[:province], shop[:city], shop[:county], shop[:address] =
           row[6].split(',')
