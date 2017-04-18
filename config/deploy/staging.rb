@@ -61,4 +61,3 @@ set :ssh_options, {
 #     # password: 'please use keys'
 #   }
 #
-after "deploy:published", ""
