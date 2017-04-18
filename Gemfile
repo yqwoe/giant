@@ -120,6 +120,7 @@ group :development, :test do
 
   gem 'mocha'
   gem 'minitest-reporters'
+  gem 'railroady'
 end
 
 group :development do
@@ -129,9 +130,12 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'brakeman'
+  gem 'brakeman', require: false
   gem 'bullet'
   gem "zero_downtime_migrations"
+<<<<<<< HEAD
   gem "better_errors"
+=======
+  gem 'guard-brakeman'
+>>>>>>> master
 end
-

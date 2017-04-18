@@ -48,6 +48,7 @@ set :ssh_options, {
   forward_agent: true,
   user: 'deploy'
 }
+
 #
 # The server-based syntax can be used to override options:
 # ------------------------------------

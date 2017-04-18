@@ -10,7 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170406074505) do
+
+ActiveRecord::Schema.define(version: 20170413090019) do
+
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +75,17 @@ ActiveRecord::Schema.define(version: 20170406074505) do
     t.index ["licensed_id"], name: "index_cars_on_licensed_id", unique: true, using: :btree
   end
 
+  create_table "clients", force: :cascade do |t|
+    t.integer  "seller_id"
+    t.integer  "second_seller_id"
+    t.integer  "custom_id"
+    t.float    "commission_portion",        default: 0.0
+    t.float    "second_commission_portion", default: 0.0
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.index ["custom_id"], name: "index_clients_on_custom_id", using: :btree
+  end
+
   create_table "comments", force: :cascade do |t|
     t.string   "content"
     t.integer  "env_star"
@@ -81,6 +94,14 @@ ActiveRecord::Schema.define(version: 20170406074505) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "deal_id"
+    t.integer  "shop_id"
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.string   "avatar"
+    t.integer  "status",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "deals", force: :cascade do |t|
@@ -211,6 +232,18 @@ ActiveRecord::Schema.define(version: 20170406074505) do
     t.string    "openning"
   end
 
+  create_table "suites", force: :cascade do |t|
+    t.string   "name"
+    t.float    "origin_price"
+    t.float    "sale_price"
+    t.integer  "store"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "shop_id"
+    t.integer  "tags"
+    t.string   "avatar"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -248,6 +281,17 @@ ActiveRecord::Schema.define(version: 20170406074505) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "fine"
+  end
+
+  create_table "wares", force: :cascade do |t|
+    t.string   "name"
+    t.float    "origin_price"
+    t.float    "sale_price"
+    t.string   "avatar"
+    t.string   "tags"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "suite_id"
   end
 
   add_foreign_key "oauth_access_grants", "oauth_applications", column: "application_id"

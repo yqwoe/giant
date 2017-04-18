@@ -51,6 +51,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
     # else
     #   render json: { success: false, message: current_user.errors.messages }
     # end
+    render json: { success: true}
   end
 
   private
