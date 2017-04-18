@@ -8,8 +8,9 @@ class Deal < ApplicationRecord
 
   include Queriable
 
-  def self.today_deal_count car_id
-    where(car_id: car_id, created_at: Time.zone.today).count
+  def self.today_deals_count car_id
+    where('created_at >=? AND car_id = ?', Time.zone.now.beginning_of_day, car_id)
+      .count
   end
 
 end
