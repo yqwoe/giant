@@ -43,9 +43,9 @@ class Api::V1::CarsController < Api::V1::BaseController
       deal.shop_id = current_user.shops.first.id
       deal.cleaned_at = Time.zone.now
 
-      if current_user.save
+      if car_in_service? && current_user.save
         render json: {
-          member:      car_in_service?,
+          member:      @car.user.member?,
           car_brand:   @car&.car_model&.car_brand&.cn_name,
           car_model:   @car&.car_model&.cn_name,
           valid_date:  @car.valid_at,
@@ -57,7 +57,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def car_in_service?
-      !!@car.valid_at && @car.valid_at >= Time.zone.now && Deal.today_deals_count(car) < 1
+      !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 1)
     end
 
     def render_qrcode_not_valid
