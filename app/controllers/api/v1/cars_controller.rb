@@ -29,7 +29,8 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist    and return unless @car
-    render_not_member       and return unless car_in_service?
+    render_not_member       and return unless @car.user.member?
+    render_not_in_service   and return unless car_in_service?
     # Fixme: will use this by market
     # render_qrcode_not_valid and return unless verify_qrcode?
     create_wash_record
@@ -52,7 +53,10 @@ class Api::V1::CarsController < Api::V1::BaseController
           licensed_id: @car.licensed_id
         }
       else
-        render json: { success: false, message: current_user.errors.messages }
+        render json: { success: false,
+                       message: current_user.errors.messages,
+                       member: false
+                }
       end
     end
 
@@ -70,6 +74,10 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def render_car_not_exist
       render json: { success: false, message: '该辆车不存在!', member: false }
+    end
+
+    def render_not_in_service
+      render json: { success: false, message: '该车不在服务范围之内', member: false }
     end
 
     def verify_qrcode?
