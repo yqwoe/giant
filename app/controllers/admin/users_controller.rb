@@ -5,8 +5,17 @@ class Admin::UsersController < Admin::BaseController
   layout 'dashboard'
 
   def index
-    @users = User.member.paginate(:page => params[:page])
-    @users_count = @users.count
+    respond_to do |format|
+      format.html do
+        @users = User.member.paginate(:page => params[:page])
+        @users_count = @users.count
+      end
+
+      format.xls do
+        @cars = Car.all
+        render layout: "application"
+      end
+    end
   end
 
   def show

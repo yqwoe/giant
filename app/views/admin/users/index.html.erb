@@ -2,7 +2,14 @@
 <div id="users">
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
-      <h4 class='text-right'>总计：<span><%= @users_count if @users_count %></span></h4>
+      <h4 class='text-right'>
+        <span>
+          <%= link_to '导出Excel', admin_users_path(format: :xls),
+            class: 'btn btn-info', id: 'excel'
+          %>
+        </span>
+        <span>总计:<%= @users_count if @users_count %></span>
+      </h4>
       <br>
       <div class="row">
         <table class='table'>

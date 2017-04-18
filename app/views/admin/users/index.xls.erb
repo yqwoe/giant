@@ -1,0 +1,22 @@
+<Row>
+  <Cell><Data ss:Type="String">姓名</Data></Cell>
+  <Cell><Data ss:Type="String">手机号</Data></Cell>
+  <Cell><Data ss:Type="String">类别</Data></Cell>
+  <Cell><Data ss:Type="String">车型</Data></Cell>
+  <Cell><Data ss:Type="String">车牌</Data></Cell>
+  <Cell><Data ss:Type="String">开通日期</Data></Cell>
+  <Cell><Data ss:Type="String">有效日期</Data></Cell>
+  <Cell><Data ss:Type="String">洗车次数</Data></Cell>
+</Row>
+<% @cars.each do |car| %>
+  <Row>
+    <Cell><Data ss:Type="String"><%= car.user.name %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.user.mobile %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.user.role %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.car_model&.cn_name  %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.licensed_id %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.created_at&.strftime('%Y-%m-%d %H:%M') %></Data></Cell>
+    <Cell><Data ss:Type="String"><%= car.valid_at&.strftime('%Y-%m-%d %H:%M') %></Data></Cell>
+    <Cell><Data ss:Type="Number"><%= car.deals.count %></Data></Cell>
+  </Row>
+<% end %>
