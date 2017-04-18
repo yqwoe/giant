@@ -422,8 +422,8 @@ DEPENDENCIES
   factory_girl_rails
   foreman
   guard
-  guard-ctags-bundler
   guard-brakeman
+  guard-ctags-bundler
   guard-livereload
   guard-minitest
   jbuilder (~> 2.5)

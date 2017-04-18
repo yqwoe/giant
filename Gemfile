@@ -133,9 +133,6 @@ group :development do
   gem 'brakeman', require: false
   gem 'bullet'
   gem "zero_downtime_migrations"
-<<<<<<< HEAD
   gem "better_errors"
-=======
   gem 'guard-brakeman'
->>>>>>> master
 end
