@@ -26,7 +26,7 @@ class Api::V1::CommentsControllerTest < ActionDispatch::IntegrationTest
                                         service_star: 5,
                                         env_star: 5,
                                         user_token: @user.authentication_token}
-        assert true
+        assert_response :success
         #assert_equal JSON.parse(response.body)['message'],'deal id can not be nil'
     end
 end

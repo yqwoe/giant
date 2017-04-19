@@ -2,45 +2,110 @@ require 'test_helper'
 
 class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @user = create(:user)
-    @car_brand = create(:car_brand)
+    @user       = create(:user)
+    @car_brand  = create(:car_brand)
+    @car_model = create(:car_model, car_brand_id: @car_brand.id)
+    @car        = create(:car, user_id: @user.id, car_model_id: @car_model.id)
+    @shop_owner = create(:user, roles: :shop_owner)
+    @shop       = create(:shop, user_id: @shop_owner.id)
   end
 
   test "car have been binded" do
     @car_model = create(:car_model, car_brand_id: @car_brand.id)
-    @car = create(:car, car_model_id: @car_model.id, user_id: @user.id)
-    post api_v1_cars_url, params:{
-        car_brand_id: @car_brand.id,
-         car_model: @car_model.cn_name,
-          licensed_id: @car.licensed_id,
-           user_token: @user.authentication_token}
+    @car.update_attributes(car_model_id: @car_model.id, user_id: @user.id)
+    post api_v1_cars_url, params: car_params
     assert_response :success
-    assert_equal JSON.parse(response.body)['message'], '该车牌已经被绑定'
-  end
-
-  test "car_model is invalid" do
-    @car_model = create(:car_model)
-    @car = create(:car, car_model_id: @car_model.id)
-    post api_v1_cars_url, params:{
-        car_brand_id: @car_brand.id,
-         car_model: @car_model.cn_name,
-          licensed_id: @car.licensed_id,
-           user_token: @user.authentication_token}
-    assert_response :success
-    assert_equal JSON.parse(response.body)['message'], '无效车型'
+    assert_equal    json_response[:message], '该车牌已经被绑定'
   end
 
   test "car bind success" do
     @car_model = create(:car_model, car_brand_id: @car_brand.id)
-    @car = create(:car, car_model_id: @car_model.id)
+    @car.update_attributes(car_model_id: @car_model.id)
     @user.cars.build(car_model_id: @car_model.id, licensed_id: '豫A77777')
-    @user.save!
-    assert true
+    assert true, @user.save!
   end
 
-  test "user not have cars" do
-    get api_v1_cars_url, params: {user_token: @user.authentication_token}
-    assert_equal JSON.parse(response.body)['message'], '该用户没有绑定任何车辆！'
+  ##
+  # Car#wash
+  #
+  test "return false if car not exist" do
+    post api_v1_wash_url, params: {
+      user_token:  @user.authentication_token,
+      licensed_id: 'invalid licensed'
+    }
+
+    assert_response :success
+    assert_not   json_response[:success]
+    assert_equal json_response[:message], '该辆车不存在!'
+  end
+
+  test "return false if user is not member" do
+    post_wash
+
+    assert_response :success
+    assert_not   json_response[:success]
+    assert_equal json_response[:message], '非会员车辆'
+  end
+
+  test "car in service" do
+    @user.member!
+    @car.update_attributes(valid_at: 1.month.from_now)
+
+    post_wash
+
+    assert_response :success
+    assert json_response[:member]
+  end
+
+  test "car is not in service if cars expired" do
+    @car.valid_at = 1.day.ago
+    @car.save!
+
+    post_wash
+
+    assert_response :success
+    assert_not json_response[:member]
+  end
+
+  test "car is not in service if car's valid is not set" do
+    @car.valid_at = nil
+    @car.save!
+
+    post_wash
+
+    assert_response :success
+    assert_not json_response[:member]
+  end
+
+  test "car is not in service if car has washed today" do
+    @car.update_attributes(valid_at: 1.day.from_now)
+    @user.member!
+
+    2.times { create(:deal, car_id: @car.id, created_at: Time.zone.now) }
+
+    post_wash
+
+    assert_response :success
+    assert_not json_response[:member]
+
+  end
+
+  private
+
+  def post_wash
+    post api_v1_wash_url, params: {
+      user_token:  @shop_owner.authentication_token,
+      licensed_id: @car.licensed_id
+    }
+  end
+
+  def car_params
+    {
+      car_brand_id:  @car_brand.id,
+      car_model:     @car_model.cn_name,
+      licensed_id:   @car.licensed_id,
+      user_token:    @user.authentication_token
+    }
   end
 
 end

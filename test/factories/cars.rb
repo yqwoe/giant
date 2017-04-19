@@ -7,5 +7,7 @@ FactoryGirl.define do
     joined_at "2016-11-28"
     visited_at "2016-11-28"
     user_id 1
+    car_model
+    user
   end
 end

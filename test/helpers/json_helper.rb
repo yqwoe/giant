@@ -1,9 +1,5 @@
-require 'test_helper'
-
-module ActionDispatch
-  class IntegrationTest
-    def prase_json
-      JSON.parse(resonse.body)
-    end
+module RequestHelper
+  def json_response
+    JSON.parse(response.body, symbolize_names: true)
   end
 end

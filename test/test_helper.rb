@@ -4,7 +4,8 @@ require 'rails/test_help'
 require 'capybara/rails'
 require 'mocha/mini_test'
 require "minitest/reporters"
-require 'test/helpers'
+require 'helpers/json_helper'
+
 Minitest::Reporters.use! Minitest::Reporters::DefaultReporter.new
 
 class ActiveSupport::TestCase
@@ -18,6 +19,7 @@ end
 class ActionDispatch::IntegrationTest
   # Make the Capybara DSL available in all integration tests
   include Capybara::DSL
+  include RequestHelper
 
   # Reset sessions and driver between tests
   # Use super wherever this method is redefined in your individual test classes

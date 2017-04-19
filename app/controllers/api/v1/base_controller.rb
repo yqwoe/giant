@@ -30,14 +30,15 @@ class Api::V1::BaseController < ActionController::API
   def authenticate_user_from_token!
     user_token = params[:user_token].presence
     @user       = user_token && User.find_by_authentication_token(user_token.to_s)
-    render json: {success: false, message: 'Invalid token!'},
-      status: :unauthorized unless @user
+    render json: {
+        success: false,
+        message: 'Invalid token!'
+      }, status: :unauthorized and return unless @user
 
     # Notice we are passing store false, so the user is not
     # actually stored in the session and a token is needed
     # for every request. If you want the token to work as a
     # sign in token, you can simply remove store: false.
-
     sign_in @user, store: false
   end
 

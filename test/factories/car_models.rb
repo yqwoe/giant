@@ -4,5 +4,6 @@ FactoryGirl.define do
     cn_name "MyString"
     en_name "MyString"
     initial_letter ""
+    car_brand
   end
 end
