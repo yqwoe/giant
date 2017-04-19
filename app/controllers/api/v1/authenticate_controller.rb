@@ -52,6 +52,8 @@ class Api::V1::AuthenticateController <  ActionController::API
       member:     resource.member?,
       success:    true,
       auth_token: resource.authentication_token,
+      role:       resource.role,
+      authenticated_time: Time.zone.now.strftime('%Y-%m-%d %H:%M')
     }
   end
 
