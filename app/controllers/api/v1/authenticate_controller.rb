@@ -47,7 +47,7 @@ class Api::V1::AuthenticateController <  ActionController::API
 
   def render_valid resource
     render json: {
-      login:      resource.login,
+      login:      resource.mobile,
       email:      resource.email,
       member:     resource.member?,
       success:    true,
