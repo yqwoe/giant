@@ -48,9 +48,10 @@ class Api::V1::CarsController < Api::V1::BaseController
       #TODO: think about multi shops
 
       shop = current_user.shops.first
-      deal = @car.deals.today.first
-      if deal
-        if deal.find_by_shop_id(shop)&.first
+      deals = @car.deals.today
+
+      unless deals.empty?
+        if deals.find_by_shop_id(shop)
           # 假如是同一家店铺，则直接返回验证成功
           render_success_washed and return
         else
