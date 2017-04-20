@@ -68,7 +68,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def car_in_service?
-      !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 1)
+      !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 5)
     end
 
     def render_qrcode_not_valid
