@@ -5,7 +5,7 @@ class CarSerializer < ActiveModel::Serializer
   def car_brand_url
     return nil unless object.car_model
     if object.car_model.car_brand
-      object.car_model ? CarBrandSerializer.new(object.car_model.car_brand) : nil
+      object.car_model ? CarBrandSimpleSerializer.new(object.car_model.car_brand) : nil
     end
   end
 
