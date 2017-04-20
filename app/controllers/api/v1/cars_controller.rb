@@ -40,38 +40,66 @@ class Api::V1::CarsController < Api::V1::BaseController
     render_not_in_service   and return unless car_in_service?
     # Fixme: will use this by market
     # render_qrcode_not_valid and return unless verify_qrcode?
-    create_wash_record
+    find_or_create_wash_record
   end
 
   private
-    def create_wash_record
-      deal = current_user.deals.build
-      deal.car_id = @car.id
+    def find_or_create_wash_record
       #TODO: think about multi shops
+
+      shop = current_user.shops.first
+      deal = @car.deals.today.first
+      if deal
+        if deal.find_by_shop_id(shop)&.first
+          # 假如是同一家店铺，则直接返回验证成功
+          render_success_washed and return
+        else
+          # 假如不是同一家店铺，则验证不通过
+          render_faild_multi_wash and return
+        end
+      end
+
+      deal = @car.deals.build
+      deal.user_id = current_user.id
       deal.shop_id = current_user.shops.first.id
       deal.cleaned_at = Time.zone.now
 
-      if car_in_service? && current_user.save
-        render json: {
-          member:      @car.user.member?,
-          car_brand:   @car&.car_model&.car_brand&.cn_name,
-          car_model:   @car&.car_model&.cn_name,
-          valid_date:  @car.valid_at,
-          licensed_id: @car.licensed_id
-        }
-
-        sleep 3
+      if @car.save
+        render_success_washed
       else
-        render json: { success: false,
-                       message: current_user.errors.messages,
-                       member: false
-                }
+        render_deals_create_error
       end
+    end
+
+    def render_faild_multi_wash
+      render_deals_create_error
+    end
+
+    def render_already_recorded
+      render_success_washed
+    end
+
+    def render_deals_create_error
+      render json: {
+        member: false,
+        success: false,
+        message: '创建洗车记录失败'
+      }
+    end
+
+    def render_success_washed
+      render json: {
+        member:      @car.user.member?,
+        car_brand:   @car&.car_model&.car_brand&.cn_name,
+        car_model:   @car&.car_model&.cn_name,
+        valid_date:  @car.valid_at,
+        licensed_id: @car.licensed_id
+      }
     end
 
     def car_in_service?
       # FIXME: to limit deals less than 1
-      !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 5)
+      !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 1)
     end
 
     def render_qrcode_not_valid
