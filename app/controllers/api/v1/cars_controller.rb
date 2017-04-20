@@ -1,6 +1,8 @@
 class Api::V1::CarsController < Api::V1::BaseController
   before_action :set_car, only: [:wash]
 
+  TEST_USERS = %w(13652885999 136736693021 15838208401 18639970824)
+
   def create
     if current_user.cars.find_by(licensed_id: params[:licensed_id].upcase)
       render json: { success: false, message: '该车牌已经被绑定' } and return
@@ -8,8 +10,12 @@ class Api::V1::CarsController < Api::V1::BaseController
     car_model = CarBrand.find(params[:car_brand_id]).car_models.find_by_cn_name(params[:car_model])
     render json: {success: false, message: '无效车型'} and return unless car_model
 
-    current_user.cars.build(car_model_id: car_model.id,
+    car = current_user.cars.build(car_model_id: car_model.id,
                             licensed_id: params[:licensed_id].upcase)
+
+    if TEST_UESRS.include? current_user.mobile
+      car.valid_at = 1.year.from_now
+    end
 
     if current_user.save!
       render json: { success: true }
