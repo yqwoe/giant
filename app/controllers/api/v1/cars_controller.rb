@@ -59,6 +59,8 @@ class Api::V1::CarsController < Api::V1::BaseController
           valid_date:  @car.valid_at,
           licensed_id: @car.licensed_id
         }
+
+        sleep 3
       else
         render json: { success: false,
                        message: current_user.errors.messages,
@@ -68,6 +70,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def car_in_service?
+      # FIXME: to limit deals less than 1
       !!@car.valid_at && @car.valid_at >= Time.zone.now && (Deal.today_deals_count(@car) < 5)
     end
 
