@@ -11,15 +11,17 @@ namespace :db do
     CSV.open 'card.csv', 'wb' do |csv|
       50000.times do
         begin
-          id  = gen_pin(111111...999999, 6).gsub('4', '8')
-          pin = gen_pin(111111111111...999999999999, 11)
-          unless Card.find_by pin: pin
+          id  = gen_pin(111111...999999, 6)
+          pin = gen_pin(11111111111...99999999999, 11)
+          unless GrowingCard.find_by pin: pin
+            GrowingCard.create! cid: "G#{id}", pin: "G#{pin}", range: -1
             csv << [id, pin]
-            Card.create! cid: id, pin: pin
             print '.'
           end
-        rescue
+        rescue Exception => e
           print '-'
+          puts e.message
+          retry
         end
       end
       puts

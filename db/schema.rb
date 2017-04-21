@@ -10,9 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20170413090019) do
-
+ActiveRecord::Schema.define(version: 20170421064945) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -129,6 +127,24 @@ ActiveRecord::Schema.define(version: 20170413090019) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["device_id", "user_id"], name: "index_devices_and_users_relationships_on_device_id_and_user_id", unique: true, using: :btree
+  end
+
+  create_table "growing_cards", force: :cascade do |t|
+    t.string   "cid"
+    t.string   "pin"
+    t.float    "range"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cid"], name: "index_growing_cards_on_cid", unique: true, using: :btree
+    t.index ["pin"], name: "index_growing_cards_on_pin", unique: true, using: :btree
+  end
+
+  create_table "growing_users", force: :cascade do |t|
+    t.string   "mobile"
+    t.integer  "growing_card_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["mobile"], name: "index_growing_users_on_mobile", unique: true, using: :btree
   end
 
   create_table "messages", force: :cascade do |t|

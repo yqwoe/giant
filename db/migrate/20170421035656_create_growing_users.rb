@@ -7,6 +7,5 @@ class CreateGrowingUsers < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    add_index :growing_users, :mobile, uniq: true
   end
 end

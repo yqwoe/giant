@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>嘻唰唰</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="./lib/flexiable.js"></script>
+    <script src="./lib/jquery-3.1.1.min.js"></script>
+    <style lang="text/css">
+        .wh100 {
+            width: 100%;
+            height: 100%;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            font-size: 75px;
+            padding: 0;
+            margin: 0;
+        }
+        .container {
+            background-image: url('./images/back.png');
+            background-size: cover;
+            font-size: 0.453rem;
+            position: relative;
+        }
+
+        /*输入框部分*/
+        .container .form {
+            position: absolute;
+            left: 0.3rem;
+            bottom: 1rem;
+            background-color: #fff;
+            width: 9.4rem;
+            height: 1.173rem;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .form input {
+            height: 100%;
+            border: none;
+            padding-left: 0.627rem;
+        }
+        .form span {
+            background-color: #f01f15;
+            text-align: center;
+            width: 3.23rem;
+            height: 100%;
+            line-height: 1.173rem;
+            color: #fff;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+        }
+
+        /*提示框*/
+        .promptBox {
+            background-color: rgba(0, 0, 0, .6);
+            position: absolute;
+            text-align: center;
+            display: none;
+        }
+        .promptBox:after {
+            display: inline-block;
+            content: '';
+            height: 100%;
+            width: 0;
+            vertical-align: middle;
+        }
+        .promptBox .content {
+            padding: 0.747rem 0.773rem 0.533rem 0.773rem;
+            border-radius: 10px;
+            background-color: #fff;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 0.333rem;
+            color: #ff8a01;
+        }
+        .promptBox .content img {
+            width: 1.27rem;
+            height: 1.27rem;
+        }
+        .promptBox .promptText {
+            margin: 0.667rem 0;
+        }
+        .promptBox .confirmBtn{
+            color: #fff;
+            background-color: #ff8a01;
+            width: 3.84rem;
+            border-radius: 4px;
+            line-height: 0.733rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container wh100">
+        <div class="form">
+            <input type="text" placeholder="请输入手机号" maxlength="11">
+            <span class="submitBtn">立即参与</span>
+        </div>
+        <!--提示框-->
+        <div class="promptBox wh100">
+            <div class="content">
+                <img src="./images/warn.png" />
+                <div class="promptText">手机号码有误</div>
+                <div class="confirmBtn">确定</div>
+            </div>
+        </div>
+    </div>
+
+    <script text="text/javascript">
+        var phoneNumberReg = /^1[34578]+\d{9}$/;
+        var promptBox = $('.promptBox');
+        var isClosePrompt = true;                    // 弹出框的按钮行为是否是关闭弹窗
+        var userAgent = window.navigator.userAgent;
+        // 提交按钮事件
+        $('.submitBtn').click(function() {
+            var phoneNumber = $('.form input').val();
+            if (phoneNumberReg.test(phoneNumber)) {
+                $.ajax({
+                    url: 'https://autoxss.com/api/v1/growings',
+                    dataType: 'json',
+                    type: 'POST',
+                    data: {
+                        phoneNumber: phoneNumber
+                    },
+                    success: function(res) {
+                        if (res.success) {
+                            // 提交成功
+                            $('.promptText').text(res.message);
+                            $('.promptBox img').attr('src', './images/ok.png');
+                            isClosePrompt = false;
+                        }else {
+                            // 已参与
+                            $('.promptText').text(res.message);
+                        }
+                        promptBox.show();
+                    },
+                    fail: function() {
+                        $('.promptText').text('网络请求出错');
+                        promptBox.show();
+                    }
+                });
+            }else {
+                // 手机号码有误
+                promptBox.show();
+            }
+        });
+        // 确定按钮事件，隐藏提示框
+        $('.confirmBtn').click(function() {
+            if (isClosePrompt) {
+                promptBox.hide();
+            }else if (userAgent.indexOf('Android') > -1) {
+                // 安卓
+                window.location.replace('http://a.app.qq.com/o/simple.jsp?pkgname=com.xss2');
+            }else {
+                // iOS
+                window.location.replace('https://itunes.apple.com/cn/app/嘻唰唰车主端/id1193479954?mt=8');
+            }
+        });
+    </script>
+</body>
+</html>
