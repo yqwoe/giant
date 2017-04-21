@@ -12,6 +12,8 @@ class Api::V1::GrowingsController < ActionController::API
 
     @card = add_card_to_table_cards
     create_growing_user
+    @card.growing_user = @growing_user
+    @card.save!
     send_card_to_growing_user
     render_accept_growing_user
   end
@@ -39,7 +41,6 @@ class Api::V1::GrowingsController < ActionController::API
     Card.create(cid: @growing_card.cid,
                 pin: @growing_card.pin,
                 range: -1,
-                growing_user_id: @growing_user.id,
                 channel: :growing)
   end
 
