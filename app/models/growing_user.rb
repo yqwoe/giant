@@ -1,0 +1,2 @@
+class GrowingUser < ApplicationRecord
+end

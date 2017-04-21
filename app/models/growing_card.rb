@@ -1,0 +1,2 @@
+class GrowingCard < ApplicationRecord
+end
