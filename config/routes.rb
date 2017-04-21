@@ -74,6 +74,7 @@ Rails.application.routes.draw do
       get :use_new_qrcode, to: 'versions#use_new_qrcode'
       resources :shop_detail, only: [:show]
       resources :coupons, only: [:index]
+      post 'growings/create'
     end
   end
 
