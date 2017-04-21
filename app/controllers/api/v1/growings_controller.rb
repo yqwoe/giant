@@ -10,7 +10,7 @@ class Api::V1::GrowingsController < ActionController::API
     # verify
     render_has_been_inrolled and return if growing_user_exist?
 
-    add_card_to_table_cards
+    @card = add_card_to_table_cards
     create_growing_user
     send_card_to_growing_user
     render_accept_growing_user
@@ -23,7 +23,8 @@ class Api::V1::GrowingsController < ActionController::API
   end
 
   def create_growing_user
-    @growing_user = GrowingUser.create mobile: params[:mobile]
+    @growing_user =
+      GrowingUser.create mobile: params[:mobile], growing_card_id: @card.id
   end
 
   def growing_user_exist?

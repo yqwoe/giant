@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170421064945) do
+ActiveRecord::Schema.define(version: 20170421092241) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20170421064945) do
     t.integer  "car_id"
     t.integer  "range"
     t.integer  "channel"
+    t.integer  "growing_user_id"
     t.index ["cid"], name: "index_cards_on_cid", unique: true, using: :btree
     t.index ["pin"], name: "index_cards_on_pin", unique: true, using: :btree
   end
@@ -144,6 +145,7 @@ ActiveRecord::Schema.define(version: 20170421064945) do
     t.integer  "growing_card_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "status"
     t.index ["mobile"], name: "index_growing_users_on_mobile", unique: true, using: :btree
   end
 

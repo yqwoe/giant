@@ -1,6 +1,7 @@
 class Card < ApplicationRecord
   include Queriable
   belongs_to :car
+  belongs_to :growing_user
 
   validates_uniqueness_of :cid, :pin
 

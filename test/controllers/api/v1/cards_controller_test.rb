@@ -17,13 +17,29 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
 
   test "valid card can active car" do
     @car = create(:car, user_id: @user.id)
-    post api_v1_cards_url, params: {
-        user_token: @user.authentication_token,
-        card_pin: @card.pin,
-        licensed_id: @car.licensed_id
-      }
+    post_cards @card.pin
     assert_response :success
-    assert_equal json_response[:success]
+    assert json_response[:success]
+
+    @growing_user = create(:growing_user)
+    @growing_card = create(:card, growing_user_id: @growing_user.id)
+    @growing_card.update_attributes(pin: "G#{@growing_card.pin}")
+
+    post_cards @growing_card.pin
+    assert_response :success
+    assert json_response[:success]
+    assert_equal 45.days.from_now.strftime('%Y-%m-%d'), json_response[:valid]
+  end
+
+  test "growing user could only actived once" do
+    @car = create(:car, user_id: @user.id)
+    @growing_user = create(:growing_user, status: :enrolled)
+    @growing_card = create(:card, growing_user_id: @growing_user.id)
+    @growing_card.update_attributes(pin: "G#{@growing_card.pin}")
+
+    post_cards @growing_card.pin
+    assert_response :success
+    assert_not json_response[:success]
   end
 
   test "active with invalid card pin" do
@@ -53,5 +69,13 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
     assert_equal JSON.parse(response.body)['message'], '请先绑定车辆!'
   end
 
+  private
 
+  def post_cards pin
+    post api_v1_cards_url, params: {
+        user_token:  @user.authentication_token,
+        card_pin:    pin,
+        licensed_id: @car.licensed_id
+      }
+  end
 end
