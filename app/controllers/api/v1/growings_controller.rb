@@ -36,7 +36,11 @@ class Api::V1::GrowingsController < ActionController::API
   end
 
   def add_card_to_table_cards
-    Card.create cid: @growing_card.cid, pin: @growing_card.pin, range: -1, channel: :growing
+    Card.create(cid: @growing_card.cid,
+                pin: @growing_card.pin,
+                range: -1,
+                growing_user_id: @growing_user.id,
+                channel: :growing)
   end
 
   def send_card_to_growing_user

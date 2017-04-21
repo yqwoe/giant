@@ -2,7 +2,7 @@ class Api::V1::CardsController < Api::V1::BaseController
   def create
     @card = Card.find_by_pin(params[:card_pin])
 
-    render_invalid_card and return unless @card
+    render_invalid_card          and return unless @card
     render_card_has_been_actived and return if @card.actived?
 
     if growing_card? && @card.growing_user.enrolled?
