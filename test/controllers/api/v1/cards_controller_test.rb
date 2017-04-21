@@ -15,6 +15,17 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
     @card = create(:card)
   end
 
+  test "valid card can active car" do
+    @car = create(:car, user_id: @user.id)
+    post api_v1_cards_url, params: {
+        user_token: @user.authentication_token,
+        card_pin: @card.pin,
+        licensed_id: @car.licensed_id
+      }
+    assert_response :success
+    assert_equal json_response[:success]
+  end
+
   test "active with invalid card pin" do
     @card = Card.find_by_pin('invalid card pin')
     post api_v1_cards_url, params: {user_token: @user.authentication_token}
