@@ -51,13 +51,14 @@ class Api::V1::CarsController < Api::V1::BaseController
       deals = @car.deals.today
 
       unless deals.empty?
-        if deals.find_by_shop_id(shop)
+        # if deals.find_by_shop_id(shop)
           # 假如是同一家店铺，则直接返回验证成功
-          render_success_washed and return
-        else
+          render_success_washed and return if shop
+        # else
           # 假如不是同一家店铺，则验证不通过
-          render_faild_multi_wash and return
-        end
+          # TODO: 临时撤销此条限制
+          # render_faild_multi_wash and return
+        # end
       end
 
       deal = @car.deals.build
