@@ -1,7 +1,7 @@
 class Api::V1::OrdersController < Api::V1::BaseController
   def create
     platform = params[:platform]
-    total_amount = params[:total_amount]
+    total_amount = 880 #params[:total_amount]
     subject = params[:subject]
     body = params[:body]
     car = current_user.cars.find_by licensed_id: params[:licensed_id]&.upcase
