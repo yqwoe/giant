@@ -1,8 +1,7 @@
 class Shop < ApplicationRecord
   has_many :deals
   has_many :suites
-  has_many :comments, as: :commentable
-  has_many :comments, through: :deals
+  has_many :comments, as: :commentable, through: :deals
 
   belongs_to :user
 

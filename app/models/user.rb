@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :cars
   has_many :shops
   has_many :deals
-  has_many :comments
+  has_many :comments, as: :commentable
   has_many :devices_and_users_relationships
   has_many :devices, through: :devices_and_users_relationships
   has_many :customs, class_name: 'Client', foreign_key: 'seller_id'
