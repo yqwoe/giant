@@ -1,4 +1,3 @@
 class Comment < ApplicationRecord
-  belongs_to :shop
-  belongs_to :deal
+  belongs_to :commentable, polymorphic: true
 end

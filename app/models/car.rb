@@ -1,6 +1,6 @@
 class Car < ApplicationRecord
   before_save :upcase_licensed_id
- 
+
   belongs_to :car_model
   belongs_to :user
 

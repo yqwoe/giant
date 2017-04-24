@@ -40,6 +40,8 @@ gem 'rails-i18n', '~> 5.0.0'
 
 group :development do
   gem 'guard-ctags-bundler'
+  gem 'guard-rubocop'
+  gem "rails_best_practices"
   gem 'capistrano'
   gem 'capistrano-bundler'
   gem 'capistrano-passenger', '>= 0.1.1'
