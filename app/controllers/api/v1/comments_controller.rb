@@ -13,10 +13,12 @@ class Api::V1::CommentsController < ActionController::API
     unless params[:content].present?
       render json: { success: false, message: 'comment can not be nil' } and return
     end
-    if @deal = Deal.find_by(id: params[:deal_id])
-      @deal.commented!
-    else
+    @deal = Deal.find_by(id: params[:deal_id])
+    unless @deal
       render json: { success: false, message: 'deal id can not be nil' } and return
+    end
+    if @deal.commented?
+      render json: { success: false, message: '您已经评论过了！' } and return
     end
 
     @comment = @deal.build_comment
@@ -26,6 +28,7 @@ class Api::V1::CommentsController < ActionController::API
     @comment.service_star = params[:service_star]
     @comment.clean_star   = params[:clean_star]
     @deal.commented_at = Time.zone.now
+    @deal.commented!
 
     if @deal.save
       @comment.reload
