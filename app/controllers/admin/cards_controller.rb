@@ -5,6 +5,10 @@ class Admin::CardsController < Admin::BaseController
       set_dadi_cards
       @actived_cards_count = dadi_actived_cards_count
       @inactived_cards_count = dadi_inactived_cards_count
+    elsif current_user.zhumadian_dadi?
+      set_zhumadian_dadi_cards
+      @actived_cards_count = zhumadian_dadi_actived_cards_count
+      @inactived_cards_count = zhumadian_dadi_inactived_cards_count
     elsif current_user.admin?
       set_cards
       @actived_cards_count = Card.actived.count
@@ -33,9 +37,11 @@ class Admin::CardsController < Admin::BaseController
   def set_cards_for_excel
     if current_user.dadi?
       Card.dadi
-    elsif params[:actived].present?
+    elsif current_user.zhumadian_dadi?
+      Card.zhumadian.dadi
+    elsif params[:actived].present? and current_user.admin?
       params[:actived] ? Card.actived : Card.where(status: nil)
-    else
+    elsif current_user.admin?
       Card.all
     end
   end
@@ -78,5 +84,29 @@ class Admin::CardsController < Admin::BaseController
 
   def dadi_inactived_cards_count
     Card.dadi.count - Card.dadi.actived.count
+  end
+
+  def set_zhumadian_dadi_cards
+    if params[:actived].present?
+      if params[:actived] == 'true'
+        @q = Card.zhumadian_dadi.actived.ransack(params[:q])
+        @cards = @q.result.includes(:car).page(params[:page])
+      elsif params[:actived] == 'false'
+        @q = Card.zhumadian_dadi.where(status: nil).ransack(params[:q])
+        @cards = @q.result.includes(:car).page(params[:page])
+      end
+    else
+      @q = Card.zhumadian_dadi.ransack(params[:q])
+      @cards = @q.result.includes(:car).page(params[:page])
+    end
+    @cards_count = Card.zhumadian_dadi.count
+  end
+
+  def zhumadian_dadi_actived_cards_count
+    Card.zhumadian_dadi.actived.count
+  end
+
+  def zhumadian_dadi_inactived_cards_count
+    Card.zhumadian_dadi.count - Card.zhumadian_dadi.actived.count
   end
 end

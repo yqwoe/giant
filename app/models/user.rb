@@ -7,8 +7,6 @@ class User < ApplicationRecord
   has_many :comments
   has_many :devices_and_users_relationships
   has_many :devices, through: :devices_and_users_relationships
-
-
   has_many :customs, class_name: 'Client', foreign_key: 'seller_id'
   has_one  :seller,  class_name: 'Client', foreign_key: 'custom_id'
   # Include default devise modules. Others available are:
@@ -25,15 +23,16 @@ class User < ApplicationRecord
     format: { with: /\A[0-9\-]+\z/, on: :create }
 
   enum roles: [ :registed, # 初始注册进来的用户，未付费会员
-                :member,     # 付费会员
-                :agency,     # 代理商
-                :salesman,   # 业务员
-                :shop_owner, # 车行老板
-                :admin,      # 普通管理员
-                :sysadmin,   # 系统管理员
+                :member,           # 付费会员
+                :agency,           # 代理商
+                :salesman,         # 业务员
+                :shop_owner,       # 车行老板
+                :admin,            # 普通管理员
+                :sysadmin,         # 系统管理员
                 :dadi,
-                :risk,       #高危用户
-                :blacklist   #黑名单
+                :risk,             #高危用户
+                :blacklist,        #黑名单
+                :zhumadian_dadi    #驻马店大地保险
                ]
 
   def role
