@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   before_save :ensure_authentication_token
 
   has_many :cars
