@@ -19,8 +19,8 @@ class Api::V1::UsersController <  ActionController::API
     @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
     @user.send_pin
     render json: { success: true, pin: @user.pin }
-  rescue
-    render json: { success: false, massenge: "手机号码无效！" }
+  rescue Exception => e
+    render json: { success: false, massenge: e.message }
   end
 
   def create

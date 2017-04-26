@@ -46,7 +46,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   private
 
   def get_file_extension
-    original_filename.split('.').last
+    original_filename.split('.').last if original_filename
   end
 
 end
