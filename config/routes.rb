@@ -75,7 +75,7 @@ Rails.application.routes.draw do
       resources :shop_detail, only: [:show]
       resources :coupons,     only: [:index]
       post 'growings', to: 'growings#create'
-      resources :avatars
+      resources :suites
     end
   end
 

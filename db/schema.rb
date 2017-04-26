@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170425085058) do
+ActiveRecord::Schema.define(version: 20170426094332) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20170425085058) do
     t.integer  "status",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float    "deductible"
   end
 
   create_table "deals", force: :cascade do |t|
@@ -251,6 +252,22 @@ ActiveRecord::Schema.define(version: 20170425085058) do
     t.string    "image",        default: "default_shop.png"
     t.integer   "user_id"
     t.string    "openning"
+  end
+
+  create_table "suite_orders", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "state"
+    t.integer  "payment_gateway"
+    t.integer  "trade_no"
+    t.float    "price"
+    t.integer  "quantity"
+    t.integer  "suite_id"
+    t.integer  "coupon_id"
+    t.integer  "platform"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["coupon_id"], name: "index_suite_orders_on_coupon_id", using: :btree
+    t.index ["suite_id"], name: "index_suite_orders_on_suite_id", using: :btree
   end
 
   create_table "suites", force: :cascade do |t|
