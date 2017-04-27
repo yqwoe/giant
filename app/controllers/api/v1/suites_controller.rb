@@ -3,10 +3,13 @@ class Api::V1::SuitesController < Api::V1::BaseController
     platform =      params[:platform]
     @total_amount = params[:total_amount].to_f
     @suite =        Suite.find params[:suite_id]
-    @coupon =       Coupon.find params[:coupon_id]
     render_suite_not_exist    and return unless @suite
-    render_coupon_not_exist   and return unless @coupon
-    render_total_amount_error and return unless is_correct_total_amount?
+
+    if params[:coupon_id].present?
+      @coupon =       Coupon.find params[:coupon_id]
+      render_coupon_not_exist   and return unless @coupon
+      render_total_amount_error and return unless is_correct_total_amount?
+    end
 
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
     timestamp    = Time.zone.now.strftime('%Y-%m-%d#%H:%M:%S')
