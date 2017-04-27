@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     resources :cars
   end
 
-  namespace :api do
+  namespace :api, defaults: {format: :json} do
     namespace :v1 do
       resources :authenticate
       resources :payments
