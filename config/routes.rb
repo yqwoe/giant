@@ -76,6 +76,7 @@ Rails.application.routes.draw do
       resources :coupons,     only: [:index]
       post 'growings', to: 'growings#create'
       resources :suites
+      resources :shop_cities, only: [:index, :show]
     end
   end
 

@@ -1,0 +1,2 @@
+class ShopCity < ApplicationRecord
+end
