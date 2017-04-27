@@ -32,7 +32,7 @@ class Api::V1::SuitesController < Api::V1::BaseController
       state:           :created,
       payment_gateway: :alipay,
       suite_id:        @suite.id,
-      coupon_id:       @coupon.id
+      coupon_id:       @coupon&.id
     )
     render json: { success: true, order_string: order_string }
 
