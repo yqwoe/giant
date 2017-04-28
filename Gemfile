@@ -59,6 +59,7 @@ gem 'sweet-alert-confirm'
 gem 'mini_magick'
 gem 'byebug', platform: :mri
 group :development, :test do
+  gem 'bullet'
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'mini_racer', platforms: :ruby
@@ -101,7 +102,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'brakeman', require: false
-  gem 'bullet'
   gem "zero_downtime_migrations"
   gem "better_errors"
   gem 'guard-brakeman'

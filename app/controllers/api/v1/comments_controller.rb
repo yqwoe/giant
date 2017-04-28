@@ -19,7 +19,6 @@ class Api::V1::CommentsController < ActionController::API
     render json: Comment.find(params[:id])
   end
 
-
   def create
     render_comment_cannot_be_nil and return unless params[:content].present?
     @deal = Deal.find_by(id: params[:deal_id])

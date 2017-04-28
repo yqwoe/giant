@@ -15,6 +15,16 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
+guard :rubocop do
+  watch(%r{.+^(factories).+\.rb$})
+  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
+end
+
+guard 'ctags-bundler', :src_path => ["app", "lib", "test/helpers"] do
+  watch(/^(app|lib|spec\/support)\/.*\.rb$/)
+  watch('Gemfile.lock')
+end
+
 guard 'livereload' do
   extensions = {
     css: :css,
@@ -141,14 +151,3 @@ end
 #    Dir[File.join("**/#{m[1]}.feature")][0] || "spec/acceptance"
 #  end
 #end
-
-guard :rubocop do
-  watch(%r{.+\.rb$})
-  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
-end
-
-
-guard 'ctags-bundler', :src_path => ["app", "lib", "test/helpers"] do
-  watch(/^(app|lib|spec\/support)\/.*\.rb$/)
-  watch('Gemfile.lock')
-end

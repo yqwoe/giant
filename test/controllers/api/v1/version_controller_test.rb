@@ -8,7 +8,7 @@ class Api::V1::VersionsControllerTest < ActionDispatch::IntegrationTest
      }
 
      assert_response :success
-     assert_match(/shop\.apk/, response.body)
+     assert_match(/apk/, response.body)
    end
 
    test 'ios and shop version' do

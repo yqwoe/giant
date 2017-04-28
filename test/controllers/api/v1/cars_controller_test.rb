@@ -77,7 +77,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     assert_not json_response[:member]
   end
 
-  test "car is not in service if car has washed today" do
+  test "car is still still in service if car has washed today" do
     @car.update_attributes(valid_at: 1.day.from_now)
     @user.member!
 
@@ -86,8 +86,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     post_wash
 
     assert_response :success
-    assert_not json_response[:member]
-
+    assert json_response[:member]
   end
 
   private
