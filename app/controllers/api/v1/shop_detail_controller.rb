@@ -2,7 +2,7 @@ class Api::V1::ShopDetailController < ActionController::API
   before_action :set_shop, only: [:show]
   def show
     suites =
-      @shop.suites.paginate(page: params[:page], per_page: params[:per_page])
+      @shop.suites.includes(:wares).paginate(page: params[:page], per_page: params[:per_page])
     serialize_suites =
       ActiveModelSerializers::SerializableResource.new(suites)
     render json: {
