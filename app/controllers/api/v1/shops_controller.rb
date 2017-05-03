@@ -36,7 +36,7 @@ class Api::V1::ShopsController < ApplicationController
   private
 
   def server_version
-    DateTime.parse '201704260646' # User UTC time
+    DateTime.parse '201705031215' # User UTC time
   end
 
   def app_version

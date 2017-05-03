@@ -8,3 +8,14 @@
 
 * bundle exec cap production deploy:rollback
 
+车行更新
+========
+
+1. 修改车行数据
+2. 编辑`app/controllers/api/v1/shops_controller.rb`
+```ruby
+  def server_version
+    DateTime.parse '201704260646' #改为最近的日期
+  end
+```
+
