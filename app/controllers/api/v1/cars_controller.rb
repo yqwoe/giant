@@ -95,7 +95,8 @@ class Api::V1::CarsController < Api::V1::BaseController
         car_brand:   @car&.car_model&.car_brand&.cn_name,
         car_model:   @car&.car_model&.cn_name,
         valid_date:  @car.valid_at,
-        licensed_id: @car.licensed_id
+        licensed_id: @car.licensed_id,
+        authenticated_at: Time.zone.now.strftime('%Y-%m-%d %H:%M')
       }
     end
 
