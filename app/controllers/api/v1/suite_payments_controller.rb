@@ -2,11 +2,17 @@ class Api::V1::SuitePaymentsController < ActionController::API
   before_action :set_suite_order, only: [:index, :create]
 
   def create
-
-    render json: {
-      success: true,
-      suite_order: SuiteOrderSerializer.new(@suite_order)
-    }
+    if @suite_order
+      render json: {
+        success: true,
+        suite_order: SuiteOrderSerializer.new(@suite_order)
+      }
+    else
+      render json: {
+        success: false,
+        suite_order: nil
+      }
+    end
   end
 
   def index
