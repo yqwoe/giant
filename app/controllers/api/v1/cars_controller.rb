@@ -102,7 +102,7 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def car_in_service?
       # FIXME: to limit deals less than 1
-      !!@car.valid_at && @car.valid_at >= Time.zone.now
+      !!@car.valid_at && @car.valid_at >= Time.zone.now.beginning_of_day
     end
 
     def render_qrcode_not_valid
