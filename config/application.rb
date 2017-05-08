@@ -22,5 +22,12 @@ module Giant
         ENV[key.to_s] = value
       end if File.exists?(env_file)
     end
+
+    # config Control-Allow-Origin
+    # at config/application.rb
+    config.action_dispatch.default_headers = {
+      'Access-Control-Allow-Origin' => '*',
+      'Access-Control-Request-Method' => %w{GET POST OPTIONS}.join(',')
+    }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170427020856) do
+ActiveRecord::Schema.define(version: 20170508041759) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -120,6 +120,14 @@ ActiveRecord::Schema.define(version: 20170427020856) do
     t.integer  "comment_id"
   end
 
+  create_table "deposits", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "last_times"
+    t.integer  "channels"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "devices", force: :cascade do |t|
     t.string   "uuid"
     t.datetime "created_at", null: false
@@ -202,7 +210,6 @@ ActiveRecord::Schema.define(version: 20170427020856) do
   create_table "orders", force: :cascade do |t|
     t.integer  "state"
     t.integer  "payment_gateway"
-    t.integer  "trade_no"
     t.float    "price"
     t.integer  "quantity"
     t.float    "distcount"
@@ -216,6 +223,35 @@ ActiveRecord::Schema.define(version: 20170427020856) do
     t.datetime "canceled_at"
     t.integer  "status"
     t.integer  "car_id"
+    t.string   "trade_no"
+  end
+
+  create_table "payments", force: :cascade do |t|
+    t.date     "notify_time"
+    t.string   "notify_type"
+    t.string   "notify_id"
+    t.string   "version"
+    t.string   "sign_type"
+    t.string   "trade_no"
+    t.string   "out_trade_no"
+    t.string   "out_biz_no"
+    t.string   "buyer_id"
+    t.string   "buyer_logon_id"
+    t.integer  "trade_status"
+    t.float    "total_amount"
+    t.float    "receipt_amount"
+    t.float    "invoice_amount"
+    t.string   "buyer_pay_amount"
+    t.float    "point_amount"
+    t.float    "refund_fee"
+    t.datetime "gmt_create"
+    t.datetime "gmt_payment"
+    t.datetime "gmt_refund"
+    t.datetime "gmt_close"
+    t.string   "passback_param"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "order_id"
   end
 
   create_table "phones", force: :cascade do |t|
@@ -267,7 +303,6 @@ ActiveRecord::Schema.define(version: 20170427020856) do
     t.integer  "user_id"
     t.integer  "state"
     t.integer  "payment_gateway"
-    t.integer  "trade_no"
     t.float    "price"
     t.integer  "quantity"
     t.integer  "suite_id"
@@ -275,6 +310,7 @@ ActiveRecord::Schema.define(version: 20170427020856) do
     t.integer  "platform"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "trade_no"
     t.index ["coupon_id"], name: "index_suite_orders_on_coupon_id", using: :btree
     t.index ["suite_id"], name: "index_suite_orders_on_suite_id", using: :btree
   end

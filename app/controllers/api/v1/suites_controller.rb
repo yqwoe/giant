@@ -38,6 +38,13 @@ class Api::V1::SuitesController < Api::V1::BaseController
 
   end
 
+  def show
+    render json: {
+      success: true,
+      suite_order: SuiteOrderSerializer.new(@suite_order)
+    }
+  end
+
   private
 
   def is_correct_total_amount?

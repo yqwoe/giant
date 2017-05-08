@@ -40,6 +40,7 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :authenticate
       resources :payments
+      resources :suite_payments
       resources :orders do
         collection do
           post :notify
