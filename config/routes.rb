@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root to: 'admin/home#index'
+  root to: 'home#index'
 
   resource :ads
   resources :phones, only: [:new, :create]
