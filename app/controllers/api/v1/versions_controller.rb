@@ -8,7 +8,7 @@ class Api::V1::VersionsController < ApplicationController
   end
 
   def use_new_qrcode
-    render json: { success: false }
+    render json: { success: true}
   end
 
   private
