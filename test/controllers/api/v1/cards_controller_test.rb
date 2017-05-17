@@ -22,7 +22,7 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
     assert json_response[:success]
 
     @growing_user = create(:growing_user)
-    @growing_card = create(:card, growing_user_id: @growing_user.id)
+    @growing_card = create(:card, growing_user_id: @growing_user.id, range: -3)
     @growing_card.update_attributes(pin: "G#{@growing_card.pin}")
 
     post_cards @growing_card.pin

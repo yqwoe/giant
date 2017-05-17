@@ -45,20 +45,25 @@ class Api::V1::CardsController < Api::V1::BaseController
   end
 
   def car_valid
-    is_service_expired? ? @car.valid_at + @card.range.month : @card.range.month.from_now
+    is_service_expired? ? @card.range.month.from_now : @car.valid_at + @card.range.month
   end
 
   def growing_car_valid
     @card.growing_user.enrolled!
-    is_service_expired? ? @car.valid_at + 3.days : 3.days.from_now
+    is_service_expired? ? expend_days.from_now : @car.valid_at + expend_days
+  end
+
+  def expend_days
+    @card.range.to_i.abs.days
   end
 
   def is_service_expired?
-    return false unless @car.valid_at
-    @car.valid_at > Time.zone.now.beginning_of_day
+    return true unless @car.valid_at
+    @car.valid_at < Time.zone.now.beginning_of_day
   end
 
   def growing_card?
-    !!@card.pin.match(/G+/)
+    !!@card.pin.match(/(G|H)+/)
   end
+
 end
