@@ -63,7 +63,7 @@ class Api::V1::CardsController < Api::V1::BaseController
   end
 
   def growing_card?
-    !!@card.pin.match(/(G|H)+/)
+    !!@card.pin.match(/(G|520)+/)
   end
 
 end
