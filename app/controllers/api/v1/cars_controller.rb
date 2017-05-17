@@ -4,8 +4,11 @@ class Api::V1::CarsController < Api::V1::BaseController
   TEST_USERS = %w(13652885999 136736693021 15838208401 18639970824)
 
   def create
-    if current_user.cars.find_by(licensed_id: params[:licensed_id].upcase)
-      render json: { success: false, message: '该车牌已经被绑定' } and return
+    if car = Car.find_by(licensed_id: params[:licensed_id])
+      render json: {
+        success: false,
+        message: "车牌已经与#{car.user.mobile}绑定",
+      } and return
     end
 
     car_model = CarBrand.find(params[:car_brand_id]).car_models.find_by_cn_name(params[:car_model])

@@ -15,7 +15,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     @car.update_attributes(car_model_id: @car_model.id, user_id: @user.id)
     post api_v1_cars_url, params: car_params
     assert_response :success
-    assert_equal    json_response[:message], '该车牌已经被绑定'
+    assert_equal    json_response[:message], "车牌已经与#{@user.mobile}绑定"
   end
 
   test "car bind success" do

@@ -15,10 +15,10 @@
 #
 # and, you'll have to watch "config/Guardfile" instead of "Guardfile"
 
-guard :rubocop do
-  watch(%r{.+^(factories).+\.rb$})
-  watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
-end
+# guard :rubocop do
+#   watch(%r{.+^(factories).+\.rb$})
+#   watch(%r{(?:.+/)?\.rubocop\.yml$}) { |m| File.dirname(m[0]) }
+# end
 
 guard 'ctags-bundler', :src_path => ["app", "lib", "test/helpers"] do
   watch(/^(app|lib|spec\/support)\/.*\.rb$/)
@@ -64,11 +64,11 @@ guard 'livereload' do
   watch(%r{config/locales/.+\.yml})
 end
 
-guard 'brakeman', :run_on_start => true do
-  watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
-  watch(%r{^config/.+\.rb$})
-  watch(%r{^lib/.+\.rb$})
-end
+ #guard 'brakeman', :run_on_start => true do
+ #  watch(%r{^app/.+\.(erb|haml|rhtml|rb)$})
+ #  watch(%r{^config/.+\.rb$})
+ #  watch(%r{^lib/.+\.rb$})
+ #end
 
 guard :minitest, spring: "bin/rails test" do
   # with Minitest::Unit
