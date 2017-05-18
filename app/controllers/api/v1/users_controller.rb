@@ -17,7 +17,6 @@ class Api::V1::UsersController <  ActionController::API
     mobile = params[:user][:mobile]
     @user = User.find_by(mobile: mobile)
     @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
-    byebug
     @user.send_pin
     render json: { success: true, pin: @user.pin }
   rescue Exception => e
