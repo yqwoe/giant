@@ -66,7 +66,7 @@ class User < ApplicationRecord
   end
 
   def send_pin
-    generate_pin
+    rand_pin = generate_pin
     if Rails.env.production? || Rails.env.staging?
       ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
       ChinaSMS.to mobile, { code: rand_pin, company: '嘻唰唰' }, tpl_id: 1
