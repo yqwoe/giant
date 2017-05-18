@@ -18,7 +18,8 @@ class Api::V1::UsersController <  ActionController::API
     @user = User.find_by(mobile: mobile)
     @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
     @user.send_pin
-    render json: { success: true, pin: @user.pin }
+    pin = $redis.get(mobile)
+    render json: { success: true, pin: pin }
   rescue Exception => e
     render json: { success: false, massenge: e.message }
   end
