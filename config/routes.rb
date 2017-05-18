@@ -38,6 +38,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
+      get '/growing_enrolled', to: 'growings#enrolled'
       resources :authenticate
       resources :payments
       resources :suite_payments

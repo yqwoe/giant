@@ -18,6 +18,12 @@ class Api::V1::GrowingsController < ActionController::API
     render_accept_growing_user
   end
 
+  def enrolled
+    @growing_user = GrowingUser.find_by mobile: params[:mobile]
+    render_has_been_inrolled and return if @growing_user && @growing_user.enrolled_520
+    render json: {success: true}
+  end
+
   private
 
   def render_accept_growing_user
