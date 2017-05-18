@@ -40,11 +40,15 @@ class Api::V1::UsersController <  ActionController::API
 
   def verify
     @user = User.find_by(mobile: params[:mobile])
+    render json: { success: false, message: '用户不存在' } unless @user
+
     if @user.verify(params[:pin])
       render json: {success: true}
     else
       render json: {success: false}
     end
+  rescue Exception => e
+    render json: {success: false, message: e.message}
   end
 
   def update
