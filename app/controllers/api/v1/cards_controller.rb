@@ -22,7 +22,7 @@ class Api::V1::CardsController < Api::V1::BaseController
       render json: { success: false, message: '车牌无效！' } and return unless @car
 
       @car.joined_at ||= Time.zone.now
-      @car.valid_at =  growing_card? ? growing_car_valid : car_valid
+      @car.valid_at =  negative_range? ? growing_car_valid : car_valid
       @card.transaction do
         @car.save!
         @card.actived!
@@ -75,5 +75,9 @@ class Api::V1::CardsController < Api::V1::BaseController
 
   def growing_520_card?
     !!@card.pin.match(/(520)+/)
+  end
+
+  def negative_range?
+    @card.range < 0
   end
 end
