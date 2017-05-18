@@ -42,7 +42,7 @@ class Api::V1::UsersController <  ActionController::API
     @user = User.find_by(mobile: params[:mobile])
     render json: { success: false, message: '用户不存在' } unless @user
 
-    if @user.verify(params[:pin])
+    if $redis.get(@user.mobile) == params[:pin]
       render json: {success: true}
     else
       render json: {success: false}

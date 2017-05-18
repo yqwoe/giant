@@ -59,15 +59,17 @@ class User < ApplicationRecord
   end
 
   def generate_pin
-    self.pin = rand(0000...9999).to_s.rjust(4, "0")
-    save!
+    rand_pin = rand(0000...9999).to_s.rjust(4, "0")
+    #TODO: will remove to service
+    $redis.set(mobile, rand_pin, ex: 180, nx: true )
+    rand_pin
   end
 
   def send_pin
     generate_pin
     if Rails.env.production? || Rails.env.staging?
       ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
-      ChinaSMS.to mobile, { code: self.pin, company: '嘻唰唰' }, tpl_id: 1
+      ChinaSMS.to mobile, { code: rand_pin, company: '嘻唰唰' }, tpl_id: 1
     end
   end
 
@@ -103,5 +105,13 @@ class User < ApplicationRecord
       token = Devise.friendly_token
       break token unless User.where(identity_token: token).first
     end
+  end
+
+  def email_required?
+    false
+  end
+
+  def email_changed?
+    false
   end
 end
