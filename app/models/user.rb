@@ -64,7 +64,7 @@ class User < ApplicationRecord
 
   def send_pin
     rand_pin = generate_pin
-    set_pin_status = $redis.set(mobile, rand_pin, ex: 180, nx: true )
+    set_pin_status = $redis.set(mobile, rand_pin, ex: 60, nx: true )
     if Rails.env.production? || Rails.env.staging? && set_pin_status
     #TODO: will remove to service
       ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
