@@ -19,6 +19,7 @@ class Api::V1::GrowingsController < ActionController::API
   end
 
   def enrolled
+    response.set_header("Access-Control-Allow-Origin", "*")
     render json: {success: false, message: '手机号不能为空'} and return unless params[:mobile].present?
     @growing_user = GrowingUser.find_by mobile: params[:mobile]
     render_has_been_inrolled and return if @growing_user && @growing_user.enrolled_520
