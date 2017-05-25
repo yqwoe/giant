@@ -12,6 +12,9 @@
 ========
 
 1. 修改车行数据
+```terminal
+$ RAILS_ENV=production rails db:shops['csv_file_path']
+```
 2. 编辑`app/controllers/api/v1/shops_controller.rb`
 ```ruby
   def server_version

@@ -32,7 +32,7 @@ namespace :db do
       end
 
       puts 'shops imported! '
-      `rm "#{ARGV[1]}"` if Rails.env.production?
+      `rm "#{csv_file}"` if Rails.env.production?
     rescue Exception => e
       puts e.message
     end
