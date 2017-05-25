@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518083709) do
+ActiveRecord::Schema.define(version: 20170523070748) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "pg_stat_statements"
 
   create_table "ads", force: :cascade do |t|
     t.string   "title"
@@ -286,7 +287,7 @@ ActiveRecord::Schema.define(version: 20170518083709) do
     t.string    "category"
     t.string    "address"
     t.daterange "duration"
-    t.integer   "status"
+    t.integer   "status",       default: 1
     t.string    "profile"
     t.string    "services"
     t.string    "sale_content"
