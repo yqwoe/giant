@@ -278,6 +278,7 @@ GEM
     public_suffix (2.0.5)
     puma (3.8.2)
     rack (2.0.3)
+    rack-cors (0.4.1)
     rack-test (0.6.3)
       rack (>= 1.0)
     railroady (1.5.2)
@@ -481,6 +482,7 @@ DEPENDENCIES
   pry-rails
   pry-rescue
   puma (~> 3.0)
+  rack-cors
   railroady
   rails (~> 5.0.2)
   rails-erd
@@ -512,4 +514,4 @@ RUBY VERSION
    ruby 2.4.0p0
 
 BUNDLED WITH
-   1.14.6
+   1.15.0

@@ -57,6 +57,7 @@ gem 'carrierwave', '~> 1.0'
 gem 'sweet-alert', git: 'https://github.com/rocLv/sweet-alert-rails.git'
 gem 'sweet-alert-confirm'
 gem 'mini_magick'
+gem 'rack-cors', :require => 'rack/cors'
 gem 'byebug', platform: :mri
 group :development, :test do
   gem 'bullet'

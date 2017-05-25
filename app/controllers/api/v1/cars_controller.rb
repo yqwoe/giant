@@ -29,7 +29,6 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def index
-    response.set_header("Access-Control-Allow-Origin", "*")
     if current_user.cars.count>0
       render json: current_user.cars
     else
