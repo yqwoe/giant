@@ -59,7 +59,7 @@ class User < ApplicationRecord
   end
 
   def generate_pin
-    rand(0000...9999).to_s.rjust(4, "0")
+    rand(000000...999999).to_s.rjust(6, "0")
   end
 
   def send_pin
