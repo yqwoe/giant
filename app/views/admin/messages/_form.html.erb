@@ -1,0 +1,36 @@
+<br><br>
+<div class='user-form'>
+  <%= form_for [:admin, @message], class: 'form-horizontal' do |f| %>
+    <% if @message.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@message.errors.count, "error") %> 
+        prohibited this @message from being saved:</h2>
+
+        <ul>
+          <% @message.errors.full_messages.each do |message| %>
+            <li><%= message if message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="form-input">
+      <%= f.label :标题, class: 'col-sm-2 control-label white' %>
+      <div class="col-sm-10">
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="form-input" style="">
+      <%= f.label :内容, class: 'col-sm-2 control-label' %>
+      <div class="col-sm-10">
+        <%= f.text_area :body, class: 'form-control', maxlength: 144 %>
+      </div>
+    </div>
+   </div>
+    <br><br><br>
+    <%= f.submit "创建并群发消息", class: 'btn btn-warning col-sm-8 col-sm-offset-3' %>
+  <% end %>
+</div>

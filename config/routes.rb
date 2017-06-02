@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   root to: 'home#index'
 
   resource :ads
@@ -20,6 +19,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :car_models
+    resources :messages
     resources :car_brands do
       resources :car_models
     end
