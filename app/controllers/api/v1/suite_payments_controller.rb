@@ -27,7 +27,7 @@ class Api::V1::SuitePaymentsController < ActionController::API
   private
     def change_suite_order_status
       @suite_order.finished_at = Time.zone.now
-      @suite_order.status      = :success
+      @suite_order.success!
       @suite_order.payment_gateway = :alipay
 
       @suite_order.save!
