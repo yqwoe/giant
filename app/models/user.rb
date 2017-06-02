@@ -88,6 +88,21 @@ class User < ApplicationRecord
     end
   end
 
+  def reset_member
+    true if cars.nil?
+
+    result = false
+    cars.each do |car|
+      result ||= if car.valid_at
+                   (car.valid_at > Time.zone.now.beginning_of_day)
+                 else
+                   false
+                  end
+    end
+
+    result ? member! : registed!
+  end
+
   protected
 
   private

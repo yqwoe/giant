@@ -38,10 +38,12 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist    and return unless @car
+
+    @car.user.reset_member
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
     # Fixme: will use this by market
-    # render_qrcode_not_valid and return unless verify_qrcode?
+    render_qrcode_not_valid and return unless verify_qrcode?
     find_or_create_wash_record
   end
 
@@ -110,7 +112,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     def render_qrcode_not_valid
       if deal_params[:did].present?
         render json: {success: false,
-                      message: '二维码无效，请升级最新版APP重试',
+                      message: '二维码超时，请车主重新进入二维码界面后再次进行认证',
                       member: false}
       else
         render json: {success: false,
@@ -132,10 +134,8 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def verify_qrcode?
-      return false unless $redis.get(deal_params[:did])
-      return false if last_3days_deals_count >= 2
-      return true  if deal_params[:h] == $redis.get(deal_params[:did])
-      return false
+      return false unless deal_params[:h]
+      deal_params[:h] == $redis.get(deal_params[:did])
     end
 
     def set_car
