@@ -3,5 +3,5 @@ class SuiteOrder < ApplicationRecord
   belongs_to :coupon
   belongs_to :users
 
-  enum state: [:created, :success, :canceled]
+  enum state: [:created, :canceled, :failed, :sucess, :verified]
 end
