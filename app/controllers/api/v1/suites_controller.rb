@@ -21,7 +21,7 @@ class Api::V1::SuitesController < Api::V1::BaseController
         out_trade_no: out_trade_no,
       },
       timestamp:  timestamp,
-      notify_url: api_v1_payments_url
+      notify_url: api_v1_suite_payments_url
     )
 
     # create order
