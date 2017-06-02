@@ -108,7 +108,15 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def render_qrcode_not_valid
-        render json: {success: false, message: '数据异常', member: false}
+      if deal_params[:did].present?
+        render json: {success: false,
+                      message: '二维码无效，请升级最新版APP重试',
+                      member: false}
+      else
+        render json: {success: false,
+                      message: '请提醒车主升级APP后重试。',
+                      member: false}
+      end
     end
 
     def render_not_member
