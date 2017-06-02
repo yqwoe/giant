@@ -74,7 +74,7 @@ class Api::V1::CardsController < Api::V1::BaseController
   end
 
   def growing_520_card?
-    !!@card.pin.match(/(520)+/)
+    !!@card.pin.match(/^(520)+/)
   end
 
   def negative_range?
