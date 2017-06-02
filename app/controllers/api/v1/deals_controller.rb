@@ -24,7 +24,11 @@ class Api::V1::DealsController <  Api::V1::BaseController
     # send to member app
     render json: {success: false, message: "请提供设备ID"} and return unless params[:device_id].present?
 
-    rand_pin = SecureRandom.hex(12)
+    rand_pin = ''
+    loop do
+      rand_pin = SecureRandom.hex(12)
+      break if rand_pin
+    end
 
     ##
     # redis set
@@ -32,7 +36,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
     # PX milliseconds -- Set the specified expire time, in milliseconds.
     # NX -- Only set the key if it does not already exist.
     # XX -- Only set the key if it already exist.
-    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true )
+    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true)
       render json: {success: true, rand_pin: rand_pin, expired: 30}
     else
       will_expired = $redis.ttl(params[:device_id])
