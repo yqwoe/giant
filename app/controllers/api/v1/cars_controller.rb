@@ -41,7 +41,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
     # Fixme: will use this by market
-    # render_qrcode_not_valid and return unless verify_qrcode?
+    render_qrcode_not_valid and return unless verify_qrcode?
     find_or_create_wash_record
   end
 
@@ -124,6 +124,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def verify_qrcode?
+      return false unless $redis.get(deal_params[:did])
       return false if last_3days_deals_count >= 2
       return true  if deal_params[:h] == $redis.get(deal_params[:did])
       return false
