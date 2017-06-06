@@ -42,12 +42,24 @@ class Api::V1::CarsController < Api::V1::BaseController
     @car.user.reset_member
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
-    # Fixme: will use this by market
     render_qrcode_not_valid and return unless verify_qrcode?
+    render_question_wash    and return if too_often?
     find_or_create_wash_record
   end
 
   private
+    def too_often?
+      shop = current_user.shops.first
+      @car.deals.last30d.by_shop(shop).count >= 8
+    end
+
+    def render_question_wash
+      render json: {
+        success: false,
+        member:  false,
+        message: '账户异常，请去其他车行尝试洗车。'
+      }
+    end
     def find_or_create_wash_record
       #TODO: think about multi shops
 
@@ -139,7 +151,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def set_car
-      licensed_id = deal_params[:l] || params[:licensed_id]
+      licensed_id = deal_params[:l]
       @car = Car.find_by_licensed_id licensed_id
     end
 

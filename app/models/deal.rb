@@ -6,8 +6,10 @@ class Deal < ApplicationRecord
 
   enum status: [:uncommented, :commented]
 
-  scope :last3d, -> { where 'created_at >= ?', 3.days.ago.beginning_of_day }
-  scope :today,  -> { where 'created_at >= ?', Time.zone.now.beginning_of_day }
+  scope :last3d,  -> { where 'created_at >= ?', 3.days.ago.beginning_of_day }
+  scope :last30d, -> { where 'created_at >= ?', 30.days.ago.beginning_of_day }
+  scope :today,   -> { where 'created_at >= ?', Time.zone.now.beginning_of_day }
+  scope :by_shop, -> (shop) { where 'shop_id = ?', shop.id }
 
   include Queriable
 

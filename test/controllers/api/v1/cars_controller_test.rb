@@ -31,7 +31,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
   test "return false if car not exist" do
     post api_v1_wash_url, params: {
       user_token:  @user.authentication_token,
-      licensed_id: 'invalid licensed'
+      qrcode_info: "l=licensed_id%26did=12345%26h=7d45c15c36f6ff852cfa61ca"
     }
 
     assert_response :success
@@ -50,6 +50,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
   test "car in service" do
     @user.member!
     @car.update_attributes(valid_at: 1.month.from_now)
+    $redis.set('12345', '7d45c15c36f6ff852cfa61ca' )
 
     post_wash
 
@@ -89,12 +90,28 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     assert json_response[:member]
   end
 
+  test "too often washing can not verified" do
+    @car.update_attributes(valid_at: 1.day.from_now)
+    @user.member!
+
+    8.times { create(:deal,
+                     car_id: @car.id,
+                     shop_id: @shop.id,
+                     created_at: Time.zone.now)
+    }
+
+    post_wash
+
+    assert_response :success
+    assert_not json_response[:member]
+  end
+
   private
 
   def post_wash
     post api_v1_wash_url, params: {
       user_token:  @shop_owner.authentication_token,
-      licensed_id: @car.licensed_id
+      qrcode_info: "l=豫A88888&did=12345&h=7d45c15c36f6ff852cfa61ca"
     }
   end
 
