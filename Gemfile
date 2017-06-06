@@ -60,6 +60,7 @@ gem 'mini_magick'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'byebug', platform: :mri
 group :development, :test do
+
   gem 'bullet'
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -92,6 +93,7 @@ group :development, :test do
   gem 'mocha'
   gem 'minitest-reporters'
   gem 'railroady'
+  gem 'timecop'
 end
 
 group :development do

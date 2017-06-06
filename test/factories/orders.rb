@@ -1,12 +1,11 @@
 FactoryGirl.define do
   factory :order do
-    user_id 1
     state ""
-    payment_gateway 1
-    trade_no 1
-    price 1.5
+    payment_gateway 0
+    trade_no 'ios20170505153834959'
+    total_amount 0.01
     quantity 1
-    distcount 1.5
-    subject "MyString"
+    subject "become VIP"
+    car
   end
 end

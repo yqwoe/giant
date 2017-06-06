@@ -11,7 +11,7 @@ class Admin::MessagesController < Admin::BaseController
     @message = Message.new(message_params)
 
     if @message.save
-      JpushJob.perform_later(@message.body)
+      JpushJob.perform_later(@message)
       render :show
     else
       render :new
