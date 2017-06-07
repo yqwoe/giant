@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170523070748) do
+ActiveRecord::Schema.define(version: 20170607020330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -299,6 +299,8 @@ ActiveRecord::Schema.define(version: 20170523070748) do
     t.string    "image",        default: "default_shop.png"
     t.integer   "user_id"
     t.string    "openning"
+    t.datetime  "deleted_at"
+    t.index ["deleted_at"], name: "index_shops_on_deleted_at", using: :btree
   end
 
   create_table "suite_orders", force: :cascade do |t|
