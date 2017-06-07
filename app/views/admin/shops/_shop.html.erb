@@ -1,0 +1,25 @@
+<tr>
+  <td><%= link_to shop.name, admin_shop_path(shop) if shop.name %></td>
+  <td><%= shop.address %></td>
+  <td><%= shop.deals.count %></td>
+  <td><%= shop.updated_at.strftime('%Y-%m-%d %H:%M') %></td>
+  <td width="15%">
+    <button
+      class="car-modify btn btn-sm btn-warning"
+      style="float: left; margin-right: 10px;"
+      data-id='<%= "#" %>'
+      data-sweet-alert-confirm='确定修改吗？'
+    >
+       上线
+    </button>
+    <%= button_to '下线', { action: 'destroy', controller: 'admin/cars', id: shop.id },
+      class: 'btn btn-sm btn-danger',
+      method: :delete, data: { :'sweet-alert-confirm' => "确定删除车牌为的车辆吗？",
+                               :"confirm-button-text" => '我确定',
+                               :"cancel-button-text" => '算了',
+                               :'sweet-alert-type' => 'null',
+                               :'image-url' => image_path("delete.gif")
+    }, remote: true
+    %>
+  </td>
+</tr>
