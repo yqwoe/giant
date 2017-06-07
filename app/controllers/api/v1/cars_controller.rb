@@ -1,5 +1,6 @@
 class Api::V1::CarsController < Api::V1::BaseController
   before_action :set_car, only: [:wash]
+  before_action :set_shop, only: [:wash]
 
   TEST_USERS = %w(13652885999 136736693021 15838208401 18639970824)
 
@@ -38,6 +39,7 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist    and return unless @car
+    render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
 
     @car.user.reset_member
     render_not_member       and return unless @car.user&.member?
@@ -48,9 +50,21 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   private
+
+    def render_shop_not_exist_or_pending
+      render json: {
+        success: false,
+        member: false,
+        message: '账户已停用或暂未启用'
+      }
+    end
+
+    def set_shop
+      @shop = current_user.shops.first
+    end
+
     def too_often?
-      shop = current_user.shops.first
-      @car.deals.last30d.by_shop(shop).count >= 8
+      @car.deals.last30d.by_shop(@shop).count >= 8
     end
 
     def render_question_wash
@@ -60,6 +74,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         message: '账户异常，请去其他车行尝试洗车。'
       }
     end
+
     def find_or_create_wash_record
       #TODO: think about multi shops
 
