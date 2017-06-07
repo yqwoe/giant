@@ -1,6 +1,6 @@
 class Admin::MessagesController < Admin::BaseController
   def index
-    @messages = Message.paginate(page: params[:page])
+    @messages = Message.order('id desc').paginate(page: params[:page])
   end
 
   def new
