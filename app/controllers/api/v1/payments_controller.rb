@@ -48,9 +48,12 @@ class Api::V1::PaymentsController <  ActionController::API
       @logger.info "#{@car.licensed_id} " \
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
+      ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
+      ChinaSMS.to @car.user.mobile, { licensed_id: @car.licensed_id, kind: '年', valid_at: @car.valid_at }, tpl_id: '1774946'
+
       render json: {
         success: true,
-        message: "您的会员已经办理成功，会员有效期延长至#{@car.valid_at}"
+        message: "您车牌号为#{@car.licensed_id}会员有效期延长至#{@car.valid_at}, 请前往我的爱车处查看"
       }
     else
       @logger.fatal params.inspect
