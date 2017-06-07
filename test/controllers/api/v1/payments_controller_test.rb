@@ -55,7 +55,7 @@ class Api::V1::PaymentsControllerTest < ActionDispatch::IntegrationTest
       seller_id:          '2088221491093746',
       notify_id:          'f8f8c4c65f0389c4fcbccd22d700413l3e',
       seller_email:       '1991996789@qq.com',
-      out_trade_no:       'ios20170505153834959'
+      'out_trade_no':       'ios20170505153834959'
     }
   end
 end

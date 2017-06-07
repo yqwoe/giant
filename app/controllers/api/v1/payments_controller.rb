@@ -5,6 +5,11 @@ class Api::V1::PaymentsController <  ActionController::API
   def create
     #TODO: verify params
     #TODO: verify sign
+    #
+    render json: {
+      success: false,
+      message: '订单不存在'
+    } and return unless @order
 
     render json: {
       success: true,
