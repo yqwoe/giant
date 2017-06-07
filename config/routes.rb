@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   authenticate :user, -> (user) { user.admin? } do
     mount PgHero::Engine, at: "pghero"
+    mount Resque:Server, at: '/jobs'
   end
 
   namespace :admin do

@@ -66,14 +66,12 @@ class User < ApplicationRecord
     rand_pin = generate_pin
     set_pin_status = $redis.set(mobile, rand_pin, ex: 60, nx: true )
     if Rails.env.production? || Rails.env.staging? && set_pin_status
-    #TODO: will remove to service
-      ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
-      ChinaSMS.to mobile, { code: rand_pin, company: '嘻唰唰' }, tpl_id: 1
+      ChinaSmsJob.new.perform_now(mobile: mobile, code: rand_pin, tpl_id: 1)
     end
   end
 
   def verify(entered_pin)
-    update(verified: true) if self.pin == entered_pin
+    update(verified: true) if $redis.get(mobile) == entered_pin
   end
 
   def ensure_authentication_token

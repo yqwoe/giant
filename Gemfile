@@ -60,6 +60,7 @@ gem 'mini_magick'
 gem 'rack-cors', :require => 'rack/cors'
 gem "paranoia", "~> 2.2"
 gem 'byebug', platform: :mri
+gem 'resque'
 group :development, :test do
 
   gem 'bullet'

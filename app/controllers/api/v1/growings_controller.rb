@@ -53,9 +53,8 @@ class Api::V1::GrowingsController < ActionController::API
 
   def send_card_to_growing_user
     #TODO: remove sensitive information to .env
-    ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
-    response = ChinaSMS.to @growing_user.mobile, { code: @growing_card.pin }, tpl_id: '1774946'
-    puts response
+    ChinaSmsJob.new.perform_now(mobile: @growing_user.mobile,
+      code: @growing_card.pin, tpl_id: '1774946')
   end
 
   def set_growing_card

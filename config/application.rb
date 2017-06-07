@@ -14,7 +14,7 @@ module Giant
     config.time_zone = 'Beijing'
     config.active_record.default_timezone = :local
 
-    WillPaginate.per_page = 15
+    WillPaginate.per_page = 30
 
     config.before_configuration do
       env_file = File.join(Rails.root, 'config', 'env.yml')
@@ -29,5 +29,8 @@ module Giant
         resource '*', :headers => :any, :methods => [:get, :post, :options]
       end
     end
+
+    config.active_job.queue_adapter = :resque
+
   end
 end
