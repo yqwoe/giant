@@ -3,28 +3,65 @@ class Api::V1::PaymentsController <  ActionController::API
   before_action :set_order, only: [:show, :create]
 
   def create
-    #TODO: verify params
     #TODO: verify sign
-    #
-    render json: {
-      success: false,
-      message: '订单不存在'
-    } and return unless @order
+    unless @order
+      @logger.fatal params.inspect
+      @logger.fatal "#{params[:out_trade_no]}\t订单不存在"
+      render json: {
+        success: false,
+        message: '订单不存在'
+      } and return
+    end
 
-    render json: {
-      success: true,
-      message: '会员卡已经激活'
-    } and return if @order.success?
+    @car = @order.car
+    unless @car
+      @logger.fatal params.inspect
+      @logger.fatal "#{@car}不存在"
 
-    convert_to_vip if verify_payment?
+      render json: {
+        success: false,
+        message: "#{@car}不存在"
+      } and return
+    end
 
-    @logger.info "#{@car.licensed_id} " \
-      "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
+    if @order.success?
+      @logger.fatal params.inspect
+      @logger.fatal "#{params[:out_trade_no]}\t会员卡已经激活"
 
-    render json: {
-      success: true,
-      message: "您的会员已经办理成功，有效期至#{@car.valid_at}"
-    }
+      render json: {
+        success: true,
+        message: '会员卡已经激活'
+      } and return
+    end
+
+    unless verify_payment?
+      @logger.fatal params.inspect
+      @logger.fatal "#{params[:out_trade_no]}\t会员卡已经激活"
+
+      render json: {
+        success: false,
+        message: '参数不完整'
+      } and return
+    end
+
+    if convert_to_vip
+      @logger.info "#{@car.licensed_id} " \
+        "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
+
+      render json: {
+        success: true,
+        message: "您的会员已经办理成功，会员有效期延长至#{@car.valid_at}"
+      }
+    else
+      @logger.fatal params.inspect
+      @logger.fatal "#{@car.errors.messages.to_json}"
+
+      render json: {
+        success: false,
+        message: @car.errors.messages.to_json
+      }
+    end
+
   end
 
   def show
@@ -34,7 +71,6 @@ class Api::V1::PaymentsController <  ActionController::API
 
   private
     def convert_to_vip
-      @car               = @order.car
       @car.valid_at      = @car.valid_at ? @car.valid_at + 1.year : 1.year.from_now
       @order.finished_at = Time.zone.now
       @order.status      = trade_success
