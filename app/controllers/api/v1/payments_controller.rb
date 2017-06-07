@@ -49,7 +49,10 @@ class Api::V1::PaymentsController <  ActionController::API
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
       ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
-      ChinaSMS.to @car.user.mobile, { licensed_id: @car.licensed_id, kind: '年', valid_at: @car.valid_at }, tpl_id: '1774946'
+      ChinaSMS.to @car.user.mobile, {
+        licensed_id: @car.licensed_id,
+        kind: '年',
+        valid_at: @car.valid_at }, tpl_id: '1827684'
 
       render json: {
         success: true,
