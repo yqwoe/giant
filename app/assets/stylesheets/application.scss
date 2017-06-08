@@ -21,3 +21,13 @@
 .white {
   text-color: white;
 }
+
+a {
+  color: #ff0;
+  &:visited {
+    color: #fff;
+  }
+  &:hover {
+    color: pink;
+  }
+}

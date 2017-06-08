@@ -1,0 +1,35 @@
+<tr id='<%= shop.id %>'>
+  <td><%= link_to shop.name, admin_shop_path(shop) if shop.name %></td>
+  <td><%= shop.address %></td>
+  <td><%= shop.deals.count %></td>
+  <td><%= shop.updated_at.strftime('%Y-%m-%d %H:%M') %></td>
+  <td width="15%">
+    <%= button_to '上线', { action: 'update', controller: 'admin/shops', id: shop.id },
+      class: "btn btn-sm btn-warning",
+      style: "float: left; margin-right: 10px;",
+      method: :patch, data: {  :'sweet-alert-confirm' => "确定上线该车行吗？",
+                               :"confirm-button-text" => '我确定',
+                               :"cancel-button-text" => '算了',
+                               :'sweet-alert-type' => 'null',
+                               :'image-url' => image_path("delete.gif")
+    }, remote: true
+    %>
+    <%= link_to edit_admin_shop_path(shop) do %>
+      <button
+        class="shop-modify btn btn-sm btn-info"
+        style="float: left; margin-right: 10px;"
+      >
+       编辑
+      </button>
+      <% end %>
+    <%= button_to '下线', { action: 'destroy', controller: 'admin/shops', id: shop.id },
+      class: 'btn btn-sm btn-danger',
+      method: :delete, data: { :'sweet-alert-confirm' => "确定下线#{shop.name}吗？",
+                               :"confirm-button-text" => '我确定',
+                               :"cancel-button-text"  => '算了',
+                               :'sweet-alert-type'    => 'null',
+                               :'image-url' => image_path("delete.gif")
+    }, remote: true
+    %>
+  </td>
+</tr>

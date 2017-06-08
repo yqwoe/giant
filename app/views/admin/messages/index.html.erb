@@ -1,2 +1,19 @@
-<h1>Admin::Messages#index</h1>
-<p>Find me in app/views/admin/messages/index.html.erb</p>
+<div class='row' style="color: white;">
+  <div class='col-lg-offset-2 col-lg-8'>
+    <h2>消息中心</h2>
+    <%= link_to '发送消息', new_admin_message_url, class: 'btn btn-lg btn-info pull-right' %>
+    <table class="table" style="text-align: left">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>信息内容</th>
+          <th>发送时间</th>
+        </tr>
+      </thead>
+      <tbody>
+        <%= render @messages %>
+      </tbody>
+    </table>
+    <%= render partial: "shared/paginate", locals: {collection: @messages}  %>
+  </div>
+</div>
