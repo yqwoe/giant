@@ -36,8 +36,8 @@ class Api::V1::DealsController <  Api::V1::BaseController
     # PX milliseconds -- Set the specified expire time, in milliseconds.
     # NX -- Only set the key if it does not already exist.
     # XX -- Only set the key if it already exist.
-    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true)
-      render json: {success: true, rand_pin: rand_pin, expired: 30}
+    if $redis.set(params[:device_id], rand_pin, ex: 10, nx: true)
+      render json: {success: true, rand_pin: rand_pin, expired: 10}
     else
       will_expired = $redis.ttl(params[:device_id])
       render json: {
