@@ -1,3 +1,5 @@
+require 'resque/server'
+
 Rails.application.routes.draw do
   root to: 'home#index'
 
@@ -15,7 +17,7 @@ Rails.application.routes.draw do
 
   authenticate :user, -> (user) { user.admin? } do
     mount PgHero::Engine, at: "pghero"
-    mount Resque:Server, at: '/jobs'
+    mount Resque::Server, at: '/jobs'
   end
 
   namespace :admin do
