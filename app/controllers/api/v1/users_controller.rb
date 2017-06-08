@@ -20,8 +20,8 @@ class Api::V1::UsersController <  ActionController::API
     @user.send_pin
     pin = $redis.get(mobile)
     render json: { success: true, pin: pin }
-  rescue Exception => e
-    render json: { success: false, massenge: e.message }
+  #rescue Exception => e
+  #  render json: { success: false, massenge: e.message }
   end
 
   def create

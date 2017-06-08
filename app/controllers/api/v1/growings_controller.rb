@@ -53,7 +53,7 @@ class Api::V1::GrowingsController < ActionController::API
 
   def send_card_to_growing_user
     #TODO: remove sensitive information to .env
-    ChinaSmsJob.new.perform_now(mobile: @growing_user.mobile,
+    ChinaSmsJob.perform_now(mobile: @growing_user.mobile,
       code: @growing_card.pin, tpl_id: '1774946')
   end
 

@@ -64,9 +64,9 @@ class User < ApplicationRecord
 
   def send_pin
     rand_pin = generate_pin
-    set_pin_status = $redis.set(mobile, rand_pin, ex: 60, nx: true )
-    if Rails.env.production? || Rails.env.staging? && set_pin_status
-      ChinaSmsJob.new.perform_now(mobile: mobile, code: rand_pin, tpl_id: 1)
+    set_pin_status = $redis.set(mobile, rand_pin, ex: 60, nx: true)
+    if set_pin_status && (Rails.env.production? || Rails.env.staging?)
+      ChinaSmsJob.perform_now(mobile: mobile, code: rand_pin, tpl_id: 1)
     end
   end
 
