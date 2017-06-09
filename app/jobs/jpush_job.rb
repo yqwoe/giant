@@ -10,7 +10,7 @@ class JpushJob < ApplicationJob
       platform: 'all',
       audience: 'all',
       notification: message.body,
-    )
+    ).set_options({apns_production: true})
     msg_id = pusher.push(push_payload).body['msg_id']
     message.update_attribute(:msg_id, msg_id)
   end
