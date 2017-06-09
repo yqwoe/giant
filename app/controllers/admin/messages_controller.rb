@@ -12,7 +12,7 @@ class Admin::MessagesController < Admin::BaseController
 
     if @message.save
       JpushJob.perform_later(@message)
-      render :index
+      redirect_to action: 'index'
     else
       render :new
     end
