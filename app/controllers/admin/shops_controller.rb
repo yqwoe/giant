@@ -6,7 +6,7 @@ class Admin::ShopsController < Admin::BaseController
   end
 
   def update
-    @shop.actived!
+    @shop.restore
   end
 
   def edit
@@ -23,7 +23,7 @@ class Admin::ShopsController < Admin::BaseController
   private
 
   def set_shop
-    @shop = Shop.find params[:id]
+    @shop = Shop.with_deleted.find params[:id]
   end
 
 end
