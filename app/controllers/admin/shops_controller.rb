@@ -2,7 +2,7 @@ class Admin::ShopsController < Admin::BaseController
   before_action :set_shop, only: [:edit, :update, :destroy]
 
   def index
-    @shops = Shop.paginate(page: params[:page])
+    @shops = Shop.with_deleted.order(created_at: :desc).paginate(page: params[:page])
   end
 
   def update
