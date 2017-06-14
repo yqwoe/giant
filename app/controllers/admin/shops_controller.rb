@@ -1,4 +1,6 @@
 class Admin::ShopsController < Admin::BaseController
+  before_action :authenticate_admin?
+
   before_action :set_shop, only: [
     :edit, :update, :destroy, :inactive, :active, :pending]
 
