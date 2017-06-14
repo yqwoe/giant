@@ -1,0 +1,7 @@
+$('#pending-<%= @shop.id %>').toggleClass('btn-default btn-success');
+if ($('#inactived-<%= @shop.id %>').hasClass('btn-success')) {
+  $('#inactived-<%= @shop.id %>').toggleClass('btn-success btn-default');
+}
+if ($('#actived-<%= @shop.id %>').hasClass('btn-success')) {
+  $('#actived-<%= @shop.id %>').toggleClass('btn-success btn-default');
+}

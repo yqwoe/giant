@@ -27,7 +27,15 @@ Rails.application.routes.draw do
       resources :car_models
     end
 
-    resources :shops
+    resources :shops do
+      collection do
+        patch 'inactive'
+        patch 'active'
+        patch 'pending'
+      end
+      resources :deals
+    end
+
     resources :deals
     resources :cards
     get '/', to: 'home#index'

@@ -1,11 +1,15 @@
 <tr id='<%= shop.id %>'>
-  <td><%= link_to shop.name, admin_shop_path(shop) if shop.name %></td>
+  <td width="18%"><%= link_to shop.name, admin_shop_path(shop) if shop.name %></td>
+  <td width="5%"><%= shop.city %></td>
   <td><%= shop.address %></td>
-  <td><%= shop.deals.count %></td>
+  <td width="8%">
+    <%= link_to shop.deals.count, admin_shop_deals_path(shop) %>
+  </td>
   <td><%= shop.updated_at.strftime('%Y-%m-%d %H:%M') %></td>
-  <td width="15%">
-    <%= button_to '上线', { action: 'update', controller: 'admin/shops', id: shop.id },
-      class: "btn btn-sm btn-warning",
+  <td width="25%">
+    <%= button_to '上线', { action: 'active', controller: 'admin/shops', id: shop.id },
+      class: "actived btn btn-sm #{btn_active(shop.actived? || shop.status.nil?)}",
+      id: "actived-#{shop.id}",
       style: "float: left; margin-right: 10px;",
       method: :patch, data: {  :'sweet-alert-confirm' => "确定上线该车行吗？",
                                :"confirm-button-text" => '我确定',
@@ -14,6 +18,19 @@
                                :'image-url' => image_path("delete.gif")
     }, remote: true
     %>
+  <%= button_to '待上线', { action: 'inactive',
+                            controller: 'admin/shops',
+                            id: shop.id },
+      id: "inactived-#{shop.id}",
+      class: "inactived btn btn-sm #{btn_active(shop.inactived?)}",
+      style: "float: left; margin-right: 10px;",
+      method: :patch, data: {  :'sweet-alert-confirm' => "确定上线该车行吗？",
+                               :"confirm-button-text" => '我确定',
+                               :"cancel-button-text" => '算了',
+                               :'sweet-alert-type' => 'null',
+                               :'image-url' => image_path("delete.gif")
+      }, remote: true
+    %>
     <%= link_to edit_admin_shop_path(shop) do %>
       <button
         class="shop-modify btn btn-sm btn-info"
@@ -21,9 +38,10 @@
       >
        编辑
       </button>
-      <% end %>
+    <% end %>
     <%= button_to '下线', { action: 'destroy', controller: 'admin/shops', id: shop.id },
-      class: 'btn btn-sm btn-danger',
+      class: "pending btn btn-sm #{btn_active(shop.pending?)}",
+      id: "pending-#{shop.id}",
       method: :delete, data: { :'sweet-alert-confirm' => "确定下线#{shop.name}吗？",
                                :"confirm-button-text" => '我确定',
                                :"cancel-button-text"  => '算了',
