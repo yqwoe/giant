@@ -6,7 +6,7 @@ class Api::V1::ShopDetailController < ActionController::API
     serialize_suites =
       ActiveModelSerializers::SerializableResource.new(suites)
     render json: {
-      shop_detail: @shop,
+      shop_detail: ShopDetailSerializer.new(@shop),
       comments_count: @shop.comments.count,
       suites: serialize_suites
     }
