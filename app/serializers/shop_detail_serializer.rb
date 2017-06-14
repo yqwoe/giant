@@ -1,5 +1,7 @@
 class ShopDetailSerializer < ShopSerializer
-  def img_url
+  attributes :image
+
+  def image
     object.detail_images.first if object.detail_images
   end
 end
