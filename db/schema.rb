@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170614024212) do
+ActiveRecord::Schema.define(version: 20170616102251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "pg_stat_statements"
+  enable_extension "cube"
+  enable_extension "earthdistance"
 
   create_table "ads", force: :cascade do |t|
     t.string   "title"
@@ -55,8 +56,6 @@ ActiveRecord::Schema.define(version: 20170614024212) do
     t.integer  "range"
     t.integer  "channel"
     t.integer  "growing_user_id"
-    t.index ["cid"], name: "index_cards_on_cid", unique: true, using: :btree
-    t.index ["pin"], name: "index_cards_on_pin", unique: true, using: :btree
   end
 
   create_table "cars", force: :cascade do |t|
@@ -119,14 +118,6 @@ ActiveRecord::Schema.define(version: 20170614024212) do
     t.datetime "updated_at",   null: false
     t.integer  "user_id"
     t.integer  "comment_id"
-  end
-
-  create_table "deposits", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "last_times"
-    t.integer  "channels"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "devices", force: :cascade do |t|
@@ -228,34 +219,6 @@ ActiveRecord::Schema.define(version: 20170614024212) do
     t.string   "trade_no"
   end
 
-  create_table "payments", force: :cascade do |t|
-    t.date     "notify_time"
-    t.string   "notify_type"
-    t.string   "notify_id"
-    t.string   "version"
-    t.string   "sign_type"
-    t.string   "trade_no"
-    t.string   "out_trade_no"
-    t.string   "out_biz_no"
-    t.string   "buyer_id"
-    t.string   "buyer_logon_id"
-    t.integer  "trade_status"
-    t.float    "total_amount"
-    t.float    "receipt_amount"
-    t.float    "invoice_amount"
-    t.string   "buyer_pay_amount"
-    t.float    "point_amount"
-    t.float    "refund_fee"
-    t.datetime "gmt_create"
-    t.datetime "gmt_payment"
-    t.datetime "gmt_refund"
-    t.datetime "gmt_close"
-    t.string   "passback_param"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.integer  "order_id"
-  end
-
   create_table "phones", force: :cascade do |t|
     t.string   "phone"
     t.string   "pin"
@@ -301,6 +264,9 @@ ActiveRecord::Schema.define(version: 20170614024212) do
     t.string    "openning"
     t.datetime  "deleted_at"
     t.string    "detail_images",                                           array: true
+    t.float     "lat"
+    t.float     "lng"
+    t.index "ll_to_earth(((\"position\"[1])::real)::double precision, ((\"position\"[2])::real)::double precision)", name: "shops_earthdistance_ix", using: :gist
     t.index ["deleted_at"], name: "index_shops_on_deleted_at", using: :btree
   end
 
