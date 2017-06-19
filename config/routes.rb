@@ -81,6 +81,7 @@ Rails.application.routes.draw do
         collection do
           get :search
           get :counties
+          get :list
         end
       end
       resource :version, only: [:show]

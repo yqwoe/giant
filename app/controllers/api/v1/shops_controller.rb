@@ -13,6 +13,16 @@ class Api::V1::ShopsController < ApplicationController
     render json: @shop
   end
 
+  def list
+    render json: {
+      success: false,
+      message: '参数不完整'
+    } and return unless params[:lat] && params[:lng]
+
+    @shops = Shop.within_radius(200, params[:lat], params[:lng])
+    render json: @shops
+  end
+
   def counties
     @q = Shop.ransack(city_cont: params[:city])
     render json: @q.result(distinct: true).pluck(:county).reject {|c| c.nil? }
