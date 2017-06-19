@@ -17,7 +17,7 @@ class Api::V1::ShopsController < ApplicationController
     render json: {
       success: false,
       message: '参数不完整'
-    } and return unless params[:lat] && params[:lng]
+    } and return unless params[:lat].present? && params[:lng].present?
 
     @shops = Shop.within_radius(200, params[:lat], params[:lng])
     render json: @shops
