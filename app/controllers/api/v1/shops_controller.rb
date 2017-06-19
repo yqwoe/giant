@@ -20,7 +20,7 @@ class Api::V1::ShopsController < ApplicationController
     } and return unless params[:lat].present? && params[:lng].present?
 
     @shops = Shop.within_radius(200, params[:lat], params[:lng])
-    render json: @shops
+    render json: { success: true, shops: @shops }
   end
 
   def counties
