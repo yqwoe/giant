@@ -30,7 +30,7 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def index
-    if current_user.cars.count>0
+    if current_user.cars.count > 0
       render json: current_user.cars
     else
       render json: { success: false, message: '该用户没有绑定任何车辆！' }
@@ -44,7 +44,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     @car.user.reset_member
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
-    render_qrcode_not_valid and return unless verify_qrcode?
+    # render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if too_often?
     find_or_create_wash_record
   end
@@ -60,7 +60,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def set_shop
-      @shop = current_user.shops.first
+      @shop = Shop.find params[:shop_id]
     end
 
     def too_often?
@@ -96,6 +96,7 @@ class Api::V1::CarsController < Api::V1::BaseController
       deal.user_id = current_user.id
       deal.shop_id = current_user.shops.first.id
       deal.cleaned_at = Time.zone.now
+      deal.avatar = deal_params[:avatar]
 
       if @car.save
         render_success_washed
