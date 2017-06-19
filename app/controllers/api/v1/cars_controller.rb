@@ -94,9 +94,9 @@ class Api::V1::CarsController < Api::V1::BaseController
 
       deal = @car.deals.build
       deal.user_id = current_user.id
-      deal.shop_id = current_user.shops.first.id
+      deal.shop_id = @shop.id
       deal.cleaned_at = Time.zone.now
-      deal.avatar = deal_params[:avatar]
+      deal.avatar = params[:avatar]
 
       if @car.save
         render_success_washed
