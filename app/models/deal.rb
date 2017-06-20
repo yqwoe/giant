@@ -1,4 +1,6 @@
 class Deal < ApplicationRecord
+  mount_uploader :avatar, AvatarUploader
+
   belongs_to :car
   belongs_to :shop
   belongs_to :user
