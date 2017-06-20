@@ -123,6 +123,8 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def render_success_washed
       render json: {
+        code:        0,
+        info:        '验证成功！',
         member:      @car.user.member?,
         car_brand:   @car&.car_model&.car_brand&.cn_name,
         car_model:   @car&.car_model&.cn_name,
@@ -150,15 +152,29 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def render_not_member
-      render json: {success: false, message: '非会员车辆', member: false}
+      render json: {
+        code:    -1,
+        info:    '非会员用户',
+        success: false,
+        message: '您的车辆不是会员',
+        member: false}
     end
 
     def render_car_not_exist
-      render json: { success: false, message: '该辆车不存在!', member: false }
+      render json: {
+        code:    -2,
+        success: false,
+        message: '该辆车不存在!',
+        member:  false }
     end
 
     def render_not_in_service
-      render json: { success: false, message: '该车不在服务范围之内', member: false }
+      render json: {
+        code:    -1,
+        info:    '非会员用户',
+        success: false,
+        message: '该车不在服务范围之内',
+        member: false }
     end
 
     def verify_qrcode?
