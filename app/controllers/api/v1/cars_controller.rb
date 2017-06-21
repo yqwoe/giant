@@ -51,14 +51,6 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   private
 
-    def render_shop_not_exist_or_pending
-      render json: {
-        success: false,
-        member: false,
-        message: '账户已停用或暂未启用'
-      }
-    end
-
     def set_shop
       @shop = Shop.find params[:shop_id]
     end
@@ -67,12 +59,22 @@ class Api::V1::CarsController < Api::V1::BaseController
       @car.deals.last30d.by_shop(@shop).count >= 8
     end
 
+    def render_shop_not_exist_or_pending
+      render json: {
+        code:    -1,
+        info:    '车行账户异常',
+        success: false,
+        # member: false,
+        message: '账户已停用或暂未启用'
+      }
+    end
+
     def render_question_wash
       render json: {
         code:    -1,
         info:    '账户异常',
         success: false,
-        member:  false,
+        # member:  false,
         message: '账户异常，请去其他车行尝试洗车。'
       }
     end
@@ -119,7 +121,6 @@ class Api::V1::CarsController < Api::V1::BaseController
       render json: {
         code:   -1,
         info:   '系统异常！',
-        member: false,
         success: false,
         message: '创建洗车记录失败'
       }
@@ -129,12 +130,13 @@ class Api::V1::CarsController < Api::V1::BaseController
       render json: {
         code:        0,
         info:        '验证成功！',
-        member:      @car.user.member?,
-        car_brand:   @car&.car_model&.car_brand&.cn_name,
-        car_model:   @car&.car_model&.cn_name,
-        valid_date:  @car.valid_at,
-        licensed_id: @car.licensed_id,
-        authenticated_at: Time.zone.now.strftime('%Y-%m-%d %H:%M')
+        success:      @car.user.member?,
+        message:      '创建洗车记录失败'
+        # car_brand:   @car&.car_model&.car_brand&.cn_name,
+        # car_model:   @car&.car_model&.cn_name,
+        # valid_date:  @car.valid_at,
+        # licensed_id: @car.licensed_id,
+        # authenticated_at: Time.zone.now.strftime('%Y-%m-%d %H:%M')
       }
     end
 
