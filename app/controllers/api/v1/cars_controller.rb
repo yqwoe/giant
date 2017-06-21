@@ -69,6 +69,8 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def render_question_wash
       render json: {
+        code:    -1,
+        info:    '账户异常',
         success: false,
         member:  false,
         message: '账户异常，请去其他车行尝试洗车。'
@@ -115,6 +117,8 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def render_deals_create_error
       render json: {
+        code:   -1,
+        info:   '系统异常！',
         member: false,
         success: false,
         message: '创建洗车记录失败'
