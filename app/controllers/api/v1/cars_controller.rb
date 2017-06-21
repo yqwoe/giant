@@ -102,7 +102,8 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:   -1,
         info:   '系统异常！',
         success: false,
-        message: '创建洗车记录失败'
+        message: '创建洗车记录失败',
+        error:   @deal.error.message
       }
     end
 
@@ -111,7 +112,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:        0,
         info:        '验证成功！',
         success:      @car.user.member?,
-        message:      '创建洗车记录失败'
+        message:      '成功创建洗车记录'
         # car_brand:   @car&.car_model&.car_brand&.cn_name,
         # car_model:   @car&.car_model&.cn_name,
         # valid_date:  @car.valid_at,
