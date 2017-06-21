@@ -170,9 +170,9 @@ class Api::V1::CarsController < Api::V1::BaseController
     def render_car_not_exist
       render json: {
         code:    -2,
-        info:    '辆车不存在',
+        info:    '车辆不存在',
         success: false,
-        message: '该辆车不存在!',
+        message: '您的账户没有该车辆!',
         member:  false }
     end
 
