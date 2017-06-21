@@ -59,26 +59,6 @@ class Api::V1::CarsController < Api::V1::BaseController
       @car.deals.last30d.by_shop(@shop).count >= 8
     end
 
-    def render_shop_not_exist_or_pending
-      render json: {
-        code:    -1,
-        info:    '车行账户异常',
-        success: false,
-        # member: false,
-        message: '账户已停用或暂未启用'
-      }
-    end
-
-    def render_question_wash
-      render json: {
-        code:    -1,
-        info:    '账户异常',
-        success: false,
-        # member:  false,
-        message: '账户异常，请去其他车行尝试洗车。'
-      }
-    end
-
     def find_or_create_wash_record
       #TODO: think about multi shops
 
@@ -140,6 +120,27 @@ class Api::V1::CarsController < Api::V1::BaseController
       }
     end
 
+
+    def render_shop_not_exist_or_pending
+      render json: {
+        code:    -1,
+        info:    '车行账户异常',
+        success: false,
+        # member: false,
+        message: '账户已停用或暂未启用'
+      }
+    end
+
+    def render_question_wash
+      render json: {
+        code:    -1,
+        info:    '账户异常',
+        success: false,
+        # member:  false,
+        message: '账户异常，请去其他车行尝试洗车。'
+      }
+    end
+
     def car_in_service?
       # FIXME: to limit deals less than 1
       !!@car.valid_at && @car.valid_at >= Time.zone.now.beginning_of_day
@@ -169,6 +170,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     def render_car_not_exist
       render json: {
         code:    -2,
+        info:    '辆车不存在',
         success: false,
         message: '该辆车不存在!',
         member:  false }
