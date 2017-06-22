@@ -6,8 +6,6 @@ class Api::V1::UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'send pin' do
-    get send_pin_api_v1_users_url
-    assert_response :success
   end
 
   test '#create' do
