@@ -16,7 +16,9 @@ class Api::V1::UsersController <  ActionController::API
   def send_pin
     mobile = params[:user][:mobile]
     @user = User.find_by(mobile: mobile)
-    @user ||= User.create(mobile: mobile, email: "#{mobile}@139.com", password: Devise.friendly_token)
+    @user ||= User.create(mobile: mobile,
+                          email: "#{mobile}@139.com",
+                          password: Devise.friendly_token)
     @user.send_pin
     pin = $redis.get(mobile)
     render json: { success: true, pin: pin }
