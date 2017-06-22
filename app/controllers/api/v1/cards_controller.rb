@@ -5,7 +5,8 @@ class Api::V1::CardsController < Api::V1::BaseController
     render_invalid_card          and return unless @card
     render_card_has_been_actived and return if @card.actived?
     if growing_card?
-      render json: { success: false, message: '用户不存在' } and return unless @card.growing_user
+      render json: { success: false,
+        message: '用户不存在' } and return unless @card.growing_user
     end
 
     if (growing_card? && @card.growing_user.enrolled?)

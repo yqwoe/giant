@@ -28,7 +28,7 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
     post_cards @growing_card.pin
     assert_response :success
     assert json_response[:success]
-    assert_equal 34.days.from_now.strftime('%Y-%m-%d'), json_response[:valid]
+    assert_equal 33.days.from_now.strftime('%Y-%m-%d'), json_response[:valid]
   end
 
   test "growing user could only actived once" do
