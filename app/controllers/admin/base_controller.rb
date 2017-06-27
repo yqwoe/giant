@@ -12,7 +12,10 @@ class Admin::BaseController < ApplicationController
 
   def authenticate_admin!
     authenticate_user!
-    unless current_user.admin? || current_user.dadi? || current_user.zhumadian_dadi?
+    unless current_user.admin? ||
+        current_user.dadi?     ||
+        current_user.zhumadian_dadi? ||
+        current_user.zhou?
       render plain: 'illegal users'
     end
   end
