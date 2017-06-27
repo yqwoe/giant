@@ -6,7 +6,7 @@ class Card < ApplicationRecord
   validates_uniqueness_of :cid, :pin
 
   enum status: [:inactived, :actived]
-  enum channel: [:dadi, :zhongyuan, :zhumadian, :growing, :zhumadian_dadi]
+  enum channel: [:dadi, :zhongyuan, :zhumadian, :growing, :zhumadian_dadi, :zhou]
 
   def is_actived?
     actived? ? '已激活' : '未激活'
