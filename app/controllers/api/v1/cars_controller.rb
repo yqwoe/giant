@@ -47,9 +47,20 @@ class Api::V1::CarsController < Api::V1::BaseController
     # render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if too_often?
     find_or_create_wash_record
+    push_to_shop_owner
   end
 
   private
+
+    def push_to_shop_owner
+      message = {
+        platform: 'all',
+        audience: @shop.user.mobile,
+        body: "#{@car.licensed_id}验证成功！",
+      }
+
+      JPushService.shop message
+    end
 
     def set_shop
       @shop = Shop.find params[:shop_id]

@@ -86,4 +86,6 @@ Rails.application.configure do
 
   # config.force_ssl = true
   config.public_file_server.enabled = true
+
+  config.read_encrypted_secrets = true
 end
