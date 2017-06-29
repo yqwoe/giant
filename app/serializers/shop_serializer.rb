@@ -1,5 +1,6 @@
 class ShopSerializer < ActiveModel::Serializer
   include ActionView::Helpers::AssetUrlHelper
+  IMG_HOST = 'https://api.autoxss.com/shops/'.freeze
 
   attributes :id, :name, :phone, :city, :star, :category, :address, :duration,
     :status, :profile, :services, :sale_content, :province, :county, :position,
@@ -7,6 +8,6 @@ class ShopSerializer < ActiveModel::Serializer
 
 
   def img_url
-    image_path("https://autoxss.com/assets/shops/#{object.image}")
+    image_path("#{IMG_HOST}#{object.image}")
   end
 end

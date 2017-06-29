@@ -9,6 +9,10 @@ class Admin::CardsController < Admin::BaseController
       set_zhumadian_dadi_cards
       @actived_cards_count = zhumadian_dadi_actived_cards_count
       @inactived_cards_count = zhumadian_dadi_inactived_cards_count
+    elsif current_user.zhou?
+      set_zhou_cards
+      @actived_cards_count = zhou_actived_cards_count
+      @inactived_cards_count = zhou_inactived_cards_count
     elsif current_user.admin?
       set_cards
       @actived_cards_count = Card.actived.count
@@ -38,9 +42,11 @@ class Admin::CardsController < Admin::BaseController
     if current_user.dadi?
       Card.dadi
     elsif current_user.zhumadian_dadi?
-      Card.zhumadian.dadi
+      Card.zhumadian_dadi
     elsif params[:actived].present? and current_user.admin?
       params[:actived] ? Card.actived : Card.where(status: nil)
+    elsif params[:actived].present? and current_user.zhou?
+      Card.zhou
     elsif current_user.admin?
       Card.all
     end
@@ -76,6 +82,30 @@ class Admin::CardsController < Admin::BaseController
       @cards = @q.result.includes(:car).page(params[:page])
     end
     @cards_count = Card.dadi.count
+  end
+
+  def set_zhou_cards
+    if params[:actived].present?
+      if params[:actived] == 'true'
+        @q = Card.zhou.actived.ransack(params[:q])
+        @cards = @q.result.includes(:car).page(params[:page])
+      elsif params[:actived] == 'false'
+        @q = Card.zhou.where(status: nil).ransack(params[:q])
+        @cards = @q.result.includes(:car).page(params[:page])
+      end
+    else
+      @q = Card.zhou.ransack(params[:q])
+      @cards = @q.result.includes(:car).page(params[:page])
+    end
+    @cards_count = Card.zhou.count
+  end
+
+  def zhou_actived_cards_count
+    Card.zhou.actived.count
+  end
+
+  def zhou_inactived_cards_count
+    Card.zhou.count - Card.zhou.inactived.count
   end
 
   def dadi_actived_cards_count
