@@ -100,7 +100,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
       records = []
       shop.deals.order(id: :desc)
         .page(page)
-        .per_page(per_page).find_each do |deal|
+        .per_page(per_page).each do |deal|
           records << {
             licensed_id: deal&.car&.licensed_id,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
