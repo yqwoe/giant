@@ -93,13 +93,14 @@ class Api::V1::DealsController <  Api::V1::BaseController
 
     def get_shop_deals
       return nil unless current_user.shop_owner?
+      shop = current_user.shops.first
 
       page = params[:page] || 1
-      per_page = params[:per_page] || current_user.deals.count
+      per_page = params[:per_page] || shop.deals.count
       records = []
-      current_user.deals.order(id: :desc)
+      shop.deals.order(id: :desc)
         .page(page)
-        .per_page(per_page).each do |deal|
+        .per_page(per_page).find_each do |deal|
           records << {
             licensed_id: deal&.car&.licensed_id,
             date:  deal&.cleaned_at&.strftime('%Y-%m-%d'),
