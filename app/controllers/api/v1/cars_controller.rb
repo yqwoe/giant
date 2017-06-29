@@ -67,7 +67,8 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def too_often?
-      @car.deals.last30d.by_shop(@shop).count >= 8
+      # TODO: neet adjust times
+      @car.deals.last30d.by_shop(@shop).count >= 888888
     end
 
     def find_or_create_wash_record
