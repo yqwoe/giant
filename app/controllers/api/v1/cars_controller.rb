@@ -47,7 +47,6 @@ class Api::V1::CarsController < Api::V1::BaseController
     # render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if too_often?
     find_or_create_wash_record
-    push_to_shop_owner
   end
 
   private
@@ -68,34 +67,20 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def too_often?
       # TODO: neet adjust times
-      @car.deals.last30d.by_shop(@shop).count >= 888888
+      @car.deals.last30d.by_shop(@shop).select(:id).count >= 88888
     end
 
     def find_or_create_wash_record
-      #TODO: think about multi shops
+      @deal = Deal.new
+      @deal.car_id = @car.id
+      @deal.user_id = current_user.id
+      @deal.shop_id = @shop.id
+      @deal.cleaned_at = Time.zone.now
+      @deal.avatar = params[:avatar]
 
-      # shop = current_user.shops.first
-      # deals = @car.deals.today
-
-      # unless deals.empty?
-      #   # if deals.find_by_shop_id(shop)
-      #     # 假如是同一家店铺，则直接返回验证成功
-      #     render_success_washed and return if shop
-      #   # else
-      #     # 假如不是同一家店铺，则验证不通过
-      #     # TODO: 临时撤销此条限制
-      #     # render_faild_multi_wash and return
-      #   # end
-      # end
-
-      deal = @car.deals.build
-      deal.user_id = current_user.id
-      deal.shop_id = @shop.id
-      deal.cleaned_at = Time.zone.now
-      deal.avatar = params[:avatar]
-
-      if @car.save
+      if @deal.save
         render_success_washed
+        push_to_shop_owner
       else
         render_deals_create_error
       end
@@ -115,7 +100,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         info:   '系统异常！',
         success: false,
         message: '创建洗车记录失败',
-        error:   @car.error.message
+        error:   @car.errors.messages
       }
     end
 

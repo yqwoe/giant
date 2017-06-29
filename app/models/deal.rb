@@ -13,6 +13,7 @@ class Deal < ApplicationRecord
   scope :today,   -> { where 'created_at >= ?', Time.zone.now.beginning_of_day }
   scope :by_shop, -> (shop) { where 'shop_id = ?', shop.id }
 
+  validates_presence_of :car_id, :shop_id
   include Queriable
 
   def self.today_deals_count car_id
