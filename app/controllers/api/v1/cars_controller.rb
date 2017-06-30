@@ -62,7 +62,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def set_shop
-      @shop = Shop.find params[:shop_id]
+      @shop = Shop.where(id: params[:shop_id]).take
     end
 
     def too_often?
