@@ -189,8 +189,8 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def set_car
-      licensed_id = deal_params[:l]
-      @car = Car.find_by_licensed_id licensed_id
+      licensed_id = params[:licensed_id]
+      @car = current_user.cars.find_by_licensed_id licensed_id
     end
 
     def deal_params
