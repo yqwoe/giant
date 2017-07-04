@@ -2,7 +2,15 @@ class Api::V1::CarsController < Api::V1::BaseController
   before_action :set_car, only: [:wash]
   before_action :set_shop, only: [:wash]
 
-  TEST_USERS = %w(13652885999 136736693021 15838208401 18639970824)
+  TEST_USERS = %w(13652885999
+                  13673669302
+                  15838208401
+                  18639970824
+                  15518873587
+                  15010971864
+                  17710052758
+                  15225140834
+  )
 
   def create
     if car = Car.find_by(licensed_id: params[:licensed_id])
@@ -66,7 +74,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def too_often?
-      # TODO: neet adjust times
+      return false if TEST_USERS.include? current_user.mobile
       @car.deals.last30d.by_shop(@shop).select(:id).count >= 8
     end
 
