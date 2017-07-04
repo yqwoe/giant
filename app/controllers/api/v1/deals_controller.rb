@@ -22,7 +22,8 @@ class Api::V1::DealsController <  Api::V1::BaseController
     # save to redis
     # set expired by 5 minute
     # send to member app
-    render json: {success: false, message: "请提供设备ID"} and return unless params[:device_id].present?
+    render json: {success: false,
+      message: "请提供设备ID"} and return unless params[:device_id].present?
 
     rand_pin = ''
     loop do

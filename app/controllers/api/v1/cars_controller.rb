@@ -58,7 +58,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         body: "#{@car.licensed_id}验证成功！",
       }
 
-      JPushService.shop message
+      JpushService.shop message
     end
 
     def set_shop
@@ -67,7 +67,7 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def too_often?
       # TODO: neet adjust times
-      @car.deals.last30d.by_shop(@shop).select(:id).count >= 88888
+      @car.deals.last30d.by_shop(@shop).select(:id).count >= 8
     end
 
     def find_or_create_wash_record

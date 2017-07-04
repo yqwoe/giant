@@ -1,4 +1,4 @@
-class JPushService
+class JpushService
   class << self
     def shop message
       secrets = Rails.application.secrets
