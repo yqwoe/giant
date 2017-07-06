@@ -84,7 +84,8 @@ class Api::V1::CarsController < Api::V1::BaseController
       @deal.user_id = current_user.id
       @deal.shop_id = @shop.id
       @deal.cleaned_at = Time.zone.now
-      @deal.avatar = params[:avatar]
+      #TODO: enable avatar for deal
+      # @deal.avatar = params[:avatar]
 
       if @deal.save
         render_success_washed
