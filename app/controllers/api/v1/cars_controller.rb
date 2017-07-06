@@ -92,6 +92,8 @@ class Api::V1::CarsController < Api::V1::BaseController
       else
         render_deals_create_error
       end
+    rescue JPush::Utils::Exceptions::JPushResponseError
+      render_notify_error
     end
 
     def render_faild_multi_wash
@@ -109,6 +111,15 @@ class Api::V1::CarsController < Api::V1::BaseController
         success: false,
         message: @car.errors.messages,
         error:   @car.errors.messages
+      }
+    end
+
+    def render_notify_error
+      render json: {
+        code:   -1,
+        info:   '通知车行失败',
+        success: false,
+        message: '洗车记录添加成功，车行更新APP后可查看',
       }
     end
 
