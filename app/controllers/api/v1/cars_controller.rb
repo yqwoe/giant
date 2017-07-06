@@ -107,7 +107,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:   -1,
         info:   '系统异常！',
         success: false,
-        message: '创建洗车记录失败',
+        message: @car.errors.messages,
         error:   @car.errors.messages
       }
     end
