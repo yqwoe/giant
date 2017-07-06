@@ -54,7 +54,14 @@ class Api::V1::CarsController < Api::V1::BaseController
     render_not_in_service   and return unless car_in_service?
     # render_qrcode_not_valid and return unless verify_qrcode?
     # render_question_wash    and return if too_often?
-    find_or_create_wash_record
+    if find_or_create_wash_record
+      push_to_shop_owner
+      render_success_washed
+    else
+      render_deals_create_error
+    end
+  rescue => @error
+    render_notify_error
   end
 
   private
@@ -87,14 +94,7 @@ class Api::V1::CarsController < Api::V1::BaseController
       #TODO: enable avatar for deal
       # @deal.avatar = params[:avatar]
 
-      if @deal.save
-        render_success_washed
-        push_to_shop_owner
-      else
-        render_deals_create_error
-      end
-    rescue  => @error #JPush::Utils::Exceptions::JPushResponseError
-      render_notify_error
+      @deal.save
     end
 
     def render_faild_multi_wash
@@ -120,7 +120,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:   -1,
         info:   '通知车行失败',
         success: false,
-        message: @error.messages
+        message: @error.message
       }
     end
 

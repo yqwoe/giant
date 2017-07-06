@@ -86,7 +86,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     post_wash
 
     assert_response :success
-    assert json_response[:member]
+    assert_equal 0, json_response[:code]
   end
 
   test "too often washing can not verified" do

@@ -61,5 +61,5 @@ Rails.application.configure do
   end
 
   config.web_console.whiny_requests = false
+  config.read_encrypted_secrets = true
 end
-
