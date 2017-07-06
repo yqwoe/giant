@@ -92,7 +92,7 @@ class Api::V1::CarsController < Api::V1::BaseController
       else
         render_deals_create_error
       end
-    rescue JPush::Utils::Exceptions::JPushResponseError
+    rescue  => @error #JPush::Utils::Exceptions::JPushResponseError
       render_notify_error
     end
 
@@ -109,8 +109,8 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:   -1,
         info:   '系统异常！',
         success: false,
-        message: @car.errors.messages,
-        error:   @car.errors.messages
+        message: @deal.errors.messages,
+        error:   @deal.errors.messages
       }
     end
 
@@ -119,7 +119,7 @@ class Api::V1::CarsController < Api::V1::BaseController
         code:   -1,
         info:   '通知车行失败',
         success: false,
-        message: '洗车记录添加成功，车行更新APP后可查看',
+        message: @error.messages
       }
     end
 
