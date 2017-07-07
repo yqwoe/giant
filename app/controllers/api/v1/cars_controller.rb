@@ -117,10 +117,10 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def render_notify_error
       render json: {
-        code:   -1,
-        info:   '通知车行失败',
+        code:   0,
+        info:   '验证成功',
         success: false,
-        message: @error.message
+        message: '洗车记录已添加，已成功洗车。通知车行失败。 '
       }
     end
 
