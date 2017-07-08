@@ -70,6 +70,7 @@ Rails.application.routes.draw do
       end
       resources :cars, only: [:index, :create]
       match :wash, to: 'cars#wash', via: :post
+      match :fuzz, to: 'cars#fuzz', via: :post
       resources :car_brands, only: [:index, :show]
       resources :cards, only: [:create]
       resources :deals, only: [:index, :show, :create] do

@@ -1,5 +1,5 @@
 class Api::V1::CarsController < Api::V1::BaseController
-  before_action :set_car, only: [:wash]
+  before_action :set_car, only: [:wash, :fuzz]
   before_action :set_shop, only: [:wash]
 
   TEST_USERS = %w(13652885999
@@ -43,6 +43,10 @@ class Api::V1::CarsController < Api::V1::BaseController
     else
       render json: { success: false, message: '该用户没有绑定任何车辆！' }
     end
+  end
+
+  def fuzz
+    render json: @car&.licensed_id
   end
 
   def wash
@@ -212,7 +216,6 @@ class Api::V1::CarsController < Api::V1::BaseController
       licensed_id = params[:licensed_id]
 
       current_user.cars.each do |car|
-          byebug
         if DiffService.compare(car.licensed_id, licensed_id) >= 4
           @car = car
           break
