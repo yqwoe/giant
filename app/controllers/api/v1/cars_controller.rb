@@ -210,7 +210,16 @@ class Api::V1::CarsController < Api::V1::BaseController
 
     def set_car
       licensed_id = params[:licensed_id]
-      @car = current_user.cars.find_by_licensed_id licensed_id
+
+      current_user.cars.each do |car|
+          byebug
+        if DiffService.compare(car.licensed_id, licensed_id) >= 4
+          @car = car
+          break
+        end
+      end
+
+      @car
     end
 
     def deal_params
