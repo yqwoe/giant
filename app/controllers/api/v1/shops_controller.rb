@@ -21,12 +21,12 @@ class Api::V1::ShopsController < ApplicationController
 
     lat = params[:lat]
     lng = params[:lng]
-    @shops = Shop.within_radius(200, lat, lng)
+    @shops = Shop.within_radius(2000, lat, lng)
                  .order_by_distance(lat, lng)
 
-    if @shops.length < 1
-      @shops = Shop.order_by_distance(lat, lng).limit(2)
-    end
+    # if @shops.length < 1
+    #   @shops = Shop.order_by_distance(lat, lng).limit(2)
+    # end
 
     render json: @shops
   end
