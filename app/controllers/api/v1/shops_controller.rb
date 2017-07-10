@@ -24,9 +24,10 @@ class Api::V1::ShopsController < ApplicationController
     @shops = Shop.within_radius(200, lat, lng)
                  .order_by_distance(lat, lng)
 
-    # if @shops.length < 1
-    #  @shops = Shop.where("name LIKE '%辉辉%'")
-    #  end
+    if @shops.length < 1
+      @shops = Shop.order_by_distance(lat, lng).first
+    end
+
     render json: @shops
   end
 
