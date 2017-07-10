@@ -25,7 +25,7 @@ class Api::V1::ShopsController < ApplicationController
                  .order_by_distance(lat, lng)
 
     if @shops.length < 1
-      @shops = Shop.order_by_distance(lat, lng).first
+      @shops = Shop.order_by_distance(lat, lng).limit(2)
     end
 
     render json: @shops
