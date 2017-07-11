@@ -44,7 +44,7 @@ class Api::V1::PaymentsController <  ActionController::API
       } and return
     end
 
-    if convert_to_vip
+    if trade_success? && convert_to_vip
       @logger.info "#{@car.licensed_id} " \
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
@@ -90,6 +90,10 @@ class Api::V1::PaymentsController <  ActionController::API
 
     def trade_success
       params[:trade_status] == 'TRADE_SUCCESS' ? :success : :created
+    end
+
+    def trade_success?
+      trade_success == :success
     end
 
     def set_order
