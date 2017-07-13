@@ -10,7 +10,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
       records = get_shop_deals
     end
 
-    render json: { record: records }
+    render json: { record_num: records.length, record: records }
   end
 
   def show
@@ -99,7 +99,14 @@ class Api::V1::DealsController <  Api::V1::BaseController
       page = params[:page] || 1
       per_page = params[:per_page] || shop.deals.count
       records = []
-      shop.deals.order(id: :desc)
+      deals   = shop.deals.includes(:car)
+
+      if params[:start].present? && params[:end].present?
+        deals = deals.where("created_at >= ? and created_at <= ?",
+                       "#{params[:start]} 00:00", "#{params[:end]} 23:59")
+      end
+
+      deals.order(id: :desc)
         .page(page)
         .per_page(per_page).each do |deal|
           records << {
@@ -109,6 +116,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
             car_brand: deal&.car&.car_model&.car_brand&.cn_name
           }
         end
+
       records
     end
 
