@@ -47,6 +47,13 @@ Rails.application.routes.draw do
     resources :cars
   end
 
+
+  namespace :api, defaults: {format: :json} do
+    namespace :v2 do
+      match :wash, to: 'cars#wash', via: :post
+    end
+  end
+
   namespace :api, defaults: {format: :json} do
     namespace :v1 do
       get '/growing_enrolled', to: 'growings#enrolled'
