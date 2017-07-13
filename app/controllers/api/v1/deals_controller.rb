@@ -10,7 +10,7 @@ class Api::V1::DealsController <  Api::V1::BaseController
       records = get_shop_deals
     end
 
-    render json: { record_num: records.length, record: records }
+    render json: { record_num: @deals_count, record: records }
   end
 
   def show
@@ -105,6 +105,8 @@ class Api::V1::DealsController <  Api::V1::BaseController
         deals = deals.where("created_at >= ? and created_at <= ?",
                        "#{params[:start]} 00:00", "#{params[:end]} 23:59")
       end
+
+      @deals_count = deals.size
 
       deals.order(id: :desc)
         .page(page)
