@@ -39,6 +39,11 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # Default value for keep_releases is 5
 set :keep_releases, 20
 
-after :finished do
-  execute('QUEUE=* bundle exec rake resque:work RAILS_ENV=production > /dev/null 2 >&1 &');
+after :finished, :worker
+
+desc 'start resque worker'
+task :worker do
+  on roles(:all) do
+    execute('QUEUE=* bundle exec rake resque:work RAILS_ENV=production > /dev/null 2 >&1 &');
+  end
 end
