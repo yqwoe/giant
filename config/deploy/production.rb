@@ -40,7 +40,7 @@
 # --------------
 # server '120.27.29.69', roles: %w{web app db}
 # server 'autoxss.com', user: 'deploy', roles: %w{app db web}
-server 'autoxss.com', user: 'deploy', roles: %w{app db web}
+server '101.200.54.109', user: 'deploy', roles: %w{app db web}
 ask :master, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :ssh_options, {
