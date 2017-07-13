@@ -37,4 +37,8 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-set :keep_releases, 5
+set :keep_releases, 20
+
+after :finished do
+  execute('QUEUE=* bundle exec rake resque:work RAILS_ENV=production > /dev/null 2 >&1 &');
+end
