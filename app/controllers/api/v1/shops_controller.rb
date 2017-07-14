@@ -21,7 +21,7 @@ class Api::V1::ShopsController < ApplicationController
 
     lat = params[:lat]
     lng = params[:lng]
-    @shops = Shop.within_radius(800, lat, lng)
+    @shops = Shop.within_radius(500, lat, lng)
                  .order_by_distance(lat, lng)
 
     # if @shops.length < 1
