@@ -1,5 +1,5 @@
 class Deal < ApplicationRecord
-  mount_uploader :avatar, AvatarUploader
+  mount_uploader :avatar, CarUploader
 
   belongs_to :car
   belongs_to :shop

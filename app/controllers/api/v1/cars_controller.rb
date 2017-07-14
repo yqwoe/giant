@@ -58,14 +58,14 @@ class Api::V1::CarsController < Api::V1::BaseController
     render_not_in_service   and return unless car_in_service?
     # render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if too_often?
+
     if find_or_create_wash_record
-      push_to_shop_owner
       render_success_washed
     else
       render_deals_create_error
     end
-  rescue => @error
-    render_notify_error
+
+    push_to_shop_owner
   end
 
   private
@@ -74,10 +74,12 @@ class Api::V1::CarsController < Api::V1::BaseController
       message = {
         platform: 'all',
         audience: @shop.user.mobile,
-        body: "#{@car.licensed_id}验证成功！",
+        body:    "#{@car.licensed_id}验证成功！",
       }
 
       JpushService.shop message
+    rescue => @error
+      false
     end
 
     def set_shop
@@ -111,10 +113,15 @@ class Api::V1::CarsController < Api::V1::BaseController
     def render_deals_create_error
       render json: {
         code:   -1,
-        info:   '系统异常！',
+        info:   '创建交易记录失败',
         success: false,
-        message: @deal.errors.messages,
-        error:   @deal.errors.messages
+        message: begin
+                   if @deal.errors.messages.present?
+                     @deal.errors.messages
+                   else
+                     @error.message
+                   end
+                 end
       }
     end
 
