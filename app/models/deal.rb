@@ -14,6 +14,7 @@ class Deal < ApplicationRecord
   scope :by_shop, -> (shop) { where 'shop_id = ?', shop.id }
 
   validates_presence_of :car_id, :shop_id
+
   include Queriable
 
   def self.today_deals_count car_id
