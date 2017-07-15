@@ -25,27 +25,18 @@ class Api::V1::DealsController <  Api::V1::BaseController
     render json: {success: false,
       message: "请提供设备ID"} and return unless params[:device_id].present?
 
-    rand_pin = ''
-    loop do
-      rand_pin = SecureRandom.hex(12)
-      break if rand_pin
-    end
-
     ##
     # redis set
     # EX seconds -- Set the specified expire time, in seconds.
     # PX milliseconds -- Set the specified expire time, in milliseconds.
     # NX -- Only set the key if it does not already exist.
     # XX -- Only set the key if it already exist.
-    if $redis.set(params[:device_id], rand_pin, ex: 10, nx: true)
+    if $redis.exists(params[:device_id])
+      $redis.del(params[:device_id])
+    end
+
+    if $redis.set(params[:device_id], generate_rand_pin, ex: 10, nx: true)
       render json: {success: true, rand_pin: rand_pin, expired: 10}
-    else
-      will_expired = $redis.ttl(params[:device_id])
-      render json: {
-        success: false,
-        message: "请#{will_expired}秒后再试",
-        will_expired: will_expired
-      }
     end
   end
 
@@ -67,6 +58,16 @@ class Api::V1::DealsController <  Api::V1::BaseController
   end
 
   private
+    def generate_rand_pin
+      rand_pin = ''
+
+      loop do
+        rand_pin = SecureRandom.hex(12)
+        break if rand_pin
+      end
+
+      rand_pin
+    end
 
     def get_member_deals
       return nil unless current_user.member?
