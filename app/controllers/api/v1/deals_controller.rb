@@ -35,7 +35,9 @@ class Api::V1::DealsController <  Api::V1::BaseController
       $redis.del(params[:device_id])
     end
 
-    if $redis.set(params[:device_id], generate_rand_pin, ex: 10, nx: true)
+    rand_pin = generate_rand_pin
+
+    if $redis.set(params[:device_id], rand_pin, ex: 10, nx: true)
       render json: {success: true, rand_pin: rand_pin, expired: 10}
     end
   end
