@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619020614) do
+ActiveRecord::Schema.define(version: 20170717142221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,12 +114,11 @@ ActiveRecord::Schema.define(version: 20170619020614) do
     t.datetime "cleaned_at"
     t.integer "status"
     t.datetime "commented_at"
-
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.integer  "user_id"
-    t.integer  "comment_id"
-    t.string   "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.integer "comment_id"
+    t.string "avatar"
   end
 
   create_table "devices", id: :serial, force: :cascade do |t|
@@ -268,6 +267,7 @@ ActiveRecord::Schema.define(version: 20170619020614) do
     t.string "detail_images", array: true
     t.float "lat"
     t.float "lng"
+    t.string "short_name"
     t.index "ll_to_earth(((\"position\"[1])::real)::double precision, ((\"position\"[2])::real)::double precision)", name: "shops_earthdistance_ix", using: :gist
     t.index ["deleted_at"], name: "index_shops_on_deleted_at"
   end
