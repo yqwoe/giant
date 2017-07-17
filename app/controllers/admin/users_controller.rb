@@ -26,17 +26,21 @@ class Admin::UsersController < Admin::BaseController
                  .paginate(page: params[:page])
 
     if @users.empty?
-      cars = Car.where('licensed_id LIKE ?', "%#{params[:mobile]}%")
-      @users = User.where('id IN (?)', cars.pluck(:user_id).join(','))
+      cars = Car.where('licensed_id LIKE ?', "%#{params[:mobile].upcase}%")
+      @users = User.where('id IN (?)', cars.pluck(:user_id))
         .paginate(page: params[:page]) if cars.exists?
     end
 
-    if @users.empty?
-      shops = Shop.where('name LIKE ?', "%#{params[:mobile]}%")
-      @users = User.where('id IN (?)', shops.pluck(:user_id).join(','))
+    if @users.exists?
+      render template: 'admin/users/index' and return
     end
 
-    render template: 'admin/users/index'
+    if @users.empty?
+      @shops = Shop.where('name LIKE ?', "%#{params[:mobile]}%")
+        .paginate(page: params[:page])
+    end
+
+    render template: 'admin/shops/index' and return
   end
 
   def edit
