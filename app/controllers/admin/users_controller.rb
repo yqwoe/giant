@@ -31,6 +31,11 @@ class Admin::UsersController < Admin::BaseController
         .paginate(page: params[:page]) if cars.exists?
     end
 
+    if @users.empty?
+      shops = Shop.where('name LIKE ?', "%#{params[:mobile]}%")
+      @users = User.where('id IN (?)', shops.pluck(:user_id).join(','))
+    end
+
     render template: 'admin/users/index'
   end
 
