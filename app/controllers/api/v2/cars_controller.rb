@@ -60,6 +60,10 @@ class Api::V2::CarsController < Api::V1::BaseController
     render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if     too_often?
 
+    if @car.deals.last4h.count > 0
+      render_already_recorded and return
+    end
+
     if find_or_create_wash_record
       render_success_washed
     else
@@ -102,7 +106,17 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     def render_already_recorded
-      render_success_washed
+      render json: {
+        code:             0,
+        info:             '验证成功！',
+        success:          @car.user.member?,
+        message:          '车行记录已添加，请勿重复验证',
+        car_brand:        @car&.car_model&.car_brand&.cn_name,
+        car_model:        @car&.car_model&.cn_name,
+        valid_date:       @car.valid_at,
+        licensed_id:      @car.licensed_id,
+        authenticated_at: @car.deals.last.created_at.strftime('%Y-%m-%d %H:%M')
+      }
     end
 
     def render_deals_create_error

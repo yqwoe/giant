@@ -13,6 +13,7 @@ class Deal < ApplicationRecord
   scope :last3d,  -> { where 'created_at >= ?', 3.days.ago.beginning_of_day }
   scope :last30d, -> { where 'created_at >= ?', 30.days.ago.beginning_of_day }
   scope :today,   -> { where 'created_at >= ?', Time.zone.now.beginning_of_day }
+  scope :last4h,  -> { where 'created_at >= ?', 4.hours.ago }
   scope :by_shop, -> (shop) { where 'shop_id = ?', shop.id }
 
   validates_presence_of :car_id, :shop_id
