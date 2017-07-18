@@ -23,6 +23,25 @@ class Admin::DealsController < Admin::BaseController
 
   end
 
+  def show
+    if params[:car_id].present?
+      car = Car.find params[:car_id]
+      @deals = car.deals
+                  .includes(:shop)
+                  .order(created_at: :desc).page(params[:page])
+    elsif params[:shop_id].present?
+      shop = Shop.whith_deleted.find params[:shop_id]
+      @deals = shop.deals
+                   .includes(car: [:user])
+                   .order(created_at: :desc)
+                   .page(params[:page])
+    end
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
   private
     #TODO: import cancancan gem
     def authenticate_admin?

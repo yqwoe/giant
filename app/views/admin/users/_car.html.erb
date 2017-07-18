@@ -16,7 +16,7 @@
     />
   </td>
   <td>
-    <%= car.deals.count %>
+    <%= link_to car.deals.count, admin_car_deal_path(car) %>
   </td>
   <td>
     <button

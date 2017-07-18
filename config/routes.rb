@@ -44,7 +44,9 @@ Rails.application.routes.draw do
         post 'search'
       end
     end
-    resources :cars
+    resources :cars do
+      resources :deals
+    end
   end
 
 

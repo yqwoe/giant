@@ -9,6 +9,10 @@ class Admin::ShopsController < Admin::BaseController
       Shop.with_deleted.order(created_at: :desc).paginate(page: params[:page])
   end
 
+  def show
+    @shop = Shop.find params[:id]
+  end
+
   def active
     @shop.restore
     @shop.actived!
