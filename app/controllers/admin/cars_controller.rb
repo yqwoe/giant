@@ -1,5 +1,6 @@
 class Admin::CarsController < Admin::BaseController
   before_action :set_car, only: [:show, :update, :destroy]
+
   def update
     @car.licensed_id = car_params[:licensed_id]
     @car.valid_at = car_params[:valid_at]

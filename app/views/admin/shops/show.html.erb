@@ -14,18 +14,34 @@
       <div class="row">
         <table class='table text-left'>
             <tr>
+              <th>店名</th>
               <th>城市</th>
               <th>地址</th>
               <th>洗车次数</th>
-              <th>更新时间</th>
+              <th>创建时间</th>
               <th>操作</th>
             </tr>
           <tbody>
-             <%= render @shop if @shop%>
+             <%= render @shop%>
+          </tbody>
+        </table>
+      </div>
+      <div class="row">
+        <table class='table text-left'>
+            <tr>
+              <th>手机</th>
+              <th>车牌号</th>
+              <th>洗车时间</th>
+              <th>操作</th>
+            </tr>
+          <tbody>
+            <% @deals.each do |deal| %>
+              <%= render partial: 'shop_deal', locals: {deal: deal}%>
+            <% end %>
           </tbody>
         </table>
       </div>
     </div>
   </div>
 </div>
-<%= render partial: "shared/paginate", locals: {collection: @shops}  %>
+<%= render partial: "shared/paginate", locals: {collection: @deals}  %>

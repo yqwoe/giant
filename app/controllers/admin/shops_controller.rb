@@ -11,6 +11,10 @@ class Admin::ShopsController < Admin::BaseController
 
   def show
     @shop = Shop.find params[:id]
+    @deals = @shop.deals
+                  .includes(car: [:user])
+                  .order(created_at: :desc)
+                  .paginate(page: params[:page])
   end
 
   def active

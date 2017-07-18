@@ -42,6 +42,15 @@ class Admin::DealsController < Admin::BaseController
     end
   end
 
+  def destroy
+    @deal = Deal.find params[:id]
+    @deal.destroy
+
+    respond_to do |format|
+      format.js
+    end
+  end
+
   private
     #TODO: import cancancan gem
     def authenticate_admin?

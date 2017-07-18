@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170717142221) do
+ActiveRecord::Schema.define(version: 20170718074510) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -119,6 +119,8 @@ ActiveRecord::Schema.define(version: 20170717142221) do
     t.integer "user_id"
     t.integer "comment_id"
     t.string "avatar"
+    t.datetime "deleted_at"
+    t.index ["deleted_at"], name: "index_deals_on_deleted_at"
   end
 
   create_table "devices", id: :serial, force: :cascade do |t|
