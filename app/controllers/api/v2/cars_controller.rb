@@ -92,8 +92,7 @@ class Api::V2::CarsController < Api::V1::BaseController
       @deal.car_id  = @car.id
       @deal.shop_id = @shop.id
       @deal.cleaned_at = Time.zone.now
-      #TODO: enable avatar for deal
-      # @deal.avatar = params[:avatar]
+      @deal.avatar = params[:avatar]
 
       @deal.save
     end
