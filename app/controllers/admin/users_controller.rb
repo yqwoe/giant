@@ -36,8 +36,9 @@ class Admin::UsersController < Admin::BaseController
     end
 
     if @users.empty?
-      @shops = Shop.where('name LIKE ?', "%#{params[:mobile]}%")
-        .paginate(page: params[:page])
+      @shops = Shop.with_deleted
+                   .where('name LIKE ?', "%#{params[:mobile]}%")
+                   .paginate(page: params[:page])
     end
 
     render template: 'admin/shops/index' and return
