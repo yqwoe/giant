@@ -47,7 +47,7 @@ class Api::V1::VersionsController < ApplicationController
                             2.扫码验证启用
                             3.部分细节优化
                           ),
-        download_url: 'https://autoxss.com/system/xishuashua_shop_2.5.0.apk'
+        download_url: 'https://autoxss.com/system/xishuashua_shop_2.4.5.apk'
       }
     end
 end
