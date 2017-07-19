@@ -24,7 +24,7 @@ class Api::V1::VersionsController < ApplicationController
     def android_car_owner_version
       render json: {
         currentVersion: '2.4.0',
-        packageSize: '35M',
+        packageSize: '43M',
         updateContent: ["1. 更新了用户验证方式，提升用户体验。"],
         download_url: 'https://autoxss.com/system/xishuashua_2.4.0.apk'
       }
@@ -40,10 +40,14 @@ class Api::V1::VersionsController < ApplicationController
 
     def android_shop_version
       render json: {
-        currentVersion: '2.4.0',
-        packageSize: '15M',
-        updateContent: ["1. 增加用户验证功能,车行无需手动验证。"],
-        download_url: 'https://autoxss.com/system/xishuashua_shop_2.4.0.apk'
+        currentVersion: '2.4.5',
+        packageSize: '13M',
+        updateContent: %w(
+                            1.洗车记录增加时间选择功能
+                            2.扫码验证启用
+                            3.部分细节优化
+                          ),
+        download_url: 'https://autoxss.com/system/xishuashua_shop_2.5.0.apk'
       }
     end
 end
