@@ -40,7 +40,7 @@ class Api::V1::VersionsController < ApplicationController
 
     def android_shop_version
       render json: {
-        currentVersion: '2.4.0',
+        currentVersion: '2.4.5',
         packageSize: '13M',
         updateContent: %w(
                             1.洗车记录增加时间选择功能
