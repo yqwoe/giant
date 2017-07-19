@@ -63,7 +63,7 @@ gem "paranoia", "~> 2.2"
 gem 'byebug', platform: :mri
 gem 'resque', require: 'resque/server'
 gem 'activerecord-postgres-earthdistance'
-gem 'ruby-pinyin'
+gem 'carrierwave-aliyun'
 
 group :development, :test do
 
