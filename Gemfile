@@ -63,6 +63,7 @@ gem "paranoia", "~> 2.2"
 gem 'byebug', platform: :mri
 gem 'resque', require: 'resque/server'
 gem 'activerecord-postgres-earthdistance'
+gem 'aliyun-sdk', github: 'aliyun/aliyun-oss-ruby-sdk'
 
 group :development, :test do
 
