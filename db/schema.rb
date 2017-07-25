@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718074510) do
+ActiveRecord::Schema.define(version: 20170725021918) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -230,6 +230,13 @@ ActiveRecord::Schema.define(version: 20170718074510) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "plates", force: :cascade do |t|
+    t.string "licensed_id"
+    t.string "avatar"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "shop_categories", id: :serial, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -328,6 +335,16 @@ ActiveRecord::Schema.define(version: 20170718074510) do
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["mobile"], name: "index_users_on_mobile", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "number"
+    t.string "download_url"
+    t.string "contents", array: true
+    t.integer "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.float "package_size"
   end
 
   create_table "violations", id: :serial, force: :cascade do |t|
