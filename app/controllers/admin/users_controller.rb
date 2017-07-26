@@ -55,6 +55,8 @@ class Admin::UsersController < Admin::BaseController
       @user.member!
     when 'registed'
       @user.registed!
+    when 'block'
+      @user.blacklist!
     end
 
     @user.save
