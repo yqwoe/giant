@@ -86,7 +86,7 @@ class User < ApplicationRecord
   end
 
   def reset_member
-    true if cars.nil?
+    true if cars.nil? && blacklist?
 
     result = false
     cars.each do |car|

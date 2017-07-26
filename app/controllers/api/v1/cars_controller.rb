@@ -50,6 +50,7 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def wash
+    render_user_is_blocked           and return unless current_user.blacklist?
     render_car_not_exist    and return unless @car
     render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
 
@@ -101,6 +102,16 @@ class Api::V1::CarsController < Api::V1::BaseController
 
       @deal.save
     end
+
+    def render_user_is_blocked
+      render json: {
+        code: -1,
+        info: "账户暂停使用",
+        success: false,
+        message: '账户异常，暂停使用，如有疑问可与客服联系！'
+      }
+    end
+
 
     def render_faild_multi_wash
       render_deals_create_error
