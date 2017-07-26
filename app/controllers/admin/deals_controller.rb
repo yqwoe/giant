@@ -51,6 +51,21 @@ class Admin::DealsController < Admin::BaseController
     end
   end
 
+  def create
+    car = Car.find_by licensed_id: params[:licensed_id].strip
+    @deal = Deal.new
+    @deal.shop_id = params[:shop_id]
+    @deal.car_id = car.id
+
+    if @deal.save
+      respond_to do |format|
+        format.js {render json: @car}
+      end
+    else
+      render json: @deal.errors.messages 
+    end
+  end
+
   private
     #TODO: import cancancan gem
     def authenticate_admin?

@@ -50,7 +50,7 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def wash
-    render_user_is_blocked           and return unless current_user.blacklist?
+    render_user_is_blocked           and return if current_user.blacklist?
     render_car_not_exist    and return unless @car
     render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
 

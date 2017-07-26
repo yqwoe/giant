@@ -27,6 +27,12 @@
         </table>
       </div>
       <div class="row">
+        <%= form_with url: admin_shop_deals_path(@shop) do |f| %>
+          <%= f.text_field :licensed_id %>
+          <%= f.submit '创建洗车记录' %>
+        <% end %>
+      </div>
+      <div class="row">
         <table class='table text-left'>
             <tr>
               <th>手机</th>
