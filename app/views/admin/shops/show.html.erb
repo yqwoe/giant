@@ -27,11 +27,13 @@
         </table>
       </div>
       <div class="row">
-        <%= form_with url: admin_shop_deals_path(@shop) do |f| %>
-          <%= f.text_field :licensed_id %>
-          <%= f.submit '创建洗车记录' %>
+        <%= form_with url: admin_shop_deals_path(@shop), class: 'form-inline' do |f| %>
+          <%= f.label '车牌号:' %>
+          <%= f.text_field :licensed_id, style: "color: black", class: 'form-control' %>
+          <%= f.submit '创建洗车记录', class: 'btn btn-success' %>
         <% end %>
       </div>
+      <br><br>
       <div class="row">
         <table class='table text-left'>
             <tr>
