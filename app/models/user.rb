@@ -44,7 +44,10 @@ class User < ApplicationRecord
       业务员
       车行老板
       普通管理员
-      系统管理员)[roles_before_type_cast]
+      系统管理员
+      大地
+      高危用户
+      黑名单)[roles_before_type_cast]
   end
 
   def self.find_for_database_authentication(warden_conditions)
