@@ -52,7 +52,7 @@ class Admin::DealsController < Admin::BaseController
   end
 
   def create
-    car = Car.find_by licensed_id: params[:licensed_id].strip
+    car = Car.find_by licensed_id: params[:car_licensed_id].strip.upcase
 
     unless car
       render js: "sweetAlert('车牌号不存在!');" and return
