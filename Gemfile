@@ -64,6 +64,8 @@ gem 'byebug', platform: :mri
 gem 'resque', require: 'resque/server'
 gem 'activerecord-postgres-earthdistance'
 gem 'aliyun-sdk', github: 'aliyun/aliyun-oss-ruby-sdk'
+gem 'rails4-autocomplete'
+gem 'jquery-ui-rails'
 
 group :development, :test do
 

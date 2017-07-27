@@ -11,12 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  */
-@import "bootstrap-sprockets";
 @import "bootstrap";
+@import "bootstrap-sprockets";
 @import "phones";
 @import "sweet-alert/sweet-alert";
 @import "dashboard";
 @import "bootstrap-datepicker3";
+@import "jquery-ui";
 
 .white {
   text-color: white;
@@ -30,4 +31,13 @@ a {
   &:hover {
     color: pink;
   }
+}
+
+// autocompelete
+#ui-id-1 {
+  width: 20px;
+  color: white;
+  background: #31b0d5;
+  list-style-type: none;
+  text-align: left;
 }

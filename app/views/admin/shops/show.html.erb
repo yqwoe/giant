@@ -29,7 +29,7 @@
       <div class="row">
         <%= form_with url: admin_shop_deals_path(@shop), class: 'form-inline' do |f| %>
           <%= f.label '车牌号:' %>
-          <%= f.text_field :licensed_id, style: "color: black", class: 'form-control' %>
+          <%= f.autocomplete_field :car_licensed_id, autocomplete_car_licensed_id_admin_shops_path, style: "color: black", class: 'form-control' %>
           <%= f.label '备注:' %>
           <%= f.text_field :memo, style: "color: black", class: 'form-control' %>
           <%= f.submit '创建洗车记录', class: 'btn btn-success' %>

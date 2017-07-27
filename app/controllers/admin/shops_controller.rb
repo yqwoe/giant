@@ -1,4 +1,6 @@
 class Admin::ShopsController < Admin::BaseController
+  autocomplete :car, :licensed_id, full: true
+
   before_action :authenticate_admin?
 
   before_action :set_shop, only: [

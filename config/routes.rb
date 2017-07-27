@@ -28,6 +28,7 @@ Rails.application.routes.draw do
     end
 
     resources :shops do
+      get :autocomplete_car_licensed_id, on: :collection
       collection do
         patch 'inactive'
         patch 'active'
