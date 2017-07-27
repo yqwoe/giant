@@ -30,18 +30,22 @@
         <%= form_with url: admin_shop_deals_path(@shop), class: 'form-inline' do |f| %>
           <%= f.label '车牌号:' %>
           <%= f.text_field :licensed_id, style: "color: black", class: 'form-control' %>
+          <%= f.label '备注:' %>
+          <%= f.text_field :memo, style: "color: black", class: 'form-control' %>
           <%= f.submit '创建洗车记录', class: 'btn btn-success' %>
         <% end %>
       </div>
       <br><br>
       <div class="row">
-        <table class='table text-left'>
+        <table id="deals" class='table text-left'>
+          <thead>
             <tr>
               <th>手机</th>
               <th>车牌号</th>
               <th>洗车时间</th>
               <th>操作</th>
             </tr>
+          </thead>
           <tbody>
             <% @deals.each do |deal| %>
               <%= render partial: 'shop_deal', locals: {deal: deal}%>

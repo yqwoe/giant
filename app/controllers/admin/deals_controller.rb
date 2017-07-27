@@ -53,16 +53,30 @@ class Admin::DealsController < Admin::BaseController
 
   def create
     car = Car.find_by licensed_id: params[:licensed_id].strip
+
+    unless car
+      render js: "sweetAlert('车牌号不存在!');" and return
+    end
+
+    if car.user.blacklist?
+      render js: "sweetAlert('黑名单用户，如需添加，请先重置为会员');" and return
+    end
+
+    unless car.valid_at && car.valid_at >= Time.zone.now.beginning_of_day
+      render js: "sweetAlert('该车辆为非会员车辆！');" and return
+    end
+
     @deal = Deal.new
     @deal.shop_id = params[:shop_id]
+    @deal.memo    = params[:memo]
     @deal.car_id = car.id
 
     if @deal.save
       respond_to do |format|
-        format.js {render json: @car}
+        format.js
       end
     else
-      render json: @deal.errors.messages 
+      render json: @deal.errors.messages
     end
   end
 

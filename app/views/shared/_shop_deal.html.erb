@@ -1,0 +1,17 @@
+<tr id='<%= "deal-#{deal.id}" %>'>
+  <td><%= deal&.car&.user&.mobile %></td>
+  <td><%= link_to deal.car&.licensed_id, admin_car_path(deal.car) if deal.car  %></td>
+  <td><%= deal.created_at.strftime('%Y-%m-%d %H:%M') %></td>
+  <td>
+    <%= button_to '删除', { action: 'destroy', controller: 'admin/deals', id: deal.id },
+      class: "delete btn btn-sm btn-danger",
+      id: "delete-#{deal.id}",
+      method: :delete, data: { :'sweet-alert-confirm' => "确定删除此条记录吗？",
+                               :"confirm-button-text" => '我确定',
+                               :"cancel-button-text"  => '算了',
+                               :'sweet-alert-type'    => 'null',
+                               :'image-url' => image_path("delete.gif")
+    }, remote: true
+    %>
+  </td>
+</tr>
