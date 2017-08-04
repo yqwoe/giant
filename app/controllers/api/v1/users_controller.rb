@@ -8,7 +8,7 @@ class Api::V1::UsersController <  ActionController::API
 
     render json: {
       success: false,
-      message: '账户停用，如有疑问请与客服联系'
+      message: '账户停用，如有疑问请与客服联系',
     } and return if user.blacklist?
 
     render(json: UserSerializer.new(user).to_json)

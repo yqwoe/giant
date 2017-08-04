@@ -5,9 +5,16 @@
 # - *name*       [String] 用户姓名
 # - *avatar_url* [String] 头像 URL
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :mobile, :roles #, :avatar_url
+  attributes :id, :name, :email, :mobile, :roles, :success, :message #, :avatar_url
 
  # def avatar_url
  #   object.avatar.url
  #  end
+  def success
+    object.member?
+  end
+
+  def message
+    success ? '会员' : '非会员'
+  end
 end
