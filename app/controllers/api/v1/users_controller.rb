@@ -2,11 +2,16 @@ class Api::V1::UsersController <  ActionController::API
 
   def show
     user = User.find_by_authentication_token(params[:user_token])
-    if user
-      render(json: UserSerializer.new(user).to_json) and return
-    else
-      render json: { success: false, message: '该用户不存在' }
-    end
+    render json: { success: false,
+                   message: '该用户不存在'
+    } and return unless user
+
+    render json: {
+      success: false,
+      message: '账户停用，如有疑问请与客服联系'
+    } and return if user.blacklist?
+
+    render(json: UserSerializer.new(user).to_json)
   end
 
   def new
