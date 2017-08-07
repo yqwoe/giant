@@ -158,7 +158,7 @@ class Api::V2::CarsController < Api::V1::BaseController
         info:    '车行账户异常',
         success: false,
         # member: false,
-        message: '账户已停用或暂未启用'
+        message: '车行已下线或暂停合作'
       }
     end
 
@@ -194,7 +194,7 @@ class Api::V2::CarsController < Api::V1::BaseController
         code:    -1,
         info:    '非会员用户',
         success: false,
-        message: '您的车辆不是会员',
+        message: '用户为非会员激活车辆',
         member: false}
     end
 
