@@ -70,6 +70,7 @@ class Admin::DealsController < Admin::BaseController
     @deal.shop_id = params[:shop_id]
     @deal.memo    = params[:memo]
     @deal.car_id = car.id
+    @deal.cleaned_at = Time.zone.now
 
     if @deal.save
       respond_to do |format|
