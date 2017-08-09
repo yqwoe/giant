@@ -107,7 +107,7 @@ class Api::V2::CarsController < Api::V1::BaseController
 
     def render_already_recorded
       render json: {
-        code:             0,
+        code:             1,
         info:             '验证成功！',
         success:          @car.user.member?,
         message:          '车行记录已添加，请勿重复验证',
