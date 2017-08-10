@@ -37,7 +37,8 @@ class Api::V1::DealsController <  Api::V1::BaseController
 
     rand_pin = generate_rand_pin
 
-    if $redis.set(params[:device_id], rand_pin, ex: 30, nx: true)
+    # keep a little more time for shops end
+    if $redis.set(params[:device_id], rand_pin, ex: 35, nx: true)
       render json: {success: true,
                     rand_pin: rand_pin,
                     expired: 30,
