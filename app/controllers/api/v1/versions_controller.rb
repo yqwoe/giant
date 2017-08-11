@@ -25,7 +25,7 @@ class Api::V1::VersionsController < ApplicationController
     def render_version
       render json: {
         currentVersion: @version.number,
-        packageSize:    @version.package_size,
+        packageSize:    "#{@version.package_size.to_s}M",
         updateContent:  @version.contents,
         download_url:   @version.download_url
       }
