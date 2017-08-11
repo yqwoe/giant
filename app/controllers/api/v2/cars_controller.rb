@@ -92,6 +92,9 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     def find_or_create_wash_record
+      # make sure user upload picture
+      return false unless params[:avatar].present?
+
       @deal = Deal.new
       @deal.car_id  = @car.id
       @deal.shop_id = @shop.id
