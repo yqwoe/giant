@@ -1,9 +1,9 @@
 class Api::V1::VersionsController < ApplicationController
-  before_action :set_shop, only: [:show]
+  before_action :set_version, only: [:show]
   respond_to :json
 
   def show
-    send "#{os}_#{kind}_version"
+    render_version
   end
 
   def use_new_qrcode
@@ -12,7 +12,7 @@ class Api::V1::VersionsController < ApplicationController
 
   private
     def set_version
-      @version = case params[:kind]
+      @version = case params[:kind].to_sym
                  when :shop
                    Version.shop.last
                  when :car_owner

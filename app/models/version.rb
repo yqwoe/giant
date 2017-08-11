@@ -1,5 +1,5 @@
 class Version < ApplicationRecord
-  validates_uniqueness_of :number, :package_size, :type, :contents
+  validates_presence_of :number, :package_size, :kind, :contents
 
-  enum type: [:shop, :car_owner]
+  enum kind: [:shop, :car_owner]
 end
