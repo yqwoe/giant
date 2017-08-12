@@ -71,6 +71,7 @@ class Admin::DealsController < Admin::BaseController
     @deal.memo    = params[:memo]
     @deal.car_id = car.id
     @deal.cleaned_at = Time.zone.now
+    @deal.avatar = File.new(File.expand_path('app/assets/images/logo.png'))
 
     if @deal.save
       respond_to do |format|
