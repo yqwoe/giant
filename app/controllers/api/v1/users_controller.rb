@@ -1,6 +1,11 @@
 class Api::V1::UsersController <  ActionController::API
 
   def show
+    render json: {
+      success: false,
+      message: "Token为空，请退出后重新登陆"
+    } and return unless params[:user_token].present?
+
     user = User.find_by_authentication_token(params[:user_token])
     render json: { success: false,
                    message: '该用户不存在'
