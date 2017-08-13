@@ -57,8 +57,8 @@ class Api::V2::CarsController < Api::V1::BaseController
 
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
-    render_qrcode_not_valid and return unless verify_qrcode?
     render_question_wash    and return if     too_often?
+    render_qrcode_not_valid and return unless verify_qrcode?
 
     if @car.deals.last4h.count > 0
       render_already_recorded and return
