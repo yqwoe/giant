@@ -105,6 +105,18 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     assert_not json_response[:member]
   end
 
+  test "users limited times wash" do
+    @account = create(:account, user: @user)
+
+    post api_v2_wash_url, params: {
+      user_token: @shop_owner.authentication_token,
+      qrcode_info: "l=#{@car.licensed_id}"
+    }
+
+    assert_response :success
+    assert json_response[:success]
+  end
+
   private
 
   def post_wash

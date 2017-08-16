@@ -90,7 +90,7 @@ class User < ApplicationRecord
   end
 
   def reset_member
-    true if cars.nil? && blacklist?
+    return true if cars.nil? || blacklist? || shop_owner?
 
     result = false
     cars.each do |car|
@@ -100,6 +100,8 @@ class User < ApplicationRecord
                    false
                   end
     end
+
+    result ||= (account.valid_to > Time.zone.now.beginning_of_day)
 
     result ? member! : registed!
   end

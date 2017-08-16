@@ -13,6 +13,7 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
   setup do
     @user = create(:user)
     @card = create(:card)
+    @times_card = create(:card, cid: 'TIMES12_0001')
   end
 
   test "valid card can active car" do
@@ -21,25 +22,11 @@ class Api::V1::CardsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert json_response[:success]
 
-    @growing_user = create(:growing_user)
-    @growing_card = create(:card, growing_user_id: @growing_user.id, range: -3)
-    @growing_card.update_attributes(pin: "G#{@growing_card.pin}")
-
-    post_cards @growing_card.pin
+    post_cards @times_card.pin
     assert_response :success
     assert json_response[:success]
-    assert_equal 33.days.from_now.strftime('%Y-%m-%d'), json_response[:valid]
-  end
-
-  test "growing user could only actived once" do
-    @car = create(:car, user_id: @user.id)
-    @growing_user = create(:growing_user, status: :enrolled)
-    @growing_card = create(:card, growing_user_id: @growing_user.id)
-    @growing_card.update_attributes(pin: "G#{@growing_card.pin}")
-
-    post_cards @growing_card.pin
-    assert_response :success
-    assert_not json_response[:success]
+    assert_equal 1.month.from_now.strftime('%Y-%m-%d'), json_response[:valid]
+    assert_equal 1, json_response[:left_times]
   end
 
   test "active with invalid card pin" do

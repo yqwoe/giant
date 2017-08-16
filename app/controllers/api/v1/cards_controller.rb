@@ -35,7 +35,13 @@ class Api::V1::CardsController < Api::V1::BaseController
         @card.save
       end
 
-      render json: { success: true, valid: 1.year.from_now } and return
+      account.reload
+
+      render json: {
+        success: true,
+        valid:      account.valid_to,
+        left_times: account.left_times
+      } and return
     end
 
     ##

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170815091629) do
+ActiveRecord::Schema.define(version: 20170816025301) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20170815091629) do
     t.integer "range"
     t.integer "channel"
     t.integer "growing_user_id"
+    t.integer "user_id"
   end
 
   create_table "cars", id: :serial, force: :cascade do |t|

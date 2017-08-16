@@ -51,11 +51,15 @@ class Api::V2::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist             and return unless @car
+    @car.user.reset_member
 
+    #
+    # 先验证单次洗车
+    #
     user = @car.user
-    account = user.account
+    uccount = user.account
     if account && account.valid_to >= Time.zone.now
-      deal_count = user.deals.by_month(:created_at, Time.zone.now.month).count
+      deal_count = user.deals.this_month.count
       if deal_count > 0
         render_faild_multi_wash and return
       else
@@ -65,8 +69,6 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
-
-    @car.user.reset_member
 
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?

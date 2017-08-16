@@ -3,10 +3,8 @@ class Api::V1::CarsController < Api::V1::BaseController
   before_action :set_shop, only: [:wash]
 
   TEST_USERS = %w(13652885999
-                  13673669302
                   15838208401
                   18639970824
-                  15518873587
                   15010971864
                   17710052758
                   15225140834
@@ -20,8 +18,13 @@ class Api::V1::CarsController < Api::V1::BaseController
       } and return
     end
 
-    car_model = CarBrand.find(params[:car_brand_id]).car_models.find_by_cn_name(params[:car_model])
-    render json: {success: false, message: '无效车型'} and return unless car_model
+    car_model = CarBrand.find(params[:car_brand_id])
+                        .car_models
+                        .find_by_cn_name(params[:car_model])
+    render json: {
+      success: false,
+      message: '无效车型'
+    } and return unless car_model
 
     car = current_user.cars.build(car_model_id: car_model.id,
                             licensed_id: params[:licensed_id].upcase)

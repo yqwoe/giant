@@ -17,6 +17,7 @@ class Deal < ApplicationRecord
   scope :today,   -> { where 'created_at >= ?', Time.zone.now.beginning_of_day }
   scope :last4h,  -> { where 'created_at >= ?', 4.hours.ago }
   scope :by_shop, -> (shop) { where 'shop_id = ?', shop.id }
+  scope :this_month, -> { where 'created_at >= ?',Time.zone.now.beginning_of_month}
 
   validates_presence_of :car_id, :shop_id
 
