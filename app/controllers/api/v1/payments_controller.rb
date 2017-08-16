@@ -48,7 +48,9 @@ class Api::V1::PaymentsController <  ActionController::API
       @logger.info "#{@car.licensed_id} " \
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
-      ChinaSMS.use :yunpian, password: '173d6d0d1d96a59d7a80530ee6c862c7' #ENV['YUNPIAN_API']
+      ChinaSMS.use :yunpian,
+        password: Rails.application.secrets.yunpian_key_secret
+
       ChinaSMS.to @car.user.mobile, {
         licensed_id: @car.licensed_id,
         kind: '年',
