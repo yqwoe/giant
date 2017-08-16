@@ -10,12 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170811033436) do
+ActiveRecord::Schema.define(version: 20170815091629) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "cube"
   enable_extension "earthdistance"
+
+  create_table "accounts", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "deposit_by_times"
+    t.decimal "deposit_cash"
+    t.decimal "available_cash"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "valid_from"
+    t.date "valid_to"
+  end
 
   create_table "ads", id: :serial, force: :cascade do |t|
     t.string "title"

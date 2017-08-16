@@ -78,7 +78,8 @@ class Api::V1::PaymentsController <  ActionController::API
 
   private
     def convert_to_vip
-      @car.valid_at      = @car.valid_at ? @car.valid_at + 1.year : 1.year.from_now
+      # FIXME: 临时取消，待问题修复后再
+      # @car.valid_at  = @car.valid_at ? @car.valid_at + 1.year : 1.year.from_now
       @order.finished_at = Time.zone.now
       @order.status      = trade_success
       @order.payment_gateway = :alipay

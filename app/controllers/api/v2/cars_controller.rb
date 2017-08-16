@@ -51,6 +51,19 @@ class Api::V2::CarsController < Api::V1::BaseController
 
   def wash
     render_car_not_exist             and return unless @car
+
+    user = @car.user
+    account = user.account
+    if account && account.valid_to >= Time.zone.now
+      deal_count = user.deals.by_month(:created_at, Time.zone.now.month).count
+      if deal_count > 0
+        render_faild_multi_wash and return
+      else
+        find_or_create_wash_record
+        render_success_washed and return
+      end
+    end
+
     render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
 
     @car.user.reset_member
