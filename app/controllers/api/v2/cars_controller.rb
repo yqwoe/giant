@@ -57,7 +57,7 @@ class Api::V2::CarsController < Api::V1::BaseController
     # 先验证单次洗车
     #
     user = @car.user
-    uccount = user.account
+    account = user.account
     if account && account.valid_to >= Time.zone.now
       deal_count = user.deals.this_month.count
       if deal_count > 0

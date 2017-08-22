@@ -29,7 +29,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
   # Car#wash
   #
   test "return false if car not exist" do
-    post api_v1_wash_url, params: {
+    post api_v2_wash_url, params: {
       user_token:  @user.authentication_token,
       qrcode_info: "l=licensed_id%26did=12345%26h=7d45c15c36f6ff852cfa61ca"
     }
@@ -120,7 +120,7 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
   private
 
   def post_wash
-    post api_v1_wash_url, params: {
+    post api_v2_wash_url, params: {
       user_token:  @user.authentication_token,
       shop_id:     @shop.id,
       licensed_id: "豫A88888"
