@@ -44,7 +44,7 @@ class Api::V1::PaymentsController <  ActionController::API
       } and return
     end
 
-    if trade_success? && convert_to_vip
+    if trade_success? # && convert_to_vip
       @logger.info "#{@car.licensed_id} " \
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
@@ -56,7 +56,8 @@ class Api::V1::PaymentsController <  ActionController::API
 
       render json: {
         success: true,
-        message: "您车牌号为#{@car.licensed_id}会员有效期延长至#{@car.valid_at}, 请前往我的爱车处查看"
+        message: "您车牌号为#{@car.licensed_id}会员有效期延长至#{@car.valid_at},
+          请联系客服400-852-3369为您人工激活"
       }
     else
       @logger.fatal params.inspect
