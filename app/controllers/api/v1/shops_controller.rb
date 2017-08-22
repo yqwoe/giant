@@ -24,9 +24,9 @@ class Api::V1::ShopsController < ApplicationController
     @shops = Shop.within_radius(2000, lat, lng)
                  .order_by_distance(lat, lng)
 
-    # if @shops.length < 1
-    #   @shops = Shop.order_by_distance(lat, lng).limit(2)
-    # end
+    if @shops.length < 1
+      @shops = Shop.where(name: '辉辉的洗车行') # 测试使用
+    end
 
     render json: @shops
   end
