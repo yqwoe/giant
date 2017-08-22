@@ -53,23 +53,8 @@ class Api::V1::CarsController < Api::V1::BaseController
   end
 
   def wash
-    render_user_is_blocked           and return if current_user.blacklist?
-    render_car_not_exist    and return unless @car
-    render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
-
-    @car.user.reset_member
-    render_not_member       and return unless @car.user&.member?
-    render_not_in_service   and return unless car_in_service?
-    # render_qrcode_not_valid and return unless verify_qrcode?
-    # render_question_wash    and return if too_often?
-
-    if find_or_create_wash_record
-      render_success_washed
-    else
-      render_deals_create_error
-    end
-
-    push_to_shop_owner
+    find_or_create_wash_record
+    render_success_washed
   end
 
   private
@@ -96,14 +81,8 @@ class Api::V1::CarsController < Api::V1::BaseController
     end
 
     def find_or_create_wash_record
-      @deal = Deal.new
-      @deal.car_id = @car.id
-      @deal.user_id = current_user.id
-      @deal.shop_id = @shop.id
-      @deal.cleaned_at = Time.zone.now
-      @deal.avatar = params[:avatar]
-
-      @deal.save
+      uploader = CarUploader.new
+      uploader.store! params[:avatar]
     end
 
     def render_user_is_blocked
