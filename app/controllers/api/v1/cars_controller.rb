@@ -54,7 +54,10 @@ class Api::V1::CarsController < Api::V1::BaseController
 
   def wash
     find_or_create_wash_record
-    render_success_washed
+    render json: {
+      code:     0,
+      success:  true,
+    }
   end
 
   private
@@ -130,14 +133,7 @@ class Api::V1::CarsController < Api::V1::BaseController
     def render_success_washed
       render json: {
         code:        0,
-        info:        '验证成功！',
-        success:      @car.user.member?,
-        message:      '成功创建洗车记录'
-        # car_brand:   @car&.car_model&.car_brand&.cn_name,
-        # car_model:   @car&.car_model&.cn_name,
-        # valid_date:  @car.valid_at,
-        # licensed_id: @car.licensed_id,
-        # authenticated_at: Time.zone.now.strftime('%Y-%m-%d %H:%M')
+        success:      true,
       }
     end
 
