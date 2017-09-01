@@ -44,17 +44,18 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_not   json_response[:success]
-    assert_equal json_response[:message], '您的车辆不是会员'
+    assert_equal json_response[:message], '您的账户没有该车辆!'
   end
 
   test "car in service" do
     @user.member!
-    @car.update_attributes(valid_at: 1.month.from_now)
+    @car.update_attributes(valid_at: 1.month.from_now,
+                           user_id: @user.id)
 
     post_wash
 
     assert_response :success
-    assert_equal 0, json_response[:code]
+    assert_equal 0, json_response #[:code]
   end
 
   test "car is not in service if cars expired" do
@@ -123,7 +124,8 @@ class Api::V1::CarsControllerTest < ActionDispatch::IntegrationTest
     post api_v2_wash_url, params: {
       user_token:  @user.authentication_token,
       shop_id:     @shop.id,
-      licensed_id: "豫A88888"
+      licensed_id: "豫A88888",
+      qrcode_info: "l=#{@car.licensed_id}"
     }
   end
 

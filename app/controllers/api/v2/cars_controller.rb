@@ -68,7 +68,9 @@ class Api::V2::CarsController < Api::V1::BaseController
       end
     end
 
-    render_shop_not_exist_or_pending and return unless @shop && @shop.actived?
+    unless @shop && @shop.actived?
+      render_shop_not_exist_or_pending and return
+    end
 
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
@@ -99,11 +101,11 @@ class Api::V2::CarsController < Api::V1::BaseController
     def too_often?
       return false if TEST_USERS.include? current_user.mobile
 
-      last30d_wash_count >= 8
+      current_month_wash_count >= 8
     end
 
-    def last30d_wash_count
-      @car.deals.last30d.by_shop(@shop).select(:id).count
+    def current_month_wash_count
+      @car.deals.this_month.by_shop(@shop).select(:id).count
     end
 
     def find_or_create_wash_record
@@ -183,10 +185,11 @@ class Api::V2::CarsController < Api::V1::BaseController
     def render_question_wash
       render json: {
         code:    -1,
-        info:    '账户异常',
+        info:    '验证失败',
         success: false,
         # member:  false,
-        message: '账户异常，请去其他车行尝试洗车。'
+        message: "本月在#{@shop.name}洗车已超过8次，请更换别家车行。\n" +
+                 "欢迎下月再光顾"
       }
     end
 
