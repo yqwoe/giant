@@ -12,5 +12,4 @@ class Shop < ApplicationRecord
 
   scope :luoyang, -> { where "city = 洛阳市" }
 
-
 end
