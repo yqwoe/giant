@@ -10,4 +10,7 @@ class Shop < ApplicationRecord
 
   enum status: [:inactived, :actived, :pending]
 
+  scope :luoyang, -> { where "city = 洛阳市" }
+
+
 end

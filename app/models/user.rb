@@ -35,7 +35,8 @@ class User < ApplicationRecord
                 :risk,             #高危用户
                 :blacklist,        #黑名单
                 :zhumadian_dadi,    #驻马店大地保险
-                :zhou
+                :zhou,
+                :luoyang_daili
                ]
 
   def role

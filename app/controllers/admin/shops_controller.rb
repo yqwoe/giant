@@ -4,15 +4,22 @@ class Admin::ShopsController < Admin::BaseController
   before_action :authenticate_admin?
 
   before_action :set_shop, only: [
-    :edit, :update, :destroy, :inactive, :active, :pending]
+    :show, :edit, :update, :destroy, :inactive, :active, :pending]
 
   def index
-    @shops =
-      Shop.with_deleted.order(created_at: :desc).paginate(page: params[:page])
+    @shops = if current_user.admin?
+               Shop.with_deleted
+                   .order(created_at: :desc)
+                   .paginate(page: params[:page])
+             elsif current_user.luoyang_daili?
+               Shop.with_deleted
+                   .luoyang
+                   .order(created_at: :desc)
+                   .paginate(page: params[:page])
+             end
   end
 
   def show
-    @shop = Shop.find params[:id]
     @deals = @shop.deals
                   .includes(car: [:user])
                   .order(created_at: :desc)
@@ -57,7 +64,11 @@ class Admin::ShopsController < Admin::BaseController
   private
 
   def set_shop
-    @shop = Shop.with_deleted.find params[:id]
+    @shop  = if current_user.admin?
+               Shop.with_deleted.find params[:id]
+             elsif current_user.luoyang_daili?
+               Shop.with_deleted.luoyang.find params[:id]
+             end
   end
 
 end
