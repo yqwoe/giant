@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 
 set :application, 'giant'
-set :repo_url, 'git@git.coding.net:xiss/Giant.git'
+set :repo_url, 'git@github.com:autoxss/Giant.git'
 set :user, 'deploy'
 set :rvm_ruby_version, '2.4.1'
 
