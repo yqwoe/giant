@@ -71,17 +71,17 @@ class Admin::CardsController < Admin::BaseController
   def set_dadi_cards
     if params[:actived].present?
       if params[:actived] == 'true'
-        @q = Card.dadi.actived.ransack(params[:q])
+        @q = Card.all_of_dadi.actived.ransack(params[:q])
         @cards = @q.result.includes(:car).page(params[:page])
       elsif params[:actived] == 'false'
-        @q = Card.dadi.where(status: nil).ransack(params[:q])
+        @q = Card.all_of_dadi.where(status: nil).ransack(params[:q])
         @cards = @q.result.includes(:car).page(params[:page])
       end
     else
-      @q = Card.dadi.ransack(params[:q])
+      @q = Card.all_of_dadi.ransack(params[:q])
       @cards = @q.result.includes(:car).page(params[:page])
     end
-    @cards_count = Card.dadi.count
+    @cards_count = Card.all_of_dadi.count
   end
 
   def set_zhou_cards

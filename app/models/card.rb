@@ -10,6 +10,8 @@ class Card < ApplicationRecord
   enum status: [:inactived, :actived]
   enum channel: [:dadi, :zhongyuan, :zhumadian, :growing, :zhumadian_dadi, :zhou]
 
+  scope :all_of_dadi, -> { where "channel = 0 OR cid LIKE 'TIMES12%'" }
+
   def is_actived?
     actived? ? '已激活' : '未激活'
   end
