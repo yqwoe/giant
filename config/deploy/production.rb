@@ -18,7 +18,7 @@
 # role :app, %w{deploy@120.27.29.69}
 # role :web, %w{user1@120.27.29.69}
 # role :db,  %w{deploy@120.27.29.69}
-# 
+#
 
 # Configuration
 # =============
@@ -40,13 +40,13 @@
 # --------------
 # server '120.27.29.69', roles: %w{web app db}
 # server 'autoxss.com', user: 'deploy', roles: %w{app db web}
-server '101.200.54.109', user: 'deploy', roles: %w{app db web}
-ask :master, `git rev-parse --abbrev-ref HEAD`.chomp
+server '39.105.20.16', user: 'root', roles: %w{app db web}
+# ask :master, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :ssh_options, {
-  keys: %w(/home/wangqsh/.ssh/id_rsa),
+  keys: %w(~/.ssh/id_rsa),
   forward_agent: true,
-  user: 'deploy'
+  user: 'root'
 }
 
 #

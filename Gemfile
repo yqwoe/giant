@@ -1,5 +1,5 @@
 source 'https://gems.ruby-china.org'
-ruby '2.4.1'
+ruby '2.5.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
@@ -49,13 +49,13 @@ gem 'status-page'
 # This line for debug
 #gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
-gem 'alipay', git: 'https://github.com/rocLv/alipay.git'
+gem 'alipay', github: 'rocLv/alipay'
 gem 'ransack'
 gem 'json'
-gem 'will_paginate', git: 'https://git.coding.net/railstutorial/will_paginate.git'
+gem 'will_paginate'
 gem 'wx_pay'
 gem 'carrierwave', '~> 1.0'
-gem 'sweet-alert', git: 'https://github.com/rocLv/sweet-alert-rails.git'
+gem 'sweet-alert', github: 'rocLv/sweet-alert-rails'
 gem 'sweet-alert-confirm'
 gem 'mini_magick'
 gem 'rack-cors', :require => 'rack/cors'

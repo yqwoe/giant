@@ -2,6 +2,8 @@
 
 set :application, 'giant'
 set :repo_url, 'git@github.com:autoxss/Giant.git'
+set :branch,'master'
+set :scm, :git
 set :user, 'deploy'
 set :rvm_ruby_version, '2.4.1'
 
@@ -38,7 +40,7 @@ append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/syst
 
 # Default value for keep_releases is 5
 set :keep_releases, 20
-
+set :deploy_via, :remote_cache
 after 'deploy:finished', :worker
 
 desc 'start resque worker'
