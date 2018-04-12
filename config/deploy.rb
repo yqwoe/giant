@@ -2,8 +2,6 @@
 
 set :application, 'giant'
 set :repo_url, 'git@github.com:autoxss/Giant.git'
-set :branch,'master'
-set :scm, :git
 set :user, 'deploy'
 set :rvm_ruby_version, '2.4.1'
 
