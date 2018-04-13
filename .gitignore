@@ -22,8 +22,6 @@
 dump.rdb
 
 data
-config/key
-config/env.yml
 
 public/assets
 public/uploads
