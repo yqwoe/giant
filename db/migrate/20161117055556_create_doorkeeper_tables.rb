@@ -1,5 +1,5 @@
 class CreateDoorkeeperTables < ActiveRecord::Migration[4.2]
-  safety_assured
+  safety_assured if Rails.env.development?
   def change
     create_table :oauth_applications do |t|
       t.string  :name,         null: false
@@ -50,16 +50,16 @@ class CreateDoorkeeperTables < ActiveRecord::Migration[4.2]
       t.string   :previous_refresh_token, null: false, default: ""
     end
 
-        safety_assured {add_index :oauth_applications, :uid, unique: true }
-      safety_assured {  add_index :oauth_access_grants, :token, unique: true}
+        add_index :oauth_applications, :uid, unique: true
+      add_index :oauth_access_grants, :token, unique: true
         add_foreign_key(
           :oauth_access_grants,
           :oauth_applications,
           column: :application_id
         )
-  safety_assured {  add_index :oauth_access_tokens, :token, unique: true }
-  safety_assured {  add_index :oauth_access_tokens, :resource_owner_id }
-  safety_assured {  add_index :oauth_access_tokens, :refresh_token, unique: true }
+   add_index :oauth_access_tokens, :token, unique: true
+  add_index :oauth_access_tokens, :resource_owner_id
+  add_index :oauth_access_tokens, :refresh_token, unique: true
     add_foreign_key(
       :oauth_access_tokens,
       :oauth_applications,
