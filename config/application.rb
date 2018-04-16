@@ -15,10 +15,9 @@ module Giant
     config.active_record.default_timezone = :local
 
     WillPaginate.per_page = 30
-    # ENV['RAILS_MASTER_KEY'] = 'GEzpAKyqk0cntt/'
     # config.before_configuration do
     #   env_file = File.join(Rails.root, 'config', 'env.yml')
-    #   YAML.load(env_file).each do |key, value|
+    #   YAML.load(File.open(env_file)).each do |key, value|
     #     ENV[key.to_s] = value
     #   end if File.exists?(env_file)
     # end

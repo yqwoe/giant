@@ -1,4 +1,5 @@
-class CreateDoorkeeperTables < ActiveRecord::Migration
+class CreateDoorkeeperTables < ActiveRecord::Migration[4.2]
+  safety_assured
   def change
     create_table :oauth_applications do |t|
       t.string  :name,         null: false
@@ -8,8 +9,6 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
       t.string  :scopes,       null: false, default: ''
       t.timestamps             null: false
     end
-
-    add_index :oauth_applications, :uid, unique: true
 
     create_table :oauth_access_grants do |t|
       t.integer  :resource_owner_id, null: false
@@ -22,12 +21,7 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
       t.string   :scopes
     end
 
-    add_index :oauth_access_grants, :token, unique: true
-    add_foreign_key(
-      :oauth_access_grants,
-      :oauth_applications,
-      column: :application_id
-    )
+
 
     create_table :oauth_access_tokens do |t|
       t.integer  :resource_owner_id
@@ -56,9 +50,16 @@ class CreateDoorkeeperTables < ActiveRecord::Migration
       t.string   :previous_refresh_token, null: false, default: ""
     end
 
-    add_index :oauth_access_tokens, :token, unique: true
-    add_index :oauth_access_tokens, :resource_owner_id
-    add_index :oauth_access_tokens, :refresh_token, unique: true
+        safety_assured {add_index :oauth_applications, :uid, unique: true }
+      safety_assured {  add_index :oauth_access_grants, :token, unique: true}
+        add_foreign_key(
+          :oauth_access_grants,
+          :oauth_applications,
+          column: :application_id
+        )
+  safety_assured {  add_index :oauth_access_tokens, :token, unique: true }
+  safety_assured {  add_index :oauth_access_tokens, :resource_owner_id }
+  safety_assured {  add_index :oauth_access_tokens, :refresh_token, unique: true }
     add_foreign_key(
       :oauth_access_tokens,
       :oauth_applications,

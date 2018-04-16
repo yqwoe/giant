@@ -1,5 +1,5 @@
 source 'https://gems.ruby-china.org'
-ruby '2.5.0'
+ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
@@ -72,7 +72,7 @@ group :development, :test do
   gem 'bullet'
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'mini_racer', platforms: :ruby
+  #gem 'mini_racer'#, platforms: :ruby
   gem 'pry'
   # pry-doc extends two core pry commands:
   # show-doc, alias ?

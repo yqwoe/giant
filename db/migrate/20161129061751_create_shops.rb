@@ -1,4 +1,5 @@
 class CreateShops < ActiveRecord::Migration[5.0]
+    safety_assured
   def change
     create_table :shops do |t|
       t.string :name
@@ -20,8 +21,10 @@ class CreateShops < ActiveRecord::Migration[5.0]
       t.string :county
       t.string :address
       t.string :position, array: true
+      t.datetime :deleted_at
 
       t.timestamps
     end
+    add_index :shops,:deleted_at
   end
 end
