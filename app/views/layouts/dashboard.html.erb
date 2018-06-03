@@ -11,7 +11,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'false' %>
-    <%= favicon_link_tag image_path("favicon.ico") %>
+    <%= render  'layouts/favicon' %>
 
     <title>嘻唰唰后台管理界面</title>
     <%= csrf_meta_tags %>
