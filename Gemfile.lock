@@ -1,23 +1,10 @@
 GIT
-  remote: git://github.com/aliyun/aliyun-oss-ruby-sdk.git
-  revision: 4091324c20ea82375175b2945b217b03eec567d4
+  remote: https://github.com/aliyun/aliyun-oss-ruby-sdk.git
+  revision: 03ad9bc26cca438bbb2e96eb4e25c73fa7abd521
   specs:
-    aliyun-sdk (0.5.0)
+    aliyun-sdk (0.6.0)
       nokogiri (~> 1.6, < 1.7.0)
       rest-client (~> 2.0.2)
-
-GIT
-  remote: git://github.com/rocLv/alipay.git
-  revision: 5a41a8696616279fbe5ee1274a1d27f37c16b201
-  specs:
-    alipay (0.12.0)
-      activesupport (~> 5.0)
-
-GIT
-  remote: git://github.com/rocLv/sweet-alert-rails.git
-  revision: 1d66877b3f5bc34f6b445d298cce72e5209cb5dd
-  specs:
-    sweet-alert (0.0.8)
 
 GIT
   remote: https://github.com/plataformatec/devise.git
@@ -30,6 +17,19 @@ GIT
       railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
+
+GIT
+  remote: https://github.com/rocLv/alipay.git
+  revision: 5a41a8696616279fbe5ee1274a1d27f37c16b201
+  specs:
+    alipay (0.12.0)
+      activesupport (~> 5.0)
+
+GIT
+  remote: https://github.com/rocLv/sweet-alert-rails.git
+  revision: 1d66877b3f5bc34f6b445d298cce72e5209cb5dd
+  specs:
+    sweet-alert (0.0.8)
 
 GEM
   remote: https://gems.ruby-china.org/
@@ -123,6 +123,10 @@ GEM
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
+    capistrano-upload-config (0.8.2)
+      capistrano (>= 3.0)
+    capistrano3-nginx (2.1.6)
+      capistrano (>= 3.0.0)
     capistrano3-puma (3.1.1)
       capistrano (~> 3.7)
       capistrano-bundler
@@ -490,6 +494,8 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
+  capistrano-upload-config
+  capistrano3-nginx
   capistrano3-puma
   capybara
   carrierwave (~> 1.0)
@@ -526,7 +532,7 @@ DEPENDENCIES
   pry-doc
   pry-rails
   pry-rescue
-  puma
+  puma (~> 3.7)
   rack-cors
   railroady
   rails (~> 5.1.1)
@@ -557,9 +563,6 @@ DEPENDENCIES
   will_paginate-bootstrap
   wx_pay
   zero_downtime_migrations
-
-RUBY VERSION
-   ruby 2.4.1p111
 
 BUNDLED WITH
    1.16.1

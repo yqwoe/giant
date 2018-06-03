@@ -1,9 +1,13 @@
 source 'https://gems.ruby-china.org'
 
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use Puma as the app server
-gem 'puma'
+gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -35,7 +39,7 @@ gem 'redis-namespace'
 gem 'swagger-docs'
 gem 'bootstrap-datepicker-rails'
 gem 'rails-i18n', '~> 5.0.0'
-gem 'devise', git: 'https://github.com/plataformatec/devise.git', branch: 'master'
+gem 'devise', github: 'plataformatec/devise', branch: 'master'
 gem 'erubis'
 gem 'pg'
 gem 'active_model_serializers', '~> 0.10.0'
@@ -129,4 +133,6 @@ group :development do
   gem 'capistrano-rails',   require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano3-puma',   require: false
+  gem 'capistrano3-nginx'
+  gem 'capistrano-upload-config'
 end

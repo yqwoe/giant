@@ -1,4 +1,13 @@
-server '39.105.20.16',user: 'root',role: %{app web}
+# server-based syntax
+# ======================
+# Defines a single server with a list of roles and multiple properties.
+# You can define all roles on a single server, or split them:
+
+# server "example.com", user: "deploy", roles: %w{app db web}, my_property: :my_value
+# server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
+# server "db.example.com", user: "deploy", roles: %w{db}
+
+server '39.105.20.16',user: 'root', roles: %w{app web}
 set :application, 'giant'
 set :repo_url, 'git@git.autoxss.com:autoxss/giant.git'
 set :branch,'master'
@@ -6,7 +15,8 @@ set :user, 'root'
 set :test
 set :deploy_user, 'root'
 set :deploy_to, '/var/www/giant'
-# set :keep_releases, 20
+
+
 
 
 set :puma_threads,    [8, 32]
@@ -53,6 +63,7 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
+      p 'abc'
       before 'deploy:restart', 'puma:start'
       invoke 'deploy'
     end
@@ -68,7 +79,7 @@ namespace :deploy do
 
   desc 'start resque worker'
   task :worker do
-    on roles(:all) do
+    on roles(:app) do
       execute('QUEUE=* bundle exec rake resque:work RAILS_ENV=production > /dev/null 2 >&1 &');
     end
   end
@@ -76,6 +87,6 @@ namespace :deploy do
   before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
-  after  :finishing,    :worker
   after  :finishing,    :restart
+  after  :finishing,    :worker
 end
