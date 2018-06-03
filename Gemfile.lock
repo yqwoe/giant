@@ -532,8 +532,7 @@ DEPENDENCIES
   pry-doc
   pry-rails
   pry-rescue
-  puma (~> 3.7)
-  rack (~> 2.0.4)
+  puma (~> 3.0)
   rack-cors
   railroady
   rails (~> 5.1.1)
