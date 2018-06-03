@@ -299,7 +299,7 @@ GEM
       pry
     public_suffix (2.0.5)
     puma (3.9.1)
-    rack (2.0.3)
+    rack (2.0.5)
     rack-cors (1.0.1)
     rack-protection (2.0.0)
       rack
@@ -533,6 +533,7 @@ DEPENDENCIES
   pry-rails
   pry-rescue
   puma (~> 3.7)
+  rack (~> 2.0.4)
   rack-cors
   railroady
   rails (~> 5.1.1)
