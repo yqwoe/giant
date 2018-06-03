@@ -1,7 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
-  # root to: 'home#index'
+  root to: 'home#index'
 
   resource :ads
   resources :phones, only: [:new, :create]
