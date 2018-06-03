@@ -1,10 +1,9 @@
 source 'https://gems.ruby-china.org'
-ruby '2.4.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -119,14 +118,15 @@ group :development do
   gem 'guard-ctags-bundler'
   gem 'guard-rubocop'
   gem "rails_best_practices"
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'capistrano-passenger', '>= 0.1.1'
-  # Remove the following if your server does not use RVM
-  gem 'capistrano-rvm'
-  # Use Capistrano for deployment
-  gem 'capistrano-rails'
   gem 'rails-erd'
   gem 'foreman'
+end
 
+
+group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-rvm',     require: false
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
 end
