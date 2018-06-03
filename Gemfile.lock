@@ -176,6 +176,8 @@ GEM
       factory_girl (~> 4.9.0)
       railties (>= 3.0.0)
     ffi (1.9.24)
+    figaro (1.1.1)
+      thor (~> 0.14)
     foreman (0.84.0)
       thor (~> 0.19.1)
     formatador (0.2.5)
@@ -505,6 +507,7 @@ DEPENDENCIES
   devise!
   erubis
   factory_girl_rails
+  figaro
   foreman
   guard
   guard-brakeman

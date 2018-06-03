@@ -137,3 +137,5 @@ group :development do
   gem 'capistrano-upload-config'
 end
 
+gem 'figaro'
+
