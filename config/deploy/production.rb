@@ -19,7 +19,7 @@ set :deploy_to, '/var/www/giant'
 
 
 
-set :puma_threads,    [8, 32]
+set :puma_threads,    [2, 16]
 set :puma_workers,    2
 
 set :pty,             true
