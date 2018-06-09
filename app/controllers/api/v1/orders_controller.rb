@@ -11,14 +11,14 @@ class Api::V1::OrdersController < Api::V1::BaseController
     subject      = params[:subject]
     body         = params[:body]
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
-    timestamp    = Time.zone.now.strftime('%Y-%m-%d#%H:%M:%S')
+    timestamp    = Time.zone.now.strftime('%Y-%m-%d+%H:%M:%S')
 
     order = Alipay::Mobile::Service.trade_app_pay_string(
       biz_content: {
+        out_trade_no: out_trade_no,
         total_amount: total_amount,
         subject:      subject,
-        body:         body,
-        out_trade_no: out_trade_no,
+        # body:         body,
       },
       timestamp: timestamp,
       notify_url: api_v1_payments_url
