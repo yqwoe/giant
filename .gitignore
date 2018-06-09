@@ -44,4 +44,4 @@ config/secrets.yml.key
 
 # Ignore application configuration
 /config/application.yml
-config/key/rsa_private_key.pem
+config/key/*
