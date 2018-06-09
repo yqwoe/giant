@@ -26,9 +26,9 @@ GIT
 
 GIT
   remote: https://github.com/yqwoe/alipay.git
-  revision: 541b1912472c79653f0dbfb15356367642c7abf1
+  revision: 7bf72a4ef9c4adc2a2707d9826bdc4c8dab4d8b5
   specs:
-    alipay (0.12.0)
+    alipay (0.12.1)
       activesupport (~> 5.0)
 
 GEM
