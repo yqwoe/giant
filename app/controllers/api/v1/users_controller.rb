@@ -31,6 +31,7 @@ class Api::V1::UsersController <  ActionController::API
                           password: Devise.friendly_token)
     @user.send_pin
     pin = $redis.get(mobile)
+    puts pin
     render json: { success: true, pin: pin }
   #rescue Exception => e
   #  render json: { success: false, massenge: e.message }
