@@ -23,7 +23,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
       timestamp: timestamp,
       notify_url: api_v1_payments_url
     )
-    # binding.pry
+    binding.pry
     # create order
     @car.orders.create(
       body:         body,

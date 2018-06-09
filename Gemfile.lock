@@ -19,17 +19,17 @@ GIT
       warden (~> 1.2.3)
 
 GIT
-  remote: https://github.com/rocLv/alipay.git
-  revision: 5a41a8696616279fbe5ee1274a1d27f37c16b201
-  specs:
-    alipay (0.12.0)
-      activesupport (~> 5.0)
-
-GIT
   remote: https://github.com/rocLv/sweet-alert-rails.git
   revision: 1d66877b3f5bc34f6b445d298cce72e5209cb5dd
   specs:
     sweet-alert (0.0.8)
+
+GIT
+  remote: https://github.com/yqwoe/alipay.git
+  revision: 541b1912472c79653f0dbfb15356367642c7abf1
+  specs:
+    alipay (0.12.0)
+      activesupport (~> 5.0)
 
 GEM
   remote: https://gems.ruby-china.org/

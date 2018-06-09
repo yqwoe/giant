@@ -52,7 +52,7 @@ gem 'status-page'
 # This line for debug
 #gem 'alipay', path: '/Users/wangqsh/Code/star/alipay'
 #
-gem 'alipay', github: 'rocLv/alipay'
+gem 'alipay', github: 'yqwoe/alipay'
 gem 'ransack'
 gem 'json'
 gem 'will_paginate'
