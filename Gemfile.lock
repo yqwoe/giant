@@ -24,13 +24,6 @@ GIT
   specs:
     sweet-alert (0.0.8)
 
-GIT
-  remote: https://github.com/yqwoe/alipay.git
-  revision: 7837ddcdc485f526e096ef9299c3f3e612d227ae
-  specs:
-    alipay (0.12.4)
-      activesupport (~> 5.0)
-
 GEM
   remote: https://gems.ruby-china.org/
   specs:
@@ -86,6 +79,7 @@ GEM
       public_suffix (>= 2.0.2, < 4.0)
     airbrussh (1.3.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    alipay (0.15.0)
     ansi (1.5.0)
     arel (8.0.0)
     ast (2.4.0)
@@ -483,7 +477,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.0)
   activerecord-import
   activerecord-postgres-earthdistance
-  alipay!
+  alipay
   aliyun-sdk!
   better_errors
   bootstrap-datepicker-rails
