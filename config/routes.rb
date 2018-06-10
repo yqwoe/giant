@@ -1,6 +1,7 @@
 require 'resque/server'
 
 Rails.application.routes.draw do
+  resources :tests
   root to: 'home#index'
 
   resource :ads

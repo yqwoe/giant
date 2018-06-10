@@ -35,8 +35,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
             out_trade_no: out_trade_no,
             total_amount: total_amount,
             subject:      subject,
-            body:         body,
+            # body:         body,
         }.to_json(ascii_only: true),
+        format: 'json',
         timestamp: timestamp,
         notify_url: api_v1_payments_url
     )
