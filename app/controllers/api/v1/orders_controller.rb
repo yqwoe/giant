@@ -20,7 +20,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     subject      = params[:subject]
     body         = params[:body]
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
-    timestamp    = Time.zone.now.strftime('%Y-%m-%d+%H:%M:%S')
+    timestamp    = Time.zone.now.strftime('%Y-%m-%d %H:%M:%S')
 
     @alipay_client = Alipay::Client.new(
         url: API_URL,
