@@ -19,6 +19,10 @@ class Admin::ShopsController < Admin::BaseController
              end
   end
 
+  def new
+    @shop = Shop.new
+  end
+
   def show
     @deals = @shop.deals
                   .includes(car: [:user])

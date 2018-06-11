@@ -50,7 +50,7 @@ class Api::V2::CarsController < Api::V1::BaseController
   end
 
   def wash
-    render_car_not_exist             and return unless @car
+    #render_car_not_exist             and return unless @car
     @car.user.reset_member
 
     #
@@ -101,7 +101,7 @@ class Api::V2::CarsController < Api::V1::BaseController
     def too_often?
       return false if TEST_USERS.include? current_user.mobile
 
-      current_month_wash_count >= 8
+      current_month_wash_count >= 6
     end
 
     def current_month_wash_count

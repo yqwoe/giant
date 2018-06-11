@@ -29,13 +29,13 @@ class Api::V1::OrdersController < Api::V1::BaseController
         alipay_public_key: ALIPAY_PUBLIC_KEY
     )
 
-    order = @alipay_client.page_execute_url(
+    order = @alipay_client.sdk_execute(
         method: 'alipay.trade.app.pay',
         biz_content: {
             out_trade_no: out_trade_no,
             total_amount: total_amount,
             subject:      subject,
-            # body:         body,
+            body:         body,
         }.to_json(ascii_only: true),
         format: 'json',
         timestamp: timestamp,
