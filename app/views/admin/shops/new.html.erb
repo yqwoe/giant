@@ -1,2 +1,6 @@
 <h1>车行添加</h1>
-<%= render 'form' %>
+<div style='width: 100%'>
+<div style="width: 500px;margin-left: 30%">
+<%= render 'form',shop: @shop,url: admin_shops_path,method: 'post' %>
+</div>
+</div>

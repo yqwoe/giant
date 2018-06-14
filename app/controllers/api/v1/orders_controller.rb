@@ -84,6 +84,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   private
 
   def set_car
+    if params[:licensed_id].present? && params[:licensed_id].is_a?(ActionController::Parameters)
+      params[:licensed_id] = params[:licensed_id][:licensed_id]
+    end
     @car = current_user.cars
       .find_by licensed_id: params[:licensed_id]&.upcase
   end

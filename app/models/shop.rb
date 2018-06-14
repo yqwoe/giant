@@ -12,4 +12,10 @@ class Shop < ApplicationRecord
 
   scope :luoyang, -> { where "city = 洛阳市" }
 
+  IMG_HOST = 'http://api.autoxss.com/shops/images/'.freeze
+
+  def img_url
+    "#{IMG_HOST}#{self.image}"
+  end
+
 end
