@@ -16,7 +16,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     render_car_nil         and return unless @car
 
     platform     = params[:platform]
-    total_amount = 880 #params[:total_amount]
+    total_amount = 0.01 #params[:total_amount]
     subject      = params[:subject]
     body         = params[:body]
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
@@ -84,9 +84,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   private
 
   def set_car
-    if params[:licensed_id].present? && params[:licensed_id].is_a?(ActionController::Parameters)
-      params[:licensed_id] = params[:licensed_id][:licensed_id]
-    end
+    # if params[:licensed_id].present? && params[:licensed_id].is_a?(ActionController::Parameters)
+    #   params[:licensed_id] = params[:licensed_id][:licensed_id]
+    # end
     @car = current_user.cars
       .find_by licensed_id: params[:licensed_id]&.upcase
   end
