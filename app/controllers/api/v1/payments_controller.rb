@@ -44,7 +44,7 @@ class Api::V1::PaymentsController <  ActionController::API
       } and return
     end
 
-    if trade_success?  && convert_to_vip
+    if trade_success? # && convert_to_vip
       @logger.info "#{@car.licensed_id} " \
         "deposit_at: #{Time.zone.now} valid at: #{@car.valid_at}"
 
@@ -81,7 +81,7 @@ class Api::V1::PaymentsController <  ActionController::API
   private
     def convert_to_vip
       # FIXME: 临时取消，待问题修复后再
-      @car.valid_at  = @car.valid_at ? @car.valid_at + 1.year : 1.year.from_now
+      # @car.valid_at  = @car.valid_at ? @car.valid_at + 1.year : 1.year.from_now
       @order.finished_at = Time.zone.now
       @order.status      = trade_success
       @order.payment_gateway = :alipay
