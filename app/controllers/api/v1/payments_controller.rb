@@ -101,7 +101,7 @@ class Api::V1::PaymentsController <  ActionController::API
     end
 
     def set_order
-      Rails.logger.inf params
+      Rails.logger.info params
       @order = Order.find_by_trade_no params[:out_trade_no]
     end
 
