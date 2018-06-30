@@ -27,7 +27,7 @@ class Api::V1::PaymentsController <  ActionController::API
     if @order.success?
       @logger.fatal params.inspect
       @logger.fatal "#{params[:out_trade_no]}\t会员卡已经激活"
-
+      current_user.member! if !current_user.member? && !current_user.admin?
       render json: {
         success: true,
         message: '会员卡已经激活'
