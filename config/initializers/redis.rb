@@ -11,7 +11,8 @@ REDIS_HOST = case Rails.env
 $redis = Redis::Namespace.new(
   "giant",
   redis: Redis.new(
-    host: REDIS_HOST,
-    password: ENV['REDIS_PASSWD']
+    host: REDIS_HOST
+# ,
+#     password: ENV['REDIS_PASSWD']
   )
 )
