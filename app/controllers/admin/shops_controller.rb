@@ -59,7 +59,6 @@ class Admin::ShopsController < Admin::BaseController
     # binding.pry
     @shop.image = upload_image
     respond_to do |format|
-      binding.pry
       if @shop.update!(set_shop_params)
 
         format.html { redirect_to admin_shops_path }
