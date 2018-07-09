@@ -40,7 +40,8 @@ class Admin::ShopsController < Admin::BaseController
                            mobile: @shop.phone,
                            name: @shop.name,
                            password: "123456",
-                           password_confirmation: "123456"
+                           password_confirmation: "123456",
+                           roles: ['shop_owner']
                        })
     respond_to do |format|
       if @shop.save!
