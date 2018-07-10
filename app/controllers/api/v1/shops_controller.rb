@@ -8,6 +8,12 @@ class Api::V1::ShopsController < ApplicationController
     render json: @shops
   end
 
+  def current
+    @shop = current_user.try(:shops).first
+    render json: @shop
+  end
+
+
   def show
     @shop = Shop.find(params[:id])
     render json: @shop

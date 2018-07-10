@@ -95,6 +95,9 @@ Rails.application.routes.draw do
           get :counties
           get :list
         end
+        member do
+          get :current
+        end
       end
       resource :version, only: [:show]
       get :use_new_qrcode, to: 'versions#use_new_qrcode'
