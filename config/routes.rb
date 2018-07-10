@@ -94,8 +94,6 @@ Rails.application.routes.draw do
           get :search
           get :counties
           get :list
-        end
-        member do
           get :current
         end
       end
