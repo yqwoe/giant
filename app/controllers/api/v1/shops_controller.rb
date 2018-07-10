@@ -9,7 +9,9 @@ class Api::V1::ShopsController < ApplicationController
   end
 
   def current
-    @shop = current_user.try(:shops).first
+    @current_user = User.find_by_authentication_token params[:user_token]
+    @shop = nil
+    @shop = @current_user.try(:shops).first if @current_user.present?
     render json: @shop
   end
 
