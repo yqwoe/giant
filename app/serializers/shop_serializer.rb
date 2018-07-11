@@ -1,6 +1,6 @@
 class ShopSerializer < ActiveModel::Serializer
   include ActionView::Helpers::AssetUrlHelper
-  IMG_HOST = 'http://api.autoxss.com/shops/images/'.freeze
+  IMG_HOST = 'https://api.autoxss.com/shops/images/'.freeze
 
   attributes :id, :name, :phone, :city, :star, :category, :address, :duration,
     :status, :profile, :services, :sale_content, :province, :county, :position,
