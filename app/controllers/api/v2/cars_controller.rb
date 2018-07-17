@@ -154,7 +154,7 @@ class Api::V2::CarsController < Api::V1::BaseController
         code:   0,
         info:   '验证成功',
         success: false,
-        message: '洗车记录已添加，已成功洗车。通知车行失败。 '
+        message: '验证失败，您还未激活该车辆，请在“在线激活”页面激活该车辆 '
       }
     end
 
