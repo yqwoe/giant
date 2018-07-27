@@ -27,7 +27,6 @@ class Api::V1::PaymentsController <  ActionController::API
     if @order.success?
       @logger.fatal params.inspect
       @logger.fatal "#{params[:out_trade_no]}\t会员卡已经激活"
-      current_user.member! if !current_user.member? && !current_user.admin?
       render json: {
         success: true,
         message: '会员卡已经激活'
@@ -56,6 +55,7 @@ class Api::V1::PaymentsController <  ActionController::API
         kind: '年',
         valid_at: @car.valid_at }, tpl_id: '1827684'
 
+      current_user.member! if !current_user.member? && !current_user.admin?
       render json: {
         success: true,
         message: "您车牌号为#{@car.licensed_id}会员有效期延长至#{@car.valid_at},
