@@ -55,7 +55,7 @@ class Api::V1::PaymentsController <  ActionController::API
         kind: '年',
         valid_at: @car.valid_at }, tpl_id: '1827684'
 
-      current_user.member! if !current_user.member? && !current_user.admin?
+      @car.user.member! if !@car.user.member? && !@car.user.admin?
       render json: {
         success: true,
         message: "您车牌号为#{@car.licensed_id}会员有效期延长至#{@car.valid_at},
