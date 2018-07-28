@@ -90,6 +90,7 @@ class Api::V1::PaymentsController <  ActionController::API
         @order.save!
         @car.save!
       end
+      return true
     end
 
     def trade_success
