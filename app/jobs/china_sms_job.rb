@@ -3,6 +3,7 @@ class ChinaSmsJob < ApplicationJob
   COMPANY = '嘻唰唰'.freeze
 
   def perform(*args)
+    puts args
     send_sms(*args)
   end
 
