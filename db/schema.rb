@@ -280,6 +280,7 @@ ActiveRecord::Schema.define(version: 20170816025301) do
     t.string "province"
     t.string "county"
     t.string "position", array: true
+    t.datetime "deleted_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "image", default: "default_shop.png"
@@ -290,6 +291,7 @@ ActiveRecord::Schema.define(version: 20170816025301) do
     t.float "lng"
     t.string "short_name"
     t.index "ll_to_earth(((\"position\"[1])::real)::double precision, ((\"position\"[2])::real)::double precision)", name: "shops_earthdistance_ix", using: :gist
+    t.index ["deleted_at"], name: "index_shops_on_deleted_at"
   end
 
   create_table "suite_orders", id: :serial, force: :cascade do |t|

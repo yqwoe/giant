@@ -1,4 +1,5 @@
 class CreateShops < ActiveRecord::Migration[5.0]
+  safety_assured
   def change
     create_table :shops do |t|
       t.string :name

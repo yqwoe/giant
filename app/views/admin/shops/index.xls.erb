@@ -1,16 +1,28 @@
-<Row>
-  <Cell><Data ss:Type="String">卡号</Data></Cell>
-  <Cell><Data ss:Type="String">是否激活</Data></Cell>
-  <Cell><Data ss:Type="String">购买用户</Data></Cell>
-  <Cell><Data ss:Type="String">车牌</Data></Cell>
-  <Cell><Data ss:Type="String">激活日期</Data></Cell>
-</Row>
-<%# @shops.each do |card| %>
-<!--  <Row>-->
-<!--    <Cell><Data ss:Type="String"><%#= card.cid %></Data></Cell>-->
-<!--    <Cell><Data ss:Type="String"><%#= card.is_actived? %></Data></Cell>-->
-<!--    <Cell><Data ss:Type="String"><%#= card&.car&.user&.name || card&.car&.user&.mobile %></Data></Cell>-->
-<!--    <Cell><Data ss:Type="String"><%#= card&.car&.licensed_id  %></Data></Cell>-->
-<!--    <Cell><Data ss:Type="String"><%#= card.actived_at&.strftime('%Y-%m-%d %H:%M') %></Data></Cell>-->
-<!--  </Row>-->
-<%# end %>
+
+
+
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:o="urn:schemas-microsoft-com:office:office"
+          xmlns:x="urn:schemas-microsoft-com:office:excel"
+          xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+          xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">店名</Data></Cell>
+        <Cell><Data ss:Type="String">城市</Data></Cell>
+        <Cell><Data ss:Type="String">地址</Data></Cell>
+        <Cell><Data ss:Type="String">洗车次数</Data></Cell>
+      </Row>
+      <% @shops.each do |shop| %>
+        <Row>
+          <Cell><Data ss:Type="String"><%= shop.name %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= shop.city %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= shop.address %></Data></Cell>
+          <Cell><Data ss:Type="String"><%= shop.deals.count  %></Data></Cell>
+        </Row>
+      <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>
