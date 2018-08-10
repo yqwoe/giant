@@ -27,7 +27,7 @@
     <div class="form-input">
       <%= f.label :会员类别, class: 'col-sm-2 control-label' %>
       <div class="col-sm-10">
-      <%= f.select(:role,options_for_select([['非会员', 'registed'], ['会员', 'member'],['加入黑名单','block']],@user.roles),{},{ class: 'form-control'} ) %>
+      <%= f.select(:role,options_for_select([['非会员', 'registed'], ['会员', 'member'], ['商家', 'shop_owner'],['加入黑名单','block']],@user.roles),{},{ class: 'form-control'} ) %>
       </div>
     </div>
 
