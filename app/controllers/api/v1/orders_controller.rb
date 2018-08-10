@@ -16,7 +16,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
     render_car_nil         and return unless @car
 
     platform     = params[:platform]
-    total_amount = params[:total_amount]
+    total_amount = 880#params[:total_amount]
     subject      = params[:subject]
     body         = params[:body]
     out_trade_no = "#{platform}#{Time.zone.now.strftime('%Y%m%d%H%M%S%L')}"
