@@ -57,6 +57,8 @@ class Admin::UsersController < Admin::BaseController
       @user.registed!
     when 'block'
       @user.blacklist!
+    when 'shop_owner'
+      @user.shop_owner!
     end
 
     @user.save
