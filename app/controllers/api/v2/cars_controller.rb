@@ -56,6 +56,15 @@ class Api::V2::CarsController < Api::V1::BaseController
     #
     # 先验证单次洗车
     #
+    #
+    Rails.logger.info "本月洗车次数：#{current_month_wash_count}"
+    Rails.logger.info "本年洗车次数：#{current_month_wash_count}"
+    render_not_member       and return unless @car.user&.member?
+    render_not_in_service   and return unless car_in_service?
+    render_question_wash    and return if     too_often?
+    render_year_question_wash and return if validate_year_count?
+    render_qrcode_not_valid and return unless verify_qrcode?
+    
     user = @car.user
     @mobile = user.mobile
     account = user.account
@@ -72,13 +81,6 @@ class Api::V2::CarsController < Api::V1::BaseController
     unless @shop && @shop.actived?
       render_shop_not_exist_or_pending and return
     end
-    Rails.logger.info "本月洗车次数：#{current_month_wash_count}"
-    Rails.logger.info "本年洗车次数：#{current_month_wash_count}"
-    render_not_member       and return unless @car.user&.member?
-    render_not_in_service   and return unless car_in_service?
-    render_question_wash    and return if     too_often?
-    render_year_question_wash and return if validate_year_count?
-    render_qrcode_not_valid and return unless verify_qrcode?
 
     if @car.deals.last4h.count > 0
       render_already_recorded and return
