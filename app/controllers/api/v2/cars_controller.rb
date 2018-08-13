@@ -75,6 +75,7 @@ class Api::V2::CarsController < Api::V1::BaseController
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
     render_question_wash    and return if     too_often?
+    render_year_question_wash and return if validate_year_count?
     render_qrcode_not_valid and return unless verify_qrcode?
 
     if @car.deals.last4h.count > 0
@@ -82,6 +83,9 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     if find_or_create_wash_record
+
+      render_question_wash    and return if     too_often?
+      render_year_question_wash and return if validate_year_count?
       render_success_washed
     else
       render_deals_create_error
@@ -100,13 +104,22 @@ class Api::V2::CarsController < Api::V1::BaseController
 
     def too_often?
       return false if TEST_USERS.include? current_user.mobile
-
       current_month_wash_count >= 8
     end
 
-    def current_month_wash_count
-      @car.deals.this_month.by_shop(@shop).select(:id).count
+    def validate_year_count?
+      current_year_wash_count >= 44
     end
+
+    def current_month_wash_count
+      # @car.deals.this_month.by_shop(@shop).select(:id).count
+      @car.deals.this_month.select(:id).count
+    end
+
+  def current_year_wash_count
+    # @car.deals.this_month.by_shop(@shop).select(:id).count
+    @car.deals.this_year.select(:id).count
+  end
 
     def find_or_create_wash_record
       # make sure user upload picture
@@ -188,10 +201,21 @@ class Api::V2::CarsController < Api::V1::BaseController
         info:    '验证失败',
         success: false,
         # member:  false,
-        message: "本月在#{@shop.name}洗车已超过8次，请更换别家车行。\n" +
-                 "欢迎下月再光顾"
+        message: "本月洗车次数已用完。\n" +
+                 "欢迎重新购买"
       }
     end
+
+  def render_year_question_wash
+    render json: {
+        code:    -1,
+        info:    '验证失败',
+        success: false,
+        # member:  false,
+        message: "本年洗车已使用完。\n" +
+            "欢迎重新购买"
+    }
+  end
 
     def car_in_service?
       # FIXME: to limit deals less than 1
@@ -252,5 +276,9 @@ class Api::V2::CarsController < Api::V1::BaseController
 
     def last_3days_deals_count
       Deal.last3d.where('car_id = ?', @car.id).count if @car
+    end
+
+    def send_message(mobile,kind)
+      ChinaSMS.to mobile, { kind: kind}, tpl_id: '2437008'
     end
 end

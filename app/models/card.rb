@@ -23,4 +23,8 @@ class Card < ApplicationRecord
     actived!
     save
   end
+
+  def times_card?
+    cid =~/TIMES12/
+  end
 end
