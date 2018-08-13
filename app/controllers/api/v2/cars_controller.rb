@@ -72,7 +72,8 @@ class Api::V2::CarsController < Api::V1::BaseController
     unless @shop && @shop.actived?
       render_shop_not_exist_or_pending and return
     end
-
+    Rails.logger.info "本月洗车次数：#{current_month_wash_count}"
+    Rails.logger.info "本年洗车次数：#{current_month_wash_count}"
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
     render_question_wash    and return if     too_often?
@@ -140,7 +141,7 @@ class Api::V2::CarsController < Api::V1::BaseController
 
     def render_already_recorded
       render json: {
-        code:             1,
+        code:             -1,
         info:             '验证成功！',
         success:          @car.user.member?,
         message:          '车行记录已添加，请勿重复验证',
