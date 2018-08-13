@@ -83,9 +83,8 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     if find_or_create_wash_record
-
-      render_question_wash    and return if     too_often?
-      render_year_question_wash and return if validate_year_count?
+      send_message(user.mobile,'月')    and return if     too_often?
+      send_message(user.mobile,'年')  and return if validate_year_count?
       render_success_washed
     else
       render_deals_create_error
