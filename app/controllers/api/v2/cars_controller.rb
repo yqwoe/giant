@@ -57,6 +57,7 @@ class Api::V2::CarsController < Api::V1::BaseController
     # 先验证单次洗车
     #
     user = @car.user
+    @mobile = user.mobile
     account = user.account
     if account && account.valid_to >= Time.zone.now
       deal_count = user.deals.this_month.count
@@ -83,8 +84,8 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     if find_or_create_wash_record
-      send_message(user.mobile,'月')    and return if     too_often?
-      send_message(user.mobile,'年')  and return if validate_year_count?
+      send_message(@mobile,'月')    and return if     too_often?
+      send_message(@mobile,'年')  and return if validate_year_count?
       render_success_washed
     else
       render_deals_create_error
