@@ -64,6 +64,8 @@ class Api::V2::CarsController < Api::V1::BaseController
     Rails.logger.info "car_in_service?：#{car_in_service?}"
     Rails.logger.info "too_often??：#{too_often?}"
     Rails.logger.info "validate_year_count???：#{validate_year_count?}"
+    Rails.logger.info "current_user.mobile???：#{current_user.mobile}"
+    Rails.logger.info "TEST_USERS：#{TEST_USERS}"
     Rails.logger.info "*"*100
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
