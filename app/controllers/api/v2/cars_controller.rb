@@ -57,14 +57,20 @@ class Api::V2::CarsController < Api::V1::BaseController
     # 先验证单次洗车
     #
     #
+    Rails.logger.info "*"*100
     Rails.logger.info "本月洗车次数：#{current_month_wash_count}"
     Rails.logger.info "本年洗车次数：#{current_month_wash_count}"
+    Rails.logger.info "@car.user&.member?：#{@car.user&.member?}"
+    Rails.logger.info "car_in_service?：#{car_in_service?}"
+    Rails.logger.info "too_often??：#{too_often?}"
+    Rails.logger.info "validate_year_count???：#{validate_year_count?}"
+    Rails.logger.info "*"*100
     render_not_member       and return unless @car.user&.member?
     render_not_in_service   and return unless car_in_service?
     render_question_wash    and return if     too_often?
     render_year_question_wash and return if validate_year_count?
     render_qrcode_not_valid and return unless verify_qrcode?
-    
+
     user = @car.user
     @mobile = user.mobile
     account = user.account
