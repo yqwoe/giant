@@ -114,7 +114,7 @@ class Api::V2::CarsController < Api::V1::BaseController
     end
 
     def too_often?
-      return false if TEST_USERS.include? current_user.mobile
+      # return false if TEST_USERS.include? current_user.mobile
       current_month_wash_count >= 8
     end
 
