@@ -37,7 +37,8 @@ class Card < ApplicationRecord
       (2..spreadsheet.last_row).each do |i|
         row = Hash[[header, spreadsheet.row(i)].transpose]
         product = find_by_id(row["id"]) || new
-        product.attributes = row.to_hash.slice(*accessible_attributes)
+        # binding.pry
+        product.attributes = row.to_hash
         product.save!
       end
     end
