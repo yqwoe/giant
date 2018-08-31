@@ -11,6 +11,25 @@ class Car < ApplicationRecord
 
   enum status: [:trial, :annual]
 
+  #次卡总数量
+  def times_card_count
+    cards.where("cid like 'TIMES12%' ").sum(:range) || -1
+  end
+
+  def card_count
+    card = cards.order(:actived_at => :desc).first
+    (card && card.card_times) || 0
+  end
+
+  def card_all_count
+    cards.sum(:card_times) || 0
+  end
+
+  def card
+    cards.order(:actived_at => :desc).first
+  end
+
+
   private
 
   def upcase_licensed_id

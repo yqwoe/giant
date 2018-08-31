@@ -38,7 +38,12 @@ Rails.application.routes.draw do
     end
 
     resources :deals
-    resources :cards
+    resources :cards do
+      collection do
+        get 'times'
+        get 'default'
+      end
+    end
     get '/', to: 'home#index'
     resources :users do
       collection do

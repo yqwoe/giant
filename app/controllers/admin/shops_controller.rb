@@ -11,7 +11,7 @@ class Admin::ShopsController < Admin::BaseController
     @shops = if current_user.admin?
                Shop.with_deleted
                    .order(created_at: :desc)
-                   .paginate(page: params[:page])
+                   .paginate(page: params[:page], :per_page => params[:per_page] || 30)
              elsif current_user.luoyang_daili?
                Shop.with_deleted
                    .luoyang

@@ -22,4 +22,10 @@ $ RAILS_ENV=production rails db:shops['csv_file_path']
     DateTime.parse '201704260646' #改为最近的日期
   end
 ```
+3. 激活卡导入
+```ruby
+1. TIMES12 开头的编号 为次卡
+2. 
+
+```
 

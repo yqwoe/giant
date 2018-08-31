@@ -32,6 +32,21 @@ class Admin::CardsController < Admin::BaseController
 
   end
 
+  def create
+   # @file = .try(:tempfile)
+
+    Card.import(params[:cards_file]) if params[:cards_file]
+    redirect_to admin_cards_url,:notice => '导入成功'
+  end
+
+  def times
+
+  end
+
+  def default
+
+  end
+
   private
 
   def set_cookies

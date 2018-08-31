@@ -1,5 +1,5 @@
 <h2 class='text-center' style='color: white;'>车行管理</h2>
-<div id="shops" style='color: white; a{color: yellow}'>
+<div id="shops" style='color: white; a { color: yellow }'>
   <div class="row">
     <div class="col-lg-10 col-lg-offset-1">
       <h4 class='text-right'>
@@ -9,7 +9,7 @@
                   %>
                 </span>
         <span>
-          <%= link_to '导出Excel', admin_shops_path(format: :xls),
+          <%= link_to '导出Excel', admin_shops_path(format: :xls,:per_page => 1000),
             class: 'btn btn-info', id: 'excel'
           %>
         </span>

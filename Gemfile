@@ -138,4 +138,6 @@ group :development do
 end
 
 gem 'figaro'
+gem 'roo'
+gem 'roo-xls'
 

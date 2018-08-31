@@ -374,6 +374,13 @@ GEM
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
     rmmseg-cpp-new (0.3.1)
+    roo (2.7.1)
+      nokogiri (~> 1)
+      rubyzip (~> 1.1, < 2.0.0)
+    roo-xls (1.2.0)
+      nokogiri
+      roo (>= 2.0.0, < 3)
+      spreadsheet (> 0.9.0)
     rubocop (0.56.0)
       parallel (~> 1.10)
       parser (>= 2.5)
@@ -382,9 +389,11 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-graphviz (1.2.3)
+    ruby-ole (1.2.12.1)
     ruby-pinyin (0.5.0)
       rmmseg-cpp-new (~> 0.3.1)
     ruby-progressbar (1.9.0)
+    rubyzip (1.2.1)
     sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
@@ -408,6 +417,8 @@ GEM
       rack (~> 2.0)
       rack-protection (= 2.0.1)
       tilt (~> 2.0)
+    spreadsheet (1.1.8)
+      ruby-ole (>= 1.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -542,6 +553,8 @@ DEPENDENCIES
   redis
   redis-namespace
   resque
+  roo
+  roo-xls
   ruby-pinyin
   sass-rails (~> 5.0)
   simplecov
@@ -562,4 +575,4 @@ DEPENDENCIES
   zero_downtime_migrations
 
 BUNDLED WITH
-   1.16.1
+   1.16.2
