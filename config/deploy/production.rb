@@ -64,6 +64,11 @@ namespace :deploy do
   task :initial do
     on roles(:app) do
       p 'abc'
+      within "/var/www/giant/current" do
+        with rails_env: :production do
+          execute :rake, "db:migrate"
+        end
+      end
       before 'deploy:restart', 'puma:start'
       invoke 'deploy'
     end
