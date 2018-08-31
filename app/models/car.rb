@@ -16,17 +16,25 @@ class Car < ApplicationRecord
     cards.where("cid like 'TIMES12%' ").sum(:range) || -1
   end
 
+  def active_cards
+    cards.order(:actived_at => :desc).select{|c| c.range.month.from_now > Time.now }
+  end
+
   def card_count
-    card = cards.order(:actived_at => :desc).first
+    card = active_cards.first
     (card && card.card_times) || 0
   end
 
   def card_all_count
-    cards.sum(:card_times) || 0
+    active_cards.sum(:card_times) || 0
   end
 
   def card
-    cards.order(:actived_at => :desc).first
+    active_cards.first
+  end
+
+  def card_valid_from_now
+    card.try(:range).month.from_now < Time.now
   end
 
 
