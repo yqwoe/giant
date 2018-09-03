@@ -17,7 +17,8 @@ class Car < ApplicationRecord
   end
 
   def active_cards
-    cards.order(:actived_at => :desc).select{|c| c.range.month.from_now > Time.now }
+    ids = cards.order(:actived_at => :desc).select{|c| c.range.month.from_now > Time.now } || []
+    cards.where(:id => ids.map{|o| o.id})
   end
 
   def card_count
