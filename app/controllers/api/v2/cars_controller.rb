@@ -101,7 +101,9 @@ class Api::V2::CarsController < Api::V1::BaseController
     else
       render_deals_create_error
     end
-  rescue => @error
+  rescue => e
+    Rails.logger.error e
+    Rails.logger.error e.backtrace
     render_notify_error
   end
 
