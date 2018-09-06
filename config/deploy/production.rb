@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server '39.105.20.16',user: 'root', roles: %w{app web}
+server '207.148.26.208',user: 'root', roles: %w{app web}
 set :application, 'giant'
 set :repo_url, 'git@git.autoxss.com:autoxss/giant.git'
 set :branch,'master'
