@@ -60,6 +60,6 @@ Rails.application.configure do
     Bullet.rails_logger = true
   end
 
-  config.web_console.whiny_requests = false
+  # config.web_console.whiny_requests = false
   # config.read_encrypted_secrets = true
 end
