@@ -63,12 +63,13 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      within "/var/www/giant/current" do
-        with rails_env: :production do
-          execute :rake, "db:migrate"
-        end
-      end
+
       before 'deploy:restart', 'puma:start'
+      # within "/var/www/giant/current" do
+      #   with rails_env: :production do
+      #     execute :rake, "db:migrate"
+      #   end
+      # end
       invoke 'deploy'
     end
   end
