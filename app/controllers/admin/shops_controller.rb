@@ -138,15 +138,24 @@ class Admin::ShopsController < Admin::BaseController
         :access_key_secret => 'oF2DYkVe7uofbsQSuZ0YtD85lme0IQ')
     bucket = client.get_bucket("autoxss-assets-bucket")
     path  =file.path
-    bucket.put_object("images/shops/#{name}",file: path)
-    objects = bucket.list_objects(prefix: 'images/shops/test', :delimiter => '/')
-    objects.each do |i|
-      if i.is_a?(Aliyun::OSS::Object) # a object
-        puts "object: #{i.key}"
-      else
-        puts "common prefix: #{i}"
+
+    retry_times = 5
+    retry_times.times do
+      begin
+        bucket.resumable_upload("images/shops/#{name}", path)
+      rescue => e
+        Rails.logger.error(e.message)
       end
     end
+    # bucket.resumable_upload("images/shops/#{name}",file: path)
+    # objects = bucket.list_objects(prefix: 'images/shops/test', :delimiter => '/')
+    # objects.each do |i|
+    #   if i.is_a?(Aliyun::OSS::Object) # a object
+    #     puts "object: #{i.key}"
+    #   else
+    #     puts "common prefix: #{i}"
+    #   end
+    # end
     return name
   end
 
