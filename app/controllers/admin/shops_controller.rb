@@ -124,7 +124,8 @@ class Admin::ShopsController < Admin::BaseController
     endpoint = if Rails.env.development?
                  'https://oss-cn-beijing.aliyuncs.com'
                else
-                 'https://oss-cn-beijing-internal.aliyuncs.com'
+                # 'https://oss-cn-beijing-internal.aliyuncs.com'
+		'https://oss-cn-beijing.aliyuncs.com'
                end
     images = params[:shop][:detail_images] || nil
     # binding.pry
