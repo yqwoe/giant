@@ -116,29 +116,34 @@ class Api::V2::CarsController < Api::V1::BaseController
   end
 
   def too_often?
-    # return false if TEST_USERS.include? current_user.mobile
+    return false if TEST_USERS.include? current_user.mobile
     current_month_wash_count >= 8
   end
 
   def validate_year_count?
+    return false if TEST_USERS.include? current_user.mobile
     validate_count?
   end
 
   def validate_count?
+    return false if TEST_USERS.include? current_user.mobile
     current_wash_count >= @car.card_all_count
   end
 
   def validate_card_count?
+    return false if TEST_USERS.include? current_user.mobile
     current_wash_count >= @car.card_count
   end
 
   def current_month_wash_count
     # @car.deals.this_month.by_shop(@shop).select(:id).count
+    return false if TEST_USERS.include? current_user.mobile
     @car.deals.this_month.select(:id).count
   end
 
   def current_year_wash_count
     # @car.deals.this_month.by_shop(@shop).select(:id).count
+    return false if TEST_USERS.include? current_user.mobile
     @car.deals.this_year.select(:id).count
   end
 
