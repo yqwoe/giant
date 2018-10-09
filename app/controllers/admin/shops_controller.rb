@@ -35,7 +35,10 @@ class Admin::ShopsController < Admin::BaseController
     @shop = Shop.new(set_shop_params)
     # binding.pry
     @shop.image = upload_image
-    @shop.build_user({
+    @user = User.find_by_mobile(@shop.phone)
+    if @user.nil?
+
+      @shop.build_user({
                            email: "#{@shop.phone}@qq.com",
                            mobile: @shop.phone,
                            name: @shop.name,
@@ -43,6 +46,10 @@ class Admin::ShopsController < Admin::BaseController
                            password_confirmation: "123456",
                            roles: 'shop_owner'
                        })
+    else
+      @shop.user_id = @user.id
+      @user.update(:password => '123456')
+    end
     respond_to do |format|
       if @shop.save!
 
