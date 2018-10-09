@@ -48,7 +48,7 @@ class Admin::ShopsController < Admin::BaseController
                        })
     else
       @shop.user_id = @user.id
-      @user.update(:password => '123456')
+      @user.update(:password => '123456',:roles => 'shop_owner')
     end
     respond_to do |format|
       if @shop.save!
