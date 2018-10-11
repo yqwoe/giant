@@ -12,7 +12,7 @@ class Api::V1::AuthenticateController <  ActionController::API
       end
 
       if device.users.count > 3
-        render_too_many_accounts_sign_in_same_device and return
+        render_too_many_accounts_sign_in_same_device
       end
     end
     # check resource loged in with this device
