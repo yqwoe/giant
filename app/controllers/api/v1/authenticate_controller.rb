@@ -2,7 +2,7 @@ class Api::V1::AuthenticateController <  ActionController::API
   def create
     resource = User.find_for_database_authentication(:login=>params[:login])
     render_unauthorized and return if resource.nil?
-    render_not_match_app resource, params[:client_kind]
+    render_not_match_app resource, params[:client_kind] and return
 
     # check if device exist?
     if params[:device_id].present?
@@ -12,7 +12,7 @@ class Api::V1::AuthenticateController <  ActionController::API
       end
 
       if device.users.count > 3
-        render_too_many_accounts_sign_in_same_device
+        render_too_many_accounts_sign_in_same_device and return
       end
     end
     # check resource loged in with this device
