@@ -81,6 +81,6 @@ class Api::V1::AuthenticateController <  ActionController::API
     render json: {
       success: false,
       message: "#{user}不能登录#{app}。"
-    }
+    }, status: :unauthorized
   end
 end
