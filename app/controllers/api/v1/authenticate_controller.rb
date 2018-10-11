@@ -2,7 +2,7 @@ class Api::V1::AuthenticateController <  ActionController::API
   def create
     resource = User.find_for_database_authentication(:login=>params[:login])
     render_unauthorized and return if resource.nil?
-    render_not_match_app and return unless  match_app? resource, params[:client_kind]
+    render_not_match_app resource, params[:client_kind]
 
     # check if device exist?
     if params[:device_id].present?
@@ -70,10 +70,17 @@ class Api::V1::AuthenticateController <  ActionController::API
     false
   end
 
-  def render_not_match_app
+  def render_not_match_app(resource,client_kind)
+    user = resource.shop_owner? ? '商家' : '车主'
+    app = case client_kind
+          when 'shop'
+            '商家APP'
+          when 'car'
+            '车主APP'
+          end
     render json: {
       success: false,
-      message: "用户与App不匹配。"
+      message: "#{user}不能登录#{app}。"
     }
   end
 end
