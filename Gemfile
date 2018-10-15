@@ -140,4 +140,7 @@ end
 gem 'figaro'
 gem 'roo'
 gem 'roo-xls'
+gem 'derailed_benchmarks'
+gem 'stackprof'
+
 
