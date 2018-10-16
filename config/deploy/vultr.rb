@@ -71,6 +71,7 @@ namespace :deploy do
       #   end
       # end
       invoke 'deploy'
+      invoke 'worker'
     end
   end
 

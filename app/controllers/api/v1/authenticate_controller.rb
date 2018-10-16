@@ -2,7 +2,7 @@ class Api::V1::AuthenticateController <  ActionController::API
   def create
     resource = User.find_for_database_authentication(:login=>params[:login])
     render_unauthorized and return if resource.nil?
-    render_not_match_app resource, params[:client_kind] and return
+    render_not_match_app resource, params[:client_kind] and return if match_app? resource, params[:client_kind]
 
     # check if device exist?
     if params[:device_id].present?
