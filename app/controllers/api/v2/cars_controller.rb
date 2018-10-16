@@ -137,17 +137,18 @@ class Api::V2::CarsController < Api::V1::BaseController
 
   def current_month_wash_count
     # @car.deals.this_month.by_shop(@shop).select(:id).count
-    return false if TEST_USERS.include? current_user.mobile
+    return 0 if TEST_USERS.include? current_user.mobile
     @car.deals.this_month.select(:id).count
   end
 
   def current_year_wash_count
     # @car.deals.this_month.by_shop(@shop).select(:id).count
-    return false if TEST_USERS.include? current_user.mobile
+    return 0 if TEST_USERS.include? current_user.mobile
     @car.deals.this_year.select(:id).count
   end
 
   def current_wash_count
+    return 0 if TEST_USERS.include? current_user.mobile
     @car.deals.select(:id).count
   end
 
